@@ -435,8 +435,12 @@ html {
     overflow: auto;
 }
 
-.test {
+.iframe_size {
     height: calc(100vh - 80.8px);
+}
+
+.iframe_size::-webkit-scrollbar {
+    display: none;
 }
 
 /* Content index */
@@ -586,8 +590,4 @@ html {
 .plan-item__des {
     font-size: 1.3rem;
     margin-bottom: 32px;
-}
-
-.test2 {
-    
 }
