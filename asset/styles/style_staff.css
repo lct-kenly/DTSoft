@@ -21,6 +21,12 @@
     border-radius: 1rem
 }
 
+.header__staff_btn:hover {
+    cursor: pointer;
+    background-color: rgba(68, 158, 254, 0.8);
+    
+}
+
 .staff {
     margin-top: 2rem;
 }
