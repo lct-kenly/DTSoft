@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="./asset/styles/style_themnv.css">
+</head>
+
+<body>
+	<div class="container-flud">
+		<div class="col-md-12 khung">
+			<h2>Thêm nhân viên</h2>
+			<form>
+				<div class="row">
+					<div class="col-5 bb">
+						<div class="form-group">
+							<label >Mã nhân viên:</label>
+							<input type="text" class="form-control"  placeholder="Nhập mã nhân viên" >
+						</div>
+						<div class="form-group">
+							<label >Họ tên:</label>
+							<input type="text" class="form-control" placeholder="Nhập họ tên">
+						</div>
+						<div class="form-group">
+							<label >Ngày sinh:</label>
+							<input type="date" class="form-control"  placeholder="Nhập ngày sinh" >
+						</div>
+						<div class="form-group">
+							<label >Giới tính:</label>
+							<input type="text" class="form-control"  placeholder="Nhập giới tính" >
+						</div>
+						<div class="form-group">
+							<label >Quê quán:</label>
+							<input type="text" class="form-control"  placeholder="Nhập quê quán" >
+						</div>
+
+						<div class="form-group">
+							<label >Mã Khu vực:</label><br>
+							<form action="#">
+ 
+								<div class="select-box">
+								  
+								  <label for="select-box1" class="label select-box1"><span class="label-desc">Mã khu vực</span> </label>
+								  <select id="select-box1" class="select">
+									<option value="Choice 1">Falkland Islands</option>
+									<option value="Choice 2">Germany</option>
+									<option value="Choice 3">Neverland</option>
+								  </select>
+								  
+								</div>
+								 
+							  </form>  
+						</div>
+						<div class="form-group">
+							<label >Mã bộ phận:</label><br>
+							<div class="select-box">
+								  
+								<label for="select-box1" class="label select-box1"><span class="label-desc">Mã bộ phận</span> </label>
+								<select id="select-box1" class="select">
+								  <option value="Choice 1">Falkland Islands</option>
+								  <option value="Choice 2">Germany</option>
+								  <option value="Choice 3">Neverland</option>
+								</select>
+								
+							  </div>
+						</div>	
+						<div class="form-group">
+							<label >Mã công việc:</label><br>
+							<div class="select-box">
+								  
+								<label for="select-box1" class="label select-box1"><span class="label-desc">Mã bộ phận</span> </label>
+								<select id="select-box1" class="select">
+								  <option value="Choice 1">Falkland Islands</option>
+								  <option value="Choice 2">Germany</option>
+								  <option value="Choice 3">Neverland</option>
+								</select>
+								
+							  </div>
+						</div>	
+					</div>
+					<div class="col-5 bb">
+						<div class="form-group aa">
+							<div class="hinh">
+								<img class ="img" src="1.jpg" alt=""><br>
+							</div>
+							<label >Hình ảnh:</label>
+							<input type="file" class="form-control" >
+							</div>
+						<div class="form-group">
+							<label >Số điện thoại:</label>
+							<input type="text" class="form-control"  placeholder="Nhập số điện thoại" >
+						</div>
+						<div class="form-group dienthoai">
+							<label >Tài khoản:</label>
+							<input type="text" class="form-control"  placeholder="Nhập tài khoản" >
+						</div>
+						<div class="form-group">
+							<label >Mật khẩu:</label>
+							<input type="text" class="form-control"  placeholder="Nhập mật khẩu" >
+						</div>
+						<div style="float: right;">
+							<button class="btn btn-primary" onclick="xoa()">Lưu</button>
+							</div>
+					</div>
+				</div>
+				
+				</form>
+				
+		</div>
+	</div>
+
+</body>
+<script>
+$("select").on("click" , function() {
+  
+  $(this).parent(".select-box").toggleClass("open");
+  
+});
+
+$(document).mouseup(function (e)
+{
+    var container = $(".select-box");
+
+    if (container.has(e.target).length === 0)
+    {
+        container.removeClass("open");
+    }
+});
+
+
+$("select").on("change" , function() {
+  
+  var selection = $(this).find("option:selected").text(),
+      labelFor = $(this).attr("id"),
+      label = $("[for='" + labelFor + "']");
+    
+  label.find(".label-desc").html(selection);
+    
+});
+</script>
+</html>
