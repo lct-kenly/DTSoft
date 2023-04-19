@@ -17,7 +17,8 @@ function handleSidebar() {
                 if(document.querySelector('.sidebar__item.active .sidebar__menu-sub')) 
                     document.querySelector('.sidebar__item.active .sidebar__menu-sub').style.maxHeight = 0
 
-                document.querySelector('.sidebar__item.active').classList.remove('active');
+                if(document.querySelector('.sidebar__item.active'))
+                    document.querySelector('.sidebar__item.active').classList.remove('active');
 
                 item.classList.add('active');
 
