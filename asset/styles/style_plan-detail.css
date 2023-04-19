@@ -1,55 +1,33 @@
-*{
-    margin: 0;
-    padding: 0;
+.header__title {
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #888888;
+    padding: 1rem;
 }
-.aa{
-    border-top: 2px solid black;
-    margin-bottom: 20px;
+
+.header__desc {
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 1.6rem;
+    position: relative;
+    font-weight: 500;
 }
-.select{
-    border-radius: 5px;
+
+.header__plan--name, .header__plan--leader {
+    width: 50%;
+    margin-top: 2rem;
 }
-.col-12{
-    border: 1px solid black;
+
+.header__plan--name span, .header__plan--leader span {
+    font-style: italic;
 }
-.select{
-    border-radius: 5px;
-}
-.text{
-    display: inline-block;
-}
-.chon{
-    margin-top: 15%;
-    margin-right: 20px;
-}
-.col-12 p{
-    word-wrap: break-word;
-}
-.aaa{
-    width: 100%;
-    border: 2px solid rgb(243, 243, 243);
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    margin-left: 80px;
-    margin-bottom: 20px;
-}
-.aaaa{
-    width: 100%;
-    border: 2px solid rgb(243, 243, 243);
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    margin-bottom: 20px;
-    margin-left: 0;
-}
-.khung{
-    width: 100%;
-    background-color: rgb(250 250 250);
-}
-.ten{
-    margin-top: 20px;
-}
-.ten1{
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 20px;
+
+.header__desc::after {
+    content:"";
+    width: 100vw;
+    height: 0.2rem;
+    background-color: #000;
+    position: absolute;
+    bottom: -4rem;
 }
