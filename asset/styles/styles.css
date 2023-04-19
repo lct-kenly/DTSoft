@@ -1,15 +1,4 @@
-*{
-    box-sizing: border-box;
-}
 
-:root {
-    --primary-color: #449efe;
-}
-
-html {
-    font-family: 'Roboto', sans-serif;
-    font-size: 62.5%;
-}
 
 /* Header CSS */
 .header {
@@ -379,8 +368,8 @@ html {
 }
 
 .main__login_logo {
-    background-image: url(../img/logoDTSoft.png);
-    background-size:contain;
+    background-image: url(../img/logo.jpg);
+    background-size:90%;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -521,6 +510,7 @@ html {
 
 .news__des {
     font-size: 1.5rem;
+    line-height: 1.5;
 }
 
 .news__link {
