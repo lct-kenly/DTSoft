@@ -1,0 +1,25 @@
+.statistical-manager-content {
+
+}
+
+.statistical-manager-content__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.statistical-manager-content__title {
+    font-size: 2rem;
+}
+
+.statistical-manager-content__filter {
+    width: 200px;
+}
+
+.statistical-manager-content__body {
+
+}
+
+.statistical-manager-content__table-staff {
+
+}
