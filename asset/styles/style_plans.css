@@ -58,5 +58,10 @@
 
 .add__btn a {
     color: #fff;
-    
+    font-size: 1.4rem;
+}
+
+.add__btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
