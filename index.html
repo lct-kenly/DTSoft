@@ -33,6 +33,85 @@
         <link rel="stylesheet" href="./asset/styles/reset.css" />
         <link rel="stylesheet" href="./asset/styles/base.css" />
         <link rel="stylesheet" href="./asset/styles/styles.css" />
+
+        <!-- Favicon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="57x57"
+            href="./asset/favicon/apple-icon-57x57.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="60x60"
+            href="./asset/favicon/apple-icon-60x60.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="72x72"
+            href="./asset/favicon/apple-icon-72x72.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="76x76"
+            href="./asset/favicon/apple-icon-76x76.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="114x114"
+            href="./asset/favicon/apple-icon-114x114.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="120x120"
+            href="./asset/favicon/apple-icon-120x120.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="144x144"
+            href="./asset/favicon/apple-icon-144x144.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="./asset/favicon/apple-icon-152x152.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="./asset/favicon/apple-icon-180x180.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="./asset/favicon/android-icon-192x192.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./asset/favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="96x96"
+            href="./asset/favicon/favicon-96x96.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="./asset/favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="./asset/favicon/manifest.json" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta
+            name="msapplication-TileImage"
+            content="./asset/favicon/ms-icon-144x144.png"
+        />
+        <meta name="theme-color" content="#ffffff" />
+
         <title>Quan Ly Nhan Su</title>
     </head>
 
@@ -43,7 +122,7 @@
                     <div class="col-md-12">
                         <!-- Start Header -->
                         <header id="header" class="header">
-                            <a href="/">
+                            <a href="">
                                 <img
                                     src="./asset/img/logo.jpg"
                                     alt="logo"
@@ -291,90 +370,87 @@
                                 </li>
                                 <li class="header__menu-item header__profile">
                                     <!-- Start Profile -->
-                                    <img
-                                        src="./asset/img/avatar-default.jfif"
-                                        alt=""
-                                        class="header__profile-avatar"
-                                    />
-                                    <div class="header__profile-info">
-                                        <p class="header__profile-name">
-                                            Admin
-                                        </p>
-                                        <span class="header__profile-level"
-                                            >Quản trị viên</span
-                                        >
-                                    </div>
-
-                                    <div class="header__profile-menu">
-                                        <div
-                                            class="header__profile-menu-heading"
-                                        >
-                                            <img
-                                                src="./asset/img/avatar-default.jfif"
-                                                alt=""
-                                                class="header__profile-avatar"
-                                            />
-                                            <p
-                                                class="header__profile-name mt-3"
-                                            >
+                                    <a
+                                        href="/thongtinnv.html"
+                                        class="header__profile-link"
+                                    >
+                                        <img
+                                            src="./asset/img/avatar-default.jfif"
+                                            alt=""
+                                            class="header__profile-avatar"
+                                        />
+                                        <div class="header__profile-info">
+                                            <p class="header__profile-name">
                                                 Admin
                                             </p>
+                                            <span class="header__profile-level"
+                                                >Quản trị viên</span
+                                            >
                                         </div>
-                                        <ul class="header__profile-menu-list">
-                                            <li
-                                                class="header__profile-menu-item"
+
+                                        <div class="header__profile-menu">
+                                            <div
+                                                class="header__profile-menu-heading"
+                                            >
+                                                <img
+                                                    src="./asset/img/avatar-default.jfif"
+                                                    alt=""
+                                                    class="header__profile-avatar"
+                                                />
+                                                <p
+                                                    class="header__profile-name mt-3"
+                                                >
+                                                    Admin
+                                                </p>
+                                            </div>
+                                            <ul
+                                                class="header__profile-menu-list"
+                                            >
+                                                <li
+                                                    class="header__profile-menu-item"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="header__profile-menu-link btn-change-content"
+                                                        data_content="thongtinnv.html"
+                                                    >
+                                                        <i
+                                                            class="fa-regular fa-address-card header__profile-menu-icon"
+                                                        ></i>
+                                                        Thông tin tài khoản
+                                                    </a>
+                                                </li>
+
+                                                <li
+                                                    class="header__profile-menu-item"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="header__profile-menu-link btn-change-content"
+                                                        data_content="content_change_password.html"
+                                                    >
+                                                        <i
+                                                            class="fa-solid fa-gear header__profile-menu-icon"
+                                                        ></i>
+                                                        Đổi mật khẩu
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div
+                                                class="header__profile-menu-footer"
                                             >
                                                 <a
-                                                    href=""
-                                                    class="header__profile-menu-link"
+                                                    href="./login.html"
+                                                    class="header__profile-menu-btn"
                                                 >
                                                     <i
-                                                        class="fa-solid fa-address-card header__profile-menu-icon"
+                                                        class="fa-solid fa-right-to-bracket header__profile-menu-icon"
                                                     ></i>
-                                                    Thông tin tài khoản
+                                                    Đăng xuất
                                                 </a>
-                                            </li>
-                                            <li
-                                                class="header__profile-menu-item"
-                                            >
-                                                <a
-                                                    href=""
-                                                    class="header__profile-menu-link"
-                                                >
-                                                    <i
-                                                        class="fa-solid fa-gear header__profile-menu-icon"
-                                                    ></i>
-                                                    Đổi mật khẩu
-                                                </a>
-                                            </li>
-                                            <li
-                                                class="header__profile-menu-item"
-                                            >
-                                                <a
-                                                    href=""
-                                                    class="header__profile-menu-link"
-                                                >
-                                                    <i
-                                                        class="fa-regular fa-address-card header__profile-menu-icon"
-                                                    ></i>
-                                                    Thông tin tài khoản
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div
-                                            class="header__profile-menu-footer"
-                                        >
-                                            <a
-                                                href="./login.html"
-                                                class="header__profile-menu-btn"
-                                            >
-                                                <i
-                                                    class="fa-solid fa-right-to-bracket header__profile-menu-icon"
-                                                ></i>
-                                                Đăng xuất
-                                            </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                     <!-- End Profile -->
                                 </li>
                             </ul>
@@ -434,7 +510,7 @@
                                             <a
                                                 href=""
                                                 class="sidebar__menu-sub-link btn-change-content"
-                                                data_content="toanbokehoach.html"
+                                                data_content="content_plans.html"
                                                 >Danh sách kế hoạch</a
                                             >
                                         </li>
@@ -487,7 +563,7 @@
                                     </ul>
                                 </li>
                                 <li class="sidebar__item">
-                                    <a href="#" class="sidebar__link">
+                                    <a href="#" class="sidebar__link btn-change-content" data_content="content_evaluate.html">
                                         <span class="sidebar__icon">
                                             <i class="fa-solid fa-file-pen"></i>
                                         </span>

@@ -46,6 +46,13 @@ const changeContent = () => {
             e.preventDefault();
             e.stopPropagation();
 
+            if(document.querySelector('.sidebar__item.active .sidebar__menu-sub')) 
+                    document.querySelector('.sidebar__item.active .sidebar__menu-sub').style.maxHeight = 0
+
+            if(document.querySelector('.sidebar__item.active'))
+                    document.querySelector('.sidebar__item.active').classList.remove('active');
+
+
             if(document.querySelector('.sidebar__menu-sub-item.active'))
                 document.querySelector('.sidebar__menu-sub-item.active').classList.remove('active');
 
