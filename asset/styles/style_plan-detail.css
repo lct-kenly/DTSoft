@@ -1,0 +1,33 @@
+.header__title {
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #888888;
+    padding: 1rem;
+}
+
+.header__desc {
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 1.6rem;
+    position: relative;
+    font-weight: 500;
+}
+
+.header__plan--name, .header__plan--leader {
+    width: 50%;
+    margin-top: 2rem;
+}
+
+.header__plan--name span, .header__plan--leader span {
+    font-style: italic;
+}
+
+.header__desc::after {
+    content:"";
+    width: 100vw;
+    height: 0.2rem;
+    background-color: #000;
+    position: absolute;
+    bottom: -4rem;
+}
