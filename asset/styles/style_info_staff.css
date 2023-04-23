@@ -62,14 +62,17 @@
 .btn-primary{
     font-size: 15px;
     padding: 10px;
+    width: 100px;
 }
 
-.form-group__text{
+.form-group__text,.select{
     font-size: 15px;
     font-weight: bold;
     padding: 5px;
 }
-
+.select{
+    width: 150px;
+}
 .form-group__name{
     font-size: 15px;
     padding: 5px;

@@ -33,59 +33,67 @@
 <body>
     <div class="container-flud">
         <div class="row row--main">
-            <div class="col-12 row--main__background">
-                <p class="row--main__background__detail">CHI TIẾT ĐÁNH GIÁ KẾ HOẠCH</p>
-                <div class="row row__text">
-                    <div class="col-12 text">
-                        <p class="text__plan">Kế hoạch 1</p><p class="text__date">(1/1/1990-1/1/2000)</p>
-                        <p class="text__area">Khu vực:</p><p class="text__area">Cần Thơ</p>
+            <form action="">
+                <div class="col-12 row--main__background">
+                    <p class="row--main__background__detail">CHI TIẾT ĐÁNH GIÁ KẾ HOẠCH</p>
+                    <div class="row row__text">
+                        <div class="col-12 text">
+                            <p class="text__plan">Kế hoạch 1</p><p class="text__date">(1/1/1990-1/1/2000)</p>
+                            <p class="text__area">Khu vực:</p><p class="text__area">Cần Thơ</p>
+                            <div class="form-group" style="float:right;">
+                                <form action="#">    
+                                    <div class="select-box">                                      
+                                    <select id="select-box1" class="row__status" disabled="disabled">
+                                        <option value="Choice 1">Hoàn thành</option>
+                                        <option value="Choice 2">Chưa hoàn thành</option>
+                                        <option value="Choice 3">Đang thực thiện</option>
+                                    </select>                                      
+                                    </div>                                     
+                                </form>  
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row row__border">
+                        <div class="col-12 col-12__detail">
+                                <table>
+                                    <tr>
+                                    <th>Tên nhân viên</th>
+                                    <th>Doanh số</th>
+                                    <th>Xuất hóa đơn</th>
+                                    <th>Thu hồi công nợ</th>
+                                    <th>Phát triển KH</th>
+                                    <th>Hỗ trợ KH</th>
+                                    <th>Hiểu biết sản phẩm</th>
+                    
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" class="data"  name="#" value="Nguyễn Văn A" disabled="G"></td>
+                                        <td><input type="text" class="data"  name="#" value="80%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="100%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="50%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="30%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="" disabled="disabled"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" class="data"  name="#" value="Nguyễn Văn A" disabled="G"></td>
+                                        <td><input type="text" class="data"  name="#" value="80%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="100%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="50%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="30%" disabled="disabled"></td>
+                                        <td><input type="text" class="data"  name="#" value="" disabled="disabled"></td>
+                                    </tr>                                
+                            </table>
+                        
+                        </div>
+                    </div>
+                    <div style="float: right;">
+                        <button class="btn btn-primary" onclick="luu()">Lưu</button>
                     </div>
                 </div>
-                <div class="row row__border">
-                    <div class="col-12 col-12__detail">
-                            <table>
-                                <tr>
-                                   <th>Tên nhân viên</th>
-                                   <th>Doanh số</th>
-                                   <th>Xuất hóa đơn</th>
-                                   <th>Thu hồi công nợ</th>
-                                   <th>Phát triển KH</th>
-                                   <th>Hỗ trợ KH</th>
-                                   <th>Hiểu biết sản phẩm</th>
-                
-                                 </tr>
-                                 <tr>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>80%</td>
-                                    <td>100%</td>
-                                    <td>50%</td>
-                                    <td> </td>
-                                    <td>30%</td>
-                                    <td> </td>
-                                  </tr>
-                                  <tr>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>80%</td>
-                                    <td>100%</td>
-                                    <td>50%</td>
-                                    <td> </td>
-                                    <td>30%</td>
-                                    <td> </td>
-                                  </tr>
-                                  <tr>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>80%</td>
-                                    <td>100%</td>
-                                    <td>50%</td>
-                                    <td> </td>
-                                    <td>30%</td>
-                                    <td> </td>
-                                  </tr>
-                           </table>
-                       
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </body>

@@ -3,17 +3,11 @@
     padding: 0;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table, th, td {
-    text-align: center; 
-}
-.nb{
-    right: 0px;
-}
-    table {
+    .col-12__detail table, th, td {
+        text-align: center; 
+    }
+
+    .col-12__detail table {
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
@@ -22,74 +16,102 @@ table, th, td {
         margin: 0 0 1.7em;
        
     }
-    th {
+    .col-12__detail th {
         color: #444;
         font-size: 15px;
+        padding: 2%;
+        font-weight: bold;
     }
-    td {
-        font-size: 12px;
+    .col-12__detail td {
+        font-size: 15px;
         line-height: 120%;
         margin: 0;
         overflow: visible;
-        
-    }
-    th, td {
-        text-align: center;
         padding: 2%;
+        
     }
     tr:nth-child(even)>td {
         background: #f5fcff;
     }
-    .tim{
-        margin-top: 10px;
-        margin-left: 3%;
-    }
-    .text{
+
+    .col-12__display__location{
         display: inline-block;
         padding: 5px;
         margin-top: 10px;
+        font-size: 20px;
+
     }
-    .text1{
+    .col-12__display__area{
         display: inline-block;
         padding: 5px;
         margin-top: 10px;
         text-align: center;
         font-weight: bold;
+        font-size: 20px;
     }
-    .search-container button{
+    .col-2__search-container button{
         text-align: center;
-        width: 80px;
+        width: 100px;
         height: 45px;
         border-radius: 5px;
         border: 0cm;
         margin-top: 20px;
+        font-weight: bold;
+
     }
-    .khung{
+    .row__select{
         width: 100%;
         border: 2px solid rgb(243, 243, 243);
         margin-left: 0px;
         border-radius: 5px;
         background-color: rgb(255, 255, 255);
     }
-    .khung2{
+    .col-12__detail{
         width: 100%;
         border: 2px solid rgb(243, 243, 243);
         margin:20px 0px;
         border-radius: 5px;
         background-color: rgb(255, 255, 255);
     }
-    .khung3{
+    .col-12__background{
         width: 100%;
         background-color: rgb(250 250 250);
     }
-.chitieu{
-    margin-left: 0px;
-        margin-right: 0px;
+    .col-12__detail__more{
+        color: black;
+        text-decoration: none;
+        font-size: 15px;
+        font-style: italic;
+    }
+    .col-12__background {
+        margin-top: 0;
+    margin-bottom: 0;
+
+    }
+
+    .header{
+        text-align: center;
+    font-size: 33px;
+    font-weight: 500;
+    padding:5px;
+
+    }
+
+.row__background{
+    margin-left: 0;
+    margin-right: 0;
 }
-.col-12 h2{
+
+.col-2__edit__container button{
     text-align: center;
-}
-    
+    width: 100px;
+    height: 45px;
+    border-radius: 5px;
+    border: 0cm;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 body {
@@ -144,4 +166,9 @@ body {
   top: 0;
   padding: 5px 15px;
   border-left: 5px solid #fff;
+}
+
+.col-12__detail__more{
+    pointer-events: none;
+    cursor: default;
 }
