@@ -15,16 +15,20 @@
 
 .header__staff_btn {
     background-color: var(--primary-color);
-    color: #fff;
-    font-size: 1.8rem;
     padding: 1rem;
-    border-radius: 1rem
+    border-radius: 1rem;
+    cursor: pointer;
+
 }
 
-.header__staff_btn:hover {
-    cursor: pointer;
-    background-color: rgba(68, 158, 254, 0.8);
+.btn__add-staff {
+    color: #fff;
+    font-size: 1.8rem;
+}
 
+.header__staff_btn:hover .btn__add-staff {
+    color: #fff;
+    opacity: 0.8;
 }
 
 .staff {
