@@ -53,11 +53,22 @@
                     <div class="row m-0">
                         <div class="col-md-12">
                             <div class="statistical-manager-content__header">
-                                <h4 class="statistical-manager-content__title">Thống kê danh sách nhân viên phòng kinh doanh</h4>
-                                <select class="statistical-manager-content__filter form-select" aria-label="Default select example">
-                                    <option selected value="ALL">------ Tất cả -----</option>
+
+                                <h4 class="statistical-manager-content__title">
+                                    Thống kê danh sách nhân viên phòng kinh
+                                    doanh
+                                </h4>
+                                <select
+                                    class="statistical-manager-content__filter form-select"
+                                    aria-label="Default select example"
+                                >
+                                    <option selected value="ALL">
+                                        ------ Tất cả -----
+                                    </option>
                                     <option value="Đạt">Đạt kết quả</option>
-                                    <option value="Chưa đạt">Chưa đạt kết quả</option>
+                                    <option value="Chưa đạt">
+                                        Chưa đạt kết quả
+                                    </option>
                                 </select>
                             </div>
 
@@ -67,18 +78,16 @@
                                     class="table table-bordered display statistical-manager-content__table-staff"
                                 >
                                     <thead class="table-dark">
-                                      <tr>
-                                        <th scope="col">STT</th>
-                                        <th scope="col">Mã nhân viên</th>
-                                        <th scope="col">Họ tên</th>
-                                        <th scope="col">Chức vụ</th>
-                                        <th scope="col">Mã kế hoạch</th>
-                                        <th scope="col">Trạng thái</th>
-                                      </tr>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Mã nhân viên</th>
+                                            <th scope="col">Họ tên</th>
+                                            <th scope="col">Chức vụ</th>
+                                            <th scope="col">Mã kế hoạch</th>
+                                            <th scope="col">Trạng thái</th>
+                                        </tr>
                                     </thead>
-                                    <tbody class="align-middle">
-                                      
-                                    </tbody>
+                                    <tbody class="align-middle"></tbody>
                                 </table>
 
                                 <div class="statistical-manager-content__chart">
@@ -130,52 +139,57 @@
     <!-- Main JS -->
     <script src="./asset/js/main.js"></script>
     <script>
-        $(document).ready( function () {
-            $('#manager-table').DataTable();
-        } );
+        $(document).ready(function () {
+            $("#manager-table").DataTable();
+        });
     </script>
 
     <script>
         const listStaff = [
             {
-                MANV: 'NV001',
-                HOTEN_NV: 'Nguyễn Văn A',
-                TEN_CV: 'Quản lý',
-                MAKEHOACH: 'KH001',
-                TRANG_THAI: 'Đạt'
+
+                MANV: "NV001",
+                HOTEN_NV: "Nguyễn Văn A",
+                TEN_CV: "Quản lý",
+                MAKEHOACH: "KH001",
+                TRANG_THAI: "Đạt",
             },
             {
-                MANV: 'NV002',
-                HOTEN_NV: 'Nguyễn Văn B',
-                TEN_CV: 'Nhân viên',
-                MAKEHOACH: 'KH002',
-                TRANG_THAI: 'Chưa đạt'
+                MANV: "NV002",
+                HOTEN_NV: "Nguyễn Văn B",
+                TEN_CV: "Nhân viên",
+                MAKEHOACH: "KH002",
+                TRANG_THAI: "Chưa đạt",
             },
             {
-                MANV: 'NV003',
-                HOTEN_NV: 'Nguyễn Văn C',
-                TEN_CV: 'Nhân viên',
-                MAKEHOACH: 'KH003',
-                TRANG_THAI: 'Đạt'
+                MANV: "NV003",
+                HOTEN_NV: "Nguyễn Văn C",
+                TEN_CV: "Nhân viên",
+                MAKEHOACH: "KH003",
+                TRANG_THAI: "Đạt",
             },
             {
-                MANV: 'NV004',
-                HOTEN_NV: 'Nguyễn Văn D',
-                TEN_CV: 'Nhân viên',
-                MAKEHOACH: 'KH004',
-                TRANG_THAI: 'Chưa đạt'
+                MANV: "NV004",
+                HOTEN_NV: "Nguyễn Văn D",
+                TEN_CV: "Nhân viên",
+                MAKEHOACH: "KH004",
+                TRANG_THAI: "Chưa đạt",
             },
             {
-                MANV: 'NV005',
-                HOTEN_NV: 'Nguyễn Văn E',
-                TEN_CV: 'Nhân viên',
-                MAKEHOACH: 'KH005',
-                TRANG_THAI: 'Chưa đạt'
+                MANV: "NV005",
+                HOTEN_NV: "Nguyễn Văn E",
+                TEN_CV: "Nhân viên",
+                MAKEHOACH: "KH005",
+                TRANG_THAI: "Chưa đạt",
             },
         ];
 
-        const bodyTable = document.querySelector('.statistical-manager-content__table-staff tbody');
-        const selectBox = document.querySelector('.statistical-manager-content__filter');
+        const bodyTable = document.querySelector(
+            ".statistical-manager-content__table-staff tbody"
+        );
+        const selectBox = document.querySelector(
+            ".statistical-manager-content__filter"
+        );
 
         const render = (arrData) => {
             const html = arrData.map((item, index) => {
@@ -197,18 +211,18 @@
 
         bodyTable.innerHTML = render(listStaff);
 
-        selectBox.addEventListener('change', (e) => {
-            if(e.target.value === 'ALL'){
+        selectBox.addEventListener("change", (e) => {
+            if (e.target.value === "ALL") {
+
                 bodyTable.innerHTML = render(listStaff);
             } else {
                 const newArrListStaff = listStaff.filter((item) => {
                     return item.TRANG_THAI === e.target.value;
-                })
+
+                });
 
                 bodyTable.innerHTML = render(newArrListStaff);
             }
-
-
         });
 
 
@@ -216,15 +230,18 @@
         let tongNhanVienChuaDat = 0;
 
         listStaff.forEach((item) => {
-            if(item.TRANG_THAI === 'Đạt') {
+
+            if (item.TRANG_THAI === "Đạt") {
+
                 tongNhanVienDat++;
             } else {
                 tongNhanVienChuaDat++;
             }
-        })
 
+        });
 
-        const ctx = document.getElementById('myChart');
+        const ctx = document.getElementById("myChart");
+
         const data = {
             labels: ["Chưa đạt", "Đạt"],
             datasets: [
@@ -234,16 +251,17 @@
                     backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
                     hoverOffset: 4,
                 },
+
             ],
-            datasets: [{
-                label: 'Số lượng nhân viên',
-                data: [5, 12],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                ],
-                hoverOffset: 4
-            }]
+            datasets: [
+                {
+                    label: "Số lượng nhân viên",
+                    data: [5, 12],
+                    backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+                    hoverOffset: 4,
+                },
+
+            ],
         };
 
         new Chart(ctx, {
@@ -253,17 +271,18 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Tỉ lệ nhân viên hoàn thành kế hoạch'
-                    }
-                }
-            }
-        })
+                        text: "Tỉ lệ nhân viên hoàn thành kế hoạch",
+                    },
+                },
+            },
+        });
     </script>
 
     <script>
-        $(document).ready( function () {
-            $('#manager-table').DataTable();
-        } );
+
+        $(document).ready(function () {
+            $("#manager-table").DataTable();
+        });
 
     </script>
 </html>

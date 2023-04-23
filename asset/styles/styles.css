@@ -33,6 +33,7 @@
 }
 
 .header__profile-link {
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
