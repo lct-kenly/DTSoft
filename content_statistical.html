@@ -53,6 +53,7 @@
                     <div class="row m-0">
                         <div class="col-md-12">
                             <div class="statistical-manager-content__header">
+
                                 <h4 class="statistical-manager-content__title">
                                     Thống kê danh sách nhân viên phòng kinh
                                     doanh
@@ -146,6 +147,7 @@
     <script>
         const listStaff = [
             {
+
                 MANV: "NV001",
                 HOTEN_NV: "Nguyễn Văn A",
                 TEN_CV: "Quản lý",
@@ -201,37 +203,45 @@
                         <td>${item.TRANG_THAI}</td>
                     </tr>
                 `;
-            });
+            })
 
-            return html.join("");
+            return html.join('');
+
         };
 
         bodyTable.innerHTML = render(listStaff);
 
         selectBox.addEventListener("change", (e) => {
             if (e.target.value === "ALL") {
+
                 bodyTable.innerHTML = render(listStaff);
             } else {
                 const newArrListStaff = listStaff.filter((item) => {
                     return item.TRANG_THAI === e.target.value;
+
                 });
 
                 bodyTable.innerHTML = render(newArrListStaff);
             }
         });
 
+
         let tongNhanVienDat = 0;
         let tongNhanVienChuaDat = 0;
 
         listStaff.forEach((item) => {
+
             if (item.TRANG_THAI === "Đạt") {
+
                 tongNhanVienDat++;
             } else {
                 tongNhanVienChuaDat++;
             }
+
         });
 
         const ctx = document.getElementById("myChart");
+
         const data = {
             labels: ["Chưa đạt", "Đạt"],
             datasets: [
@@ -241,6 +251,7 @@
                     backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
                     hoverOffset: 4,
                 },
+
             ],
             datasets: [
                 {
@@ -249,6 +260,7 @@
                     backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
                     hoverOffset: 4,
                 },
+
             ],
         };
 
@@ -267,8 +279,10 @@
     </script>
 
     <script>
+
         $(document).ready(function () {
             $("#manager-table").DataTable();
         });
+
     </script>
 </html>
