@@ -66,61 +66,43 @@
 
                             <div class="evaluate-content__body">
                                 <table
-                                    id="manager-table"
+                                    id="evaluate-table"
                                     class="table table-bordered display evaluate-content__table-staff"
                                 >
+                                    
                                     <thead class="table-dark">
                                       <tr>
-                                        <th scope="col">STT</th>
-                                        <th scope="col">Tên phòng ban</th>
-                                        <th scope="col">Đạt</th>
-                                        <th scope="col">Chưa đạt</th>
-                                        <th scope="col">Không đạt</th>
+                                        <th scope="col">Mã kế hoạch</th>
+                                        <th scope="col">Khu vực</th>
+                                        <th scope="col">Tên phòng</th>
+                                        <th scope="col">Ngày kết thúc dự kiến</th>
+                                        <th scope="col">Tiến độ</th>
+                                        <th scope="col">Trạng thái</th>
                                         <th scope="col">Action</th>
                                       </tr>
                                     </thead>
                                     <tbody class="align-middle">
                                       <tr>
-                                        <th scope="row">1</th>
-                                        <td>Phong Marketing</td>
-                                        <td>5</td>
-                                        <td>1</td>
-                                        <td>4</td>
+                                        <th scope="row">KH001</th>
+                                        <td>Cần Thơ</td>
+                                        <td>Phòng kinh doanh</td>
+                                        <td>31 - 12 - 2023</td>
+                                        <td class="text-success">Đã hoàn thành</td>
+                                        <td class="text-danger">Chưa đánh giá</td>
                                         <td>
-                                            <a href=""> Chi tiết </a>
+                                            <a href="./content_evaluate-detail.html"> Chi tiết </a>
                                         </td>
                                       </tr>
 
                                       <tr>
-                                        <th scope="row">1</th>
-                                        <td>Phong Marketing</td>
-                                        <td>5</td>
-                                        <td>1</td>
-                                        <td>4</td>
+                                        <th scope="row">KH002</th>
+                                        <td>Cần Thơ</td>
+                                        <td>Phòng nhân sự</td>
+                                        <td>31 - 12 - 2023</td>
+                                        <td class="text-danger">Chưa hoàn thành</td>
+                                        <td class="text-danger">Chưa đánh giá</td>
                                         <td>
-                                            <a href=""> Chi tiết </a>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">1</th>
-                                        <td>Phong Marketing</td>
-                                        <td>5</td>
-                                        <td>1</td>
-                                        <td>4</td>
-                                        <td>
-                                            <a href=""> Chi tiết </a>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <th scope="row">1</th>
-                                        <td>Phong Marketing</td>
-                                        <td>5</td>
-                                        <td>1</td>
-                                        <td>4</td>
-                                        <td>
-                                            <a href=""> Chi tiết </a>
+                                            <a href="./content_evaluate-detail.html"> Chi tiết </a>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -148,6 +130,12 @@
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+
+    <script>
+        $(document).ready( function () {
+            $('#evaluate-table').DataTable();
+        } );
     </script>
 
 </html>
