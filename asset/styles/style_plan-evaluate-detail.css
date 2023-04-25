@@ -4,21 +4,24 @@
 }
 
 .row--main__background__detail{
-    text-align: center;
-    font-size: 33px;
-    font-weight: 500;
-    padding:5px;
+    margin: 3rem 0 3rem 1.5rem;
+  font-weight: 600;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #888888;
+  margin-left: 0;
+  margin-right: 0;
 }
 .row--main__background{
     width: 100%;
-        background-color: rgb(250 250 250);
+        /* background-color: rgb(250 250 250); */
 }
 
 .text{
     width: 100%;
-    border: 2px solid rgb(243, 243, 243);
+    /* border: 2px solid rgb(243, 243, 243); */
     border-radius: 5px;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     padding: 15px 20px 20px 20px;
 }
 
@@ -37,10 +40,10 @@
 
 .row__border{
     width: 100%;
-    border: 2px solid rgb(243, 243, 243);
+    /* border: 2px solid rgb(243, 243, 243); */
     margin:20px 0px;
     border-radius: 5px;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
 }
 .col-12__detail{
     width: 100%;
@@ -61,11 +64,11 @@
 }
 .col-12__detail th{
     color: #444;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
 }
 .col-12__detail td{
-    font-size: 18px;
+    font-size: 15px;
     line-height: 120%;
     margin: 0;
     overflow: visible;
