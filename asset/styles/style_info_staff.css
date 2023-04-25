@@ -27,7 +27,7 @@ body {
 }
 
 .content__staff-info:nth-child(odd) {
-    background-color: #d2fcff;
+    background-color: #eff6f9;
 }
 
 .staff__info-title {
@@ -55,8 +55,8 @@ body {
 .content__staff-btn {
     padding: 1.5rem 2rem;
     font-size: 1.3rem;
-    margin-left:14rem;
     margin-top: 1rem;
+    float: right;
 }
 
 
