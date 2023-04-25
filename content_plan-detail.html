@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
+    <head>
+        <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Fonts -->
@@ -40,73 +40,17 @@
         <link rel="stylesheet" href="./asset/styles/base.css" />
         <link rel="stylesheet" href="./asset/styles/style_plan-detail.css" />
         <title>Quan Ly Nhan Su</title>
-</head>
+    </head>
 
-<body>
-	<div class="container-flud">
-            <div class="row header">
-                <h2>Chi tiết kế hoạch</h2>
+    <body>
+        <div class="wrapper">
+            <div class="container-flud">
+                <div class="row header">
+                    <h2 class="header__title">Chi tiết kế hoạch</h2>
+                </div>
+
+                <div class="row content"></div>
             </div>
-			<div class="row row__detail">
-					<div class="col-8 col-10__detail">
-                        <div class="form-group">
-                            <div class="col-10__detail--name">
-                                <h5>Tên kế hoạch</h5>
-                            </div>
-                            <p class="text_col-10__detail--text"><b>Kế hoạch 1</b></p> <i>(1/1/1999</i><i> đến </i><i>1/1/2000)</i>  <p class="text_col-10__detail--text"><b>Nguyễn Văn A</b></p>
-                            <p class="col-10__detail--text">Cần thơ - Phòng Kinh doanh 1</p>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="col-2__select" style="float: right;">
-                            <select class="col-2__select--choice">
-                                <option selected disabled>Tiến độ</option>
-                                <option value="1">Hoàn thành</option>
-                                <option value="2">Đang thực hiện</option>
-                                <option value="3">Không hoàn thành</option>
-                            </select>
-                        </div>
-                    </div>
-			</div>
-            <br>
-            <div class="row content">
-                <div class="col-2 col-2__member">
-                    <div class="form-group">
-                        <div class="col-10__detail--name">
-                            <h5>Thành viên</h5>
-                        </div>
-                        <div class="col-10__detail--member">
-                            <P>Nguyễn Văn B</P>
-                            <P>Nguyễn Văn C</P>
-                            <P>Nguyễn Văn D</P>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-8 col-8__content">
-                    <div class="form-group">
-                            <div class="form-group">
-                                <p class="form-group__text">Nội dung</p>
-                                <td><textarea cols="95%" rows="10">
-Lam cai nay lam cai kia
-Hom nay lam cai nay ngay mai lam cai kia,
-Hom nay lam cai nay ngay mai lam cai kia
-Hom nay lam cai nay ngay mai lam cai kia
-Lam cai nay lam cai kia
-Hom nay lam cai nay ngay mai lam cai kia
-Lam cai nay lam cai kia
-Hom nay lam cai nay ngay mai lam cai kia</textarea></td>
-                            </div>
-                        </div>
-                        <div style="float: right;">
-                            <button class="btn btn-success col-8__content--fix" onclick="chinh()">Chỉnh sửa</button>
-                            <button class="btn btn-primary col-8__content--save" onclick="chinh()">Lưu</button>
-                        </div>                    
-                </div>
         </div>
-        
-		</div>
-	</div>
-
-
-</body>
+    </body>
 </html>
