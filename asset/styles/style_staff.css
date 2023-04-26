@@ -15,7 +15,7 @@
 
 .header__staff_btn {
     background-color: var(--primary-color);
-    padding: 1rem;
+    padding: 1rem; 
     border-radius: 1rem;
     cursor: pointer;
 

@@ -18,7 +18,7 @@
 .table__content tr:nth-child(odd) > .table__desc{
     background-color: #f5fcff;
 }
-
+ 
 .table__title {
     margin-bottom: 2rem;
 }
