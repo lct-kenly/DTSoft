@@ -1,92 +1,65 @@
-.header{
-    margin: 3rem 0 3rem 1.5rem;
+body {
+    min-height: 60rem;
+}
+
+.wrapper {
+    width: 99%;
+}
+
+.staff_info {
+    margin-top: 3rem ;
+}
+
+.header__title {
+    padding-left: 2.7rem;
     font-weight: 600;
     font-size: 2rem;
     text-transform: uppercase;
     color: #888888;
-    margin-left: 0;
-    margin-right: 0;
 }
 
-.content{
-    width: 100%;
-    /* background-color: rgb(250 250 250); */
-    margin-left: 0;
-    margin-right: 0;
+.main {
+    margin-top: 3rem;
 }
 
-.content__left{
-    /* border: 2px solid rgb(243, 243, 243); */
-    border-radius: 5px;
-    /* background-color: rgb(255, 255, 255); */
-    margin-left: 10%;
-    margin-bottom: 20px;
-    
+.content__staff-info {
+    padding: 1rem;
 }
 
-.content__right{
-    /* border: 2px solid rgb(243, 243, 243); */
-    border-radius: 5px;
-    /* background-color: rgb(255, 255, 255); */
-    margin-left: 10%;
-    margin-bottom: 20px;
+.content__staff-info:nth-child(odd) {
+    background-color: #eff6f9;
 }
 
-.odd{
-    background: #f5fcff;
-    padding: 10px;
+.staff__info-title {
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
 }
 
-.even{
-    border-radius: 5px;
-    background: rgb(255, 255, 255);
-    padding: 10px;
+.staff__info-desc {
+    font-size: 1.6rem;
 }
 
-.content__right--img{
-    width: 180px;
-    height: 235px;
-    border: 2px solid black;
-    border-radius: 5px;
-    margin-left: 30%;
+.content__staff-img {
+    width: 24.5rem;
+    height: 30rem;
+    margin-left: 1.1rem;
+    margin-bottom: 2rem;
 }
 
-.img{
+.content__staff-img img {
     width: 100%;
     height: 100%;
-    border-radius: 5px;
 }
 
-.btn-save{  
-    margin-right: 10px;
-    margin-bottom: 10px;
+.content__staff-btn {
+    padding: 1.5rem 2rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    float: right;
 }
 
-.btn-primary{
-    font-size: 15px;
-    padding: 10px;
-    width: 100px;
-}
 
-.form-group__text,.select{
-    font-size: 15px;
-    font-weight: bold;
-    padding: 5px;
-}
-.select{
-    width: 150px;
-}
-.form-group__name{
-    font-size: 15px;
-    padding: 5px;
-}
-
-.even .form-control:disabled {
-    background: rgb(255, 255, 255);
-    border: none;
-}
-
-.odd .form-control:disabled {
-    background: #f5fcff;
-    border: none;
+.content__staff-btn a {
+    color: #fff;
 }
