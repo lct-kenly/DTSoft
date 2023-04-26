@@ -49,3 +49,7 @@
     margin-top: 8px;
     font-size: 1.3rem;
 }
+
+table.dataTable thead th {
+    text-align: center;
+}

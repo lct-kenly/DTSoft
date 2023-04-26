@@ -12,6 +12,8 @@
 .col-6__plan--date{
     width: 150px;
     height: 38px;
+    padding: 0 8px;
+    border-radius: 4px;
 }
 .row__detail{
   margin-left: 0;
@@ -60,15 +62,19 @@
 }
 .col-6__plan--name{
   width: 400px;
+  padding: 0 8px;
+  border-radius: 4px;
 }
 
 .text__area{
-  font-size: 20px;
-  height: 25px;
   width: 40%;
-  float: right;
+  height: 25px;
   margin-top: 4px;
   margin-right: 5px;
+  padding: 0 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  float: right;
 }
 
 .btn-primary{
