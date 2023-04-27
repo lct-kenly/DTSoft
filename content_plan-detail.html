@@ -235,10 +235,40 @@
                     <td class="fw-bold text-center">4800</td>
                     <td class="fw-bold text-center">16</td>
                   </tr>
+                  <tr>
+                    <th class="fw-bold text-center">Tổng chỉ tiêu đã đạt (4 tháng)</th>
+                    <th class="fw-bold text-center">1.000.000.000</th>
+                    <td class="fw-bold text-center">350</td>
+                    <td class="fw-bold text-center">1.000.000.000</td>
+                    <td class="fw-bold text-center">70</td>
+                    <td class="fw-bold text-center">1600</td>
+                    <td class="fw-bold text-center">6</td>
+                  </tr>
                 </tfoot>
               </table>
 
-              <canvas id="myChart"></canvas>
+              <div class="row">
+                <div class="col-md-6 pe-4">
+                  <canvas id="revenue"></canvas>
+                </div>
+                <div class="col-md-6 ps-4">
+                  <canvas id="bill"></canvas>
+                </div>
+
+                <div class="col-md-6 my-4 pe-4">
+                  <canvas id="debt"></canvas>
+                </div>
+                <div class="col-md-6 my-4 ps-4">
+                  <canvas id="new-customer"></canvas>
+                </div>
+
+                <div class="col-md-6 my-4 pe-4">
+                  <canvas id="support-customer"></canvas>
+                </div>
+                <div class="col-md-6 my-4 ps-4">
+                  <canvas id="products"></canvas>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -258,7 +288,7 @@
 
 <!-- DataTables plugins jquery -->
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
- 
+
 <!-- Chart js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -277,30 +307,129 @@
 </script>
 
 <script>
-  const ctx = document.getElementById("myChart");
-  const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'My First Dataset',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1
-    }]
-  };
+  const revenue = document.getElementById('revenue');
+  const bill = document.getElementById('bill');
+  const dept = document.getElementById('dept');
+  const newCustomer = document.getElementById('new-customer');
+  const supportCustomer = document.getElementById('support-customer');
+  const products = document.getElementById('products');
 
-  new Chart(ctx, {
+  new Chart(revenue, {
     type: 'line',
     data: {
+      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
       datasets: [{
-        data: [{ 'data.key': 'one', 'data.value': 20 }, { 'data.key': 'two', 'data.value': 30 }]
+        label: 'Doanh thu',
+        data: [250000000, 200000000, 250000000, 300000000],
+        borderWidth: 1,
+        backgroundColor: '#22c55e'
       }]
     },
     options: {
-      parsing: {
-        xAxisKey: 'data\\.key',
-        yAxisKey: 'data\\.value'
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  new Chart(bill, {
+    type: 'line',
+    data: {
+      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
+      datasets: [{
+        label: 'Xuất hóa đơn',
+        data: [90, 71, 90, 99],
+        borderWidth: 1,
+        backgroundColor: '#164e63'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  new Chart(debt, {
+    type: 'line',
+    data: {
+      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
+      datasets: [{
+        label: 'Thu hồi công nợ',
+        data: [250000000, 200000000, 250000000, 300000000],
+        borderWidth: 1,
+        backgroundColor: '#06b6d4'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  new Chart(newCustomer, {
+    type: 'line',
+    data: {
+      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
+      datasets: [{
+        label: 'Phát triển khách hàng',
+        data: [20, 15, 15, 30],
+        borderWidth: 1,
+        backgroundColor: '#8b5cf6'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  new Chart(supportCustomer, {
+    type: 'line',
+    data: {
+      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
+      datasets: [{
+        label: 'Hỗ trợ khách hàng',
+        data:  [400, 450, 300, 450],
+        borderWidth: 1,
+        backgroundColor: '#f43f5e'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  new Chart(products, {
+    type: 'line',
+    data: {
+      labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
+      datasets: [{
+        label: 'Hiểu biết sản phẩm',
+        data: [2, 1, 1, 2],
+        borderWidth: 1,
+        backgroundColor: '#eab308'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
   });
