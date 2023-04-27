@@ -175,6 +175,7 @@
                 <caption class="mt-4 text-center">Danh sách nhân viên thuộc kế hoạch</caption>
                 <thead class="table-dark">
                   <tr>
+                    <th scope="col">Mã nhân viên</th>
                     <th scope="col">Tên nhân viên</th>
                     <th scope="col">Doanh số</th>
                     <th scope="col">Xuất hóa đơn</th>
@@ -186,6 +187,7 @@
                 </thead>
                 <tbody class="align-middle">
                   <tr>
+                    <th>NV001</th>
                     <th>Nguyễn Văn A</th>
                     <th>700.000.000</th>
                     <td>250</td>
@@ -196,6 +198,7 @@
                   </tr>
 
                   <tr>
+                    <th>NV002</th>
                     <th>Nguyễn Văn B</th>
                     <th>700.000.000</th>
                     <td>250</td>
@@ -206,6 +209,7 @@
                   </tr>
 
                   <tr>
+                    <th>NV003</th>
                     <th>Nguyễn Văn C</th>
                     <th>700.000.000</th>
                     <td>250</td>
@@ -216,6 +220,7 @@
                   </tr>
 
                   <tr>
+                    <th>NV004</th>
                     <th>Nguyễn Văn D</th>
                     <th>700.000.000</th>
                     <td>250</td>
@@ -227,7 +232,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th class="fw-bold text-center">Tổng chỉ tiêu cần đạt</th>
+                    <th class="fw-bold text-center" colspan="2">Tổng chỉ tiêu cần đạt</th>
                     <th class="fw-bold text-center">2.800.000.000</th>
                     <td class="fw-bold text-center">1000</td>
                     <td class="fw-bold text-center">2.800.000.000</td>
@@ -236,7 +241,7 @@
                     <td class="fw-bold text-center">16</td>
                   </tr>
                   <tr>
-                    <th class="fw-bold text-center">Tổng chỉ tiêu đã đạt (4 tháng)</th>
+                    <th class="fw-bold text-center" colspan="2">Tổng chỉ tiêu đã đạt (4 tháng)</th>
                     <th class="fw-bold text-center">1.000.000.000</th>
                     <td class="fw-bold text-center">350</td>
                     <td class="fw-bold text-center">1.000.000.000</td>
@@ -322,7 +327,8 @@
         label: 'Doanh thu',
         data: [250000000, 200000000, 250000000, 300000000],
         borderWidth: 1,
-        backgroundColor: '#22c55e'
+        backgroundColor: '#22c55e',
+        borderColor: '#22c55e',
       }]
     },
     options: {
@@ -330,7 +336,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Biểu đồ tổng doanh thu qua từng tháng",
+        },
+      },
     }
   });
 
@@ -342,7 +354,9 @@
         label: 'Xuất hóa đơn',
         data: [90, 71, 90, 99],
         borderWidth: 1,
-        backgroundColor: '#164e63'
+        backgroundColor: '#164e63',
+        borderColor: '#164e63',
+
       }]
     },
     options: {
@@ -350,7 +364,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Biểu đồ tổng hóa đơn xuất qua từng tháng",
+        },
+      },
     }
   });
 
@@ -362,7 +382,9 @@
         label: 'Thu hồi công nợ',
         data: [250000000, 200000000, 250000000, 300000000],
         borderWidth: 1,
-        backgroundColor: '#06b6d4'
+        backgroundColor: '#06b6d4',
+        borderColor: '#06b6d4',
+
       }]
     },
     options: {
@@ -370,7 +392,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Biểu đồ tổng thu hồi công nợ qua từng tháng",
+        },
+      },
     }
   });
 
@@ -382,7 +410,9 @@
         label: 'Phát triển khách hàng',
         data: [20, 15, 15, 30],
         borderWidth: 1,
-        backgroundColor: '#8b5cf6'
+        backgroundColor: '#8b5cf6',
+        borderColor: '#8b5cf6',
+
       }]
     },
     options: {
@@ -390,7 +420,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Biểu đồ tổng khách hàng mới qua từng tháng",
+        },
+      },
     }
   });
 
@@ -400,9 +436,11 @@
       labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Thánh 10', 'Tháng 11', 'Tháng 12'],
       datasets: [{
         label: 'Hỗ trợ khách hàng',
-        data:  [400, 450, 300, 450],
+        data: [400, 450, 300, 450],
         borderWidth: 1,
-        backgroundColor: '#f43f5e'
+        backgroundColor: '#f43f5e',
+        borderColor: '#f43f5e',
+
       }]
     },
     options: {
@@ -410,7 +448,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Biểu đồ tổng khách hàng đã hỗ trợ qua từng tháng",
+        },
+      },
     }
   });
 
@@ -422,7 +466,9 @@
         label: 'Hiểu biết sản phẩm',
         data: [2, 1, 1, 2],
         borderWidth: 1,
-        backgroundColor: '#eab308'
+        backgroundColor: '#eab308',
+        borderColor: '#eab308',
+
       }]
     },
     options: {
@@ -430,7 +476,13 @@
         y: {
           beginAtZero: true
         }
-      }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Biểu đồ tổng doanh thu của kế hoạch qua từng tháng",
+        },
+      },
     }
   });
 </script>
