@@ -168,8 +168,3 @@ body {
   padding: 5px 15px;
   border-left: 5px solid #fff;
 }
-
-.col-12__detail__more{
-    pointer-events: none;
-    cursor: default;
-}
