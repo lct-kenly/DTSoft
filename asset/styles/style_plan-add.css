@@ -87,17 +87,6 @@
   width: 15px;
 
 }
-
-.header{
-  margin: 3rem 0 3rem 1.5rem;
-  font-weight: 600;
-  font-size: 2rem;
-  text-transform: uppercase;
-  color: #888888;
-    margin-left: 0;
-    margin-right: 0;
-}
-
 .form-group__text{
   font-size: 20px;
 }

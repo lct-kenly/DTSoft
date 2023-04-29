@@ -15,6 +15,10 @@ a {
     text-decoration: none;
 }
 
-.test {
-    
+.header__title {
+    margin: 3rem 0 3rem 1.5rem;
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #888888;
 }
