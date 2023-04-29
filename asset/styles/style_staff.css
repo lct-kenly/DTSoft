@@ -1,6 +1,7 @@
 .header__staff {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 2rem;
 }
 
@@ -9,7 +10,6 @@
     padding: 1rem; 
     border-radius: 1rem;
     cursor: pointer;
-
 }
 
 .btn__add-staff {

@@ -29,159 +29,282 @@
 
 
 <body>
-  <div class="container-flud">
-    <div class="row row__background">
-      <div class="row header">
-        <h2 class="header__title">Thêm kế hoạch</h2>
-      </div>
-      <div class="col-12">
-        <div class="row row__border">
-          <div class="col-6 col-6__plan">
-            <div class="form-group">
-              <h5>Mã kế hoạch</h5>
-              <input type="text" class="col-6__plan--name" placeholder="Nhập mã kế hoạch">
-            </div>
-          </div>
-          <div class="col-6 col-6__plan">
-            <div class="form-group">
-              <h5>Thời gian</h5>
-              <input class="col-6__plan--date" type="date">
-              <h5 class="col-6__plan--to"> đến </h5><input class="col-6__plan--date" type="date">
-            </div>
-          </div>
-        </div>
+    <div class="wrapper">
+      <div class="container-fuild">
+        <div class="row header">
+          <h2 class="header__title">
+              Thêm kế hoạch
+          </h2>
 
-        <div class="row row__detail">
-          <div class="col-3 col-3__select">
-            <div class="form-group">
-              <label>Khu vực:</label><br>
-              <form action="#">
-
-                <div class="select-box">
-
-                  <label for="select-box1" class="label select-box1"><span class="label-desc">Chọn khu vực</span>
-                  </label>
-                  <select id="select-box1" class="select">
-                    <option value="Choice 1">Falkland Islands</option>
-                    <option value="Choice 2">Germany</option>
-                    <option value="Choice 3">Neverland</option>
-                  </select>
-
+          <div class="row content">
+            <div class="col-md-6">
+              <div class="content__form">
+                <div class="form__input">
+                  <label for="plan_id" class="form-label">Mã kế hoạch</label>
+                  <input type="text" class="form-control" id="plan_id" placeholder="Nhập mã ké hoạch">
                 </div>
 
-              </form>
-            </div>
-            <div class="form-group">
-              <label>Bộ phận:</label><br>
-              <form action="#">
-
-                <div class="select-box">
-
-                  <label for="select-box1" class="label select-box1"><span class="label-desc">Chọn bộ phận</span>
-                  </label>
-                  <select id="select-box1" class="select">
-                    <option value="Choice 1">Falkland Islands</option>
-                    <option value="Choice 2">Germany</option>
-                    <option value="Choice 3">Neverland</option>
-                  </select>
-
+                <div class="form__input-dateTime">
+                  <label  for="dateStart" class="form-label">Thời gian thực hiện</label>
+                  <input id="dateStart" type="date">
                 </div>
 
-              </form>
-            </div>
-            <div class="form-group">
-              <label>Trưởng nhóm:</label><br>
-              <form action="#">
-
-                <div class="select-box">
-
-                  <label for="select-box1" class="label select-box1"><span class="label-desc">Chọn trưởng nhóm</span>
-                  </label>
-                  <select id="select-box1" class="select">
-                    <option value="Choice 1">Falkland Islands</option>
-                    <option value="Choice 2">Germany</option>
-                    <option value="Choice 3">Neverland</option>
-                  </select>
-
-                </div>
-
-              </form>
-            </div>
-            <div class="form-group">
-              <label>Thành viên:</label><br>
-              <form action="#">
-
-                <div class="select-box">
-
-                  <label for="select-box1" class="label select-box1"><span class="label-desc">Chọn thành viên</span>
-                  </label>
-                  <select id="select-box1" class="select">
-                    <option value="Choice 1">Falkland Islands</option>
-                    <option value="Choice 2">Germany</option>
-                    <option value="Choice 3">Neverland</option>
-                  </select>
-
-                </div>
-
-              </form>
-            </div>
-          </div>
-          <div class="col-8 col-8__content">
-            <form action="">
-              <div class="row">
-                <div class="col-6 col-2__target">
-                  <input type="checkbox" id="doanhso" name="doanhso" class="check__box">
-                  <label for="doanhso">Doanh số</label>
-                  <input type="text" name="id_doanhso" class="text__area">
-                </div>
-                <div class="col-6 col-2__target">
-                  <input type="checkbox" id="xuathoadon" name="xuathoadon" class="check__box">
-                  <label for="xuathoadon">Xuất hóa đơn</label>
-                  <input type="text" name="id_xuathoadon" class="text__area">
-                </div>
-                <div class="col-6 col-2__target">
-                  <input type="checkbox" id="congno" name="congno" class="check__box">
-                  <label for="congno">Thu hồi công nợ</label>
-                  <input type="text" name="id_congno" class="text__area">
-                </div> 
-                <div class="col-6 col-2__target">
-                  <input type="checkbox" id="phattrien" name="phattrien" class="check__box">
-                  <label for="phattrien">Phát triển khách hàng</label>
-                  <input type="text" name="id_phattrien" class="text__area">
-                </div>
-                <div class="col-6 col-2__target">
-                  <input type="checkbox" id="hotro" name="hotro" class="check__box">
-                  <label for="hotro">Hổ trợ khách hàng</label>
-                  <input type="text" name="id_hotro" class="text__area">
-                </div>
-                <div class="col-6 col-2__target">
-                  <input type="checkbox" id="sanpham" name="sanpham" class="check__box">
-                  <label for="sanpham">Hiểu biết sản phẩm</label>
-                  <input type="text" name="id_sanpham" class="text__area">
-                </div>
-
-                <div class="form-group">
-                  <p class="form-group__text">Nội dung</p>
-                  <td><textarea cols="80%" rows="6" class="form-control"></textarea></td>
-                </div>
-    
-                <div class="col-8__content--save mt-4 text-end">
-                  <button class="btn btn-primary" onclick="chinh()">Lưu</button>
+                <div class="form__input-dateTime">
+                  <label  for="dateEnd" class="form-label">Thời gian kết thúc</label>
+                  <input id="dateEnd" type="date">
                 </div>
               </div>
-            </form>
+            </div>
+
+            <div class="col-md-6">
+              <div class="content__selection">
+                <div class="select__form">
+                  <p class="select__title">Khu vực</p>
+                  <select class="form-select">
+                    <option selected>Khu vực</option>
+                    <option value="1">Hồ Chí Minh</option>
+                    <option value="2">Nha Trang</option>
+                    <option value="3">Cần Thơ</option>
+                  </select>
+                </div>
+
+                <div class="select__form">
+                  <p class="select__title">Bộ phận</p>
+                  <select class="form-select">
+                    <option selected>Bộ phận</option>
+                    <option value="1">Kinh doanh</option>
+                    <option value="2">Nhân sự</option>
+                    <option value="3">Lập trình</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
+
+          <div class="row plan__desc">
+              <form class="plan__desc-form">
+                <div class="mb-3 plan__desc-input">
+                  <label for="motakehoach" class="form-label">Mô tả kế hoạch</label>
+                  <textarea class="form-control" id="motakehoach" placeholder="Mô tả kế hoạch" required></textarea>
+                </div>
+              </form>
+          </div>
+
+          <div class="row plan__list">
+              <h3 class="plan__title">Các chỉ tiêu kế hoạch</h3>
+              <div class="plan__info">
+                  <div class="input-group mb-3">
+                    <div class="input-group-text">
+                      <input class="form-check-input plan__checkbox mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                    </div>
+                    <div class="form-floating">
+                      <input
+                          class="form-control plan__input-desc"
+                          placeholder="Doanh số"
+                          id="doanhso"
+                      ></input>
+                      <label for="doanhso"> Doanh số </label>
+                  </div>
+              </div>
+              </div>
+
+              <div class="plan__info">
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <input class="form-check-input plan__checkbox mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                  </div>
+                  <div class="form-floating">
+                    <input
+                        class="form-control plan__input-desc"
+                        placeholder="Xuất hóa đơn"
+                        id="xuathoadon"
+                    ></input>
+                    <label for="xuathoadon"> Xuất hóa đơn </label>
+                </div>
+              </div>
+              </div>
+
+              <div class="plan__info">
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <input class="form-check-input plan__checkbox mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                  </div>
+                  <div class="form-floating">
+                    <input
+                        class="form-control plan__input-desc"
+                        placeholder="Thu hồi công nợ"
+                        id="thuhoicongno"
+                    ></input>
+                    <label for="thuhoicongno"> Thu hồi công nợ </label>
+                </div>
+              </div>
+              </div>
+
+              <div class="plan__info">
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <input class="form-check-input plan__checkbox mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                  </div>
+                  <div class="form-floating">
+                    <input
+                        class="form-control plan__input-desc"
+                        placeholder="Phát triển khách hàng"
+                        id="phattrienkhachhang"
+                    ></input>
+                    <label for="phattrienkhachhang"> Phát triển khách hàng </label>
+                </div>
+              </div>
+            </div>
+
+              <div class="plan__info">
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <input class="form-check-input plan__checkbox mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                  </div>
+                  <div class="form-floating">
+                    <input
+                        class="form-control plan__input-desc"
+                        placeholder="Hổ trợ khách hàng"
+                        id="hieubietsanpham"
+                    ></input>
+                    <label for="hieubietsanpham"> Hổ trợ khách hàng </label>
+                </div>
+              </div>
+            </div>
+
+              <div class="plan__info">
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <input class="form-check-input plan__checkbox mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                  </div>
+                  <div class="form-floating">
+                    <input
+                        class="form-control plan__input-desc"
+                        placeholder="Hiểu biết sản phẩm"
+                        id="hieubietsanpham"
+                    ></input>
+                    <label for="hieubietsanpham"> Hiểu biết sản phẩm </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row plan__member">
+            <h3 class="plan__title">Nhân viên tham gia kế hoạch</h3>
+            <p class="member__title">Trưởng nhóm</p>
+            <div class="member__info">
+              <select class="form-select member__id" aria-label="Default select example">
+                <option selected>Mã nhân viên</option>
+                <option value="1">NV001</option>
+                <option value="2">NV002</option>
+                <option value="3">NV003</option>
+              </select>
+              
+              <p class="member__name">Tên nhân viên: </p> 
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền tên</p>
+              <p class="member__position">Chức vụ: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__location">Khu vực: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền khu vực</p>
+            </div>
+
+            <p class="member__title">Thành viên</p>
+
+            <h5 class="member__number"> Thành viên 1 </h5>
+            <div class="member__info">
+              <select class="form-select member__id" aria-label="Default select example">
+                <option selected>Mã nhân viên</option>
+                <option value="1">NV001</option>
+                <option value="2">NV002</option>
+                <option value="3">NV003</option>
+              </select>
+              
+              <p class="member__name">Tên nhân viên: </p> 
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền tên</p>
+              <p class="member__position">Chức vụ: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__location">Khu vực: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền khu vực</p>
+            </div>
+
+            <h5 class="member__number"> Thành viên 2 </h5>
+            <div class="member__info">
+              <select class="form-select member__id" aria-label="Default select example">
+                <option selected>Mã nhân viên</option>
+                <option value="1">NV001</option>
+                <option value="2">NV002</option>
+                <option value="3">NV003</option>
+              </select>
+              
+              <p class="member__name">Tên nhân viên: </p> 
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền tên</p>
+              <p class="member__position">Chức vụ: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__location">Khu vực: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền khu vực</p>
+            </div>
+
+            <h5 class="member__number"> Thành viên 3 </h5>
+            <div class="member__info">
+              <select class="form-select member__id" aria-label="Default select example">
+                <option selected>Mã nhân viên</option>
+                <option value="1">NV001</option>
+                <option value="2">NV002</option>
+                <option value="3">NV003</option>
+              </select>
+              
+              <p class="member__name">Tên nhân viên: </p> 
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền tên</p>
+              <p class="member__position">Chức vụ: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__location">Khu vực: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền khu vực</p>
+            </div>
+
+            <h5 class="member__number"> Thành viên 4 </h5>
+            <div class="member__info">
+              <select class="form-select member__id" aria-label="Default select example">
+                <option selected>Mã nhân viên</option>
+                <option value="1">NV001</option>
+                <option value="2">NV002</option>
+                <option value="3">NV003</option>
+              </select>
+              
+              <p class="member__name">Tên nhân viên: </p> 
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền tên</p>
+              <p class="member__position">Chức vụ: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__location">Khu vực: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền khu vực</p>
+            </div>
+
+            <h5 class="member__number"> Thành viên 5 </h5>
+            <div class="member__info">
+              <select class="form-select member__id" aria-label="Default select example">
+                <option selected>Mã nhân viên</option>
+                <option value="1">NV001</option>
+                <option value="2">NV002</option>
+                <option value="3">NV003</option>
+              </select>
+              
+              <p class="member__name">Tên nhân viên: </p> 
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền tên</p>
+              <p class="member__position">Chức vụ: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__location">Khu vực: </p>
+              <p class="member__desc">Chọn mã nhân viên sẽ tự điền khu vực</p>
+            </div>
+
+
+          </div>
+
+          <div class="row footer">
+            <div class="btn btn-primary plan__btn">Thêm kế hoạch</div>
+          </div>
       </div>
     </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-    crossorigin="anonymous"></script>
 </body>
 <script src="./assets/js/select-box.js"></script>
 
