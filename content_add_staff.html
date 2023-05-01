@@ -29,6 +29,22 @@
             crossorigin="anonymous"
         />
 
+        <!-- JS -->
+        <link
+            class="jsbin"
+            href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <script
+            class="jsbin"
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
+        ></script>
+        <script
+            class="jsbin"
+            src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"
+        ></script>
+
         <!-- Styles Css -->
         <link rel="stylesheet" href="./asset/styles/reset.css" />
         <link rel="stylesheet" href="./asset/styles/base.css" />
@@ -41,195 +57,191 @@
                 <div class="row header">
                     <h2 class="header__title">Thêm nhân viên</h2>
                 </div>
-                <div class="col-md-12 backgroud-content">
-                    <form>
-                        <div class="row content">
-                            <div class="col-5 content__left">
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Mã nhân viên:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập mã nhân viên"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Họ tên:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập họ tên"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Ngày sinh:</label
-                                    >
-                                    <input
-                                        type="date"
-                                        class="form-control"
-                                        placeholder="Nhập ngày sinh"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Giới tính:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập giới tính"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Quê quán:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập quê quán"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Mã Khu vực:</label
-                                    ><br />
-                                    <form action="#">
-                                        <div class="select-box">
-                                            <label
-                                                for="select-box1"
-                                                class="label select-box1"
-                                                ><span class="label-desc"
-                                                    >Mã khu vực</span
-                                                >
-                                            </label>
-                                            <select
-                                                id="select-box1"
-                                                class="select"
-                                            >
-                                                <option value="Choice 1">
-                                                    Falkland Islands
-                                                </option>
-                                                <option value="Choice 2">
-                                                    Germany
-                                                </option>
-                                                <option value="Choice 3">
-                                                    Neverland
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Mã bộ phận:</label
-                                    ><br />
-                                    <div class="select-box">
-                                        <label
-                                            for="select-box1"
-                                            class="label select-box1"
-                                            ><span class="label-desc"
-                                                >Mã bộ phận</span
-                                            >
-                                        </label>
-                                        <select id="select-box1" class="select">
-                                            <option value="Choice 1">
-                                                Falkland Islands
-                                            </option>
-                                            <option value="Choice 2">
-                                                Germany
-                                            </option>
-                                            <option value="Choice 3">
-                                                Neverland
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Mã công việc:</label
-                                    ><br />
-                                    <div class="select-box">
-                                        <label
-                                            for="select-box1"
-                                            class="label select-box1"
-                                            ><span class="label-desc"
-                                                >Mã bộ phận</span
-                                            >
-                                        </label>
-                                        <select id="select-box1" class="select">
-                                            <option value="Choice 1">
-                                                Falkland Islands
-                                            </option>
-                                            <option value="Choice 2">
-                                                Germany
-                                            </option>
-                                            <option value="Choice 3">
-                                                Neverland
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
+
+                <div class="row content">
+                    <div class="col-md-6 content__left">
+                        <!-- ID -->
+                        <div class="input__form">
+                            <label for="staffID" class="form-label input__label"
+                                >Mã nhân viên</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control input__value"
+                                id="staffID"
+                                placeholder="Mã nhân viên"
+                            />
+                        </div>
+
+                        <!-- Name -->
+                        <div class="input__form">
+                            <label
+                                for="staffName"
+                                class="form-label input__label"
+                                >Họ và tên</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control input__value"
+                                id="staffName"
+                                placeholder="Họ và tên"
+                            />
+                        </div>
+
+                        <!-- Date of birth -->
+                        <div class="input__form">
+                            <label
+                                for="staffDateofBirth"
+                                class="form-label input__label"
+                                >Ngày sinh</label
+                            >
+                            <input
+                                type="date"
+                                class="form-control input__value"
+                                id="staffDateofBirth"
+                            />
+                        </div>
+
+                        <!-- Sex -->
+                        <div class="input__form">
+                            <p class="input__label">Giới tính</p>
+                            <select class="form-select input__value">
+                                <option selected>Giới tính</option>
+                                <option value="1">Nam</option>
+                                <option value="2">Nữ</option>
+                            </select>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="input__form">
+                            <label
+                                for="staffPhone"
+                                class="form-label input__label"
+                                >Số diện thoại</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control input__value"
+                                id="staffPhone"
+                            />
+                        </div>
+
+                        <!-- Position -->
+                        <div class="input__form">
+                            <p class="input__label">Chức vụ</p>
+                            <select class="form-select input__value">
+                                <option selected>Chức vụ</option>
+                                <option value="1">Trưởng phòng</option>
+                                <option value="2">Phó phòng</option>
+                                <option value="3">Nhân viên</option>
+                            </select>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="input__form">
+                            <p class="input__label">Phòng ban</p>
+                            <select class="form-select input__value">
+                                <option selected>Phòng ban</option>
+                                <option value="1">Nhân sự</option>
+                                <option value="2">Kế toán</option>
+                                <option value="3">Lập trình</option>
+                                <option value="4">Tester</option>
+                                <option value="5">Hổ trợ khách hàng</option>
+                            </select>
+                        </div>
+
+                        <!-- Places -->
+                        <div class="input__form">
+                            <p class="input__label">Khu vực</p>
+                            <select class="form-select input__value">
+                                <option selected>Khu vực</option>
+                                <option value="1">Hồ Chí Minh</option>
+                                <option value="2">Nha Trang</option>
+                                <option value="3">Cần Thơ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 content__right">
+                        <!-- Avatar -->
+                        <div class="input__form input__avatar">
+                            <div class="avatar__input">
+                                <img src="#" alt="avatar" id="avatar__img" />
                             </div>
-                            <div class="col-5 content__right">
-                                <div class="form-group form-group__img">
-                                    <div class="content__right--img">
-                                        <img class="img" src="1.jpg" alt="" />
-                                    </div>
-                                    <label class="form-group__name"
-                                        >Hình ảnh:</label
-                                    >
-                                    <input type="file" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Số điện thoại:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập số điện thoại"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Tài khoản:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập tài khoản"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-group__name"
-                                        >Mật khẩu:</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Nhập mật khẩu"
-                                    />
-                                </div>
-                                <div style="float: right">
-                                    <button
-                                        class="btn btn-primary"
-                                        onclick="xoa()"
-                                    >
-                                        Lưu
-                                    </button>
-                                </div>
+                            <input
+                                type="file"
+                                class="form-control input__value"
+                                onchange="readURL(this);"
+                            />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="input__form">
+                            <label
+                                for="staffEmail"
+                                class="form-label input__label"
+                                >Email</label
+                            >
+                            <input
+                                type="email"
+                                class="form-control input__value"
+                                id="staffEmail"
+                                placeholder="Email"
+                            />
+                        </div>
+
+                        <!-- Staff Account -->
+                        <div class="input__form">
+                            <label
+                                for="staffUser"
+                                class="form-label input__label"
+                                >Tài khoản</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control input__value"
+                                id="staffUser"
+                                placeholder="Tài khoản"
+                            />
+                        </div>
+
+                        <div class="input__form">
+                            <label
+                                for="staffPassword"
+                                class="form-label input__label"
+                                >Mật khẩu</label
+                            >
+                            <input
+                                type="password"
+                                class="form-control input__value"
+                                id="staffPassword"
+                                placeholder="Mật khẩu"
+                            />
+                        </div>
+
+                        <!-- Button -->
+                        <div class="input__btn">
+                            <div class="btn btn-primary add__staf-btn">
+                                Thêm nhân viên
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
-    <script src="./assets/js/select-box.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#avatar__img")
+                        .attr("src", e.target.result)
+                        .width(245)
+                        .height(300);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </html>
