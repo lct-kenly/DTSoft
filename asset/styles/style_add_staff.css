@@ -1,6 +1,8 @@
 .content {
   height: 120vh;
+  padding-left: 4rem;
 }
+
 
 .input__form {
   width: 50%;
