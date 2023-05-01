@@ -171,7 +171,8 @@
                             <input
                                 type="file"
                                 class="form-control input__value"
-                                onchange="readURL(this);"
+                                name="avatar"
+                                
                             />
                         </div>
 
@@ -234,19 +235,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
         integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
+
     <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#avatar__img")
+
+        $(document).ready(function(){
+            $("input[name='avatar']").on('change', function(e){
+                const reader = new FileReader();
+                const files = e.target.files;
+
+                reader.readAsDataURL(files[0]);
+
+                if(files && files[0]) {
+                    reader.addEventListener('load', function(e){
+                        $("#avatar__img")
                         .attr("src", e.target.result)
                         .width(245)
                         .height(300);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+                    })
+                }
+                
+            })
+        })
+
+        // function readURL(input) {
+        //     if (input.files && input.files[0]) {
+        //         var reader = new FileReader();
+        //         reader.onload = function (e) {
+        //             $("#avatar__img")
+        //                 .attr("src", e.target.result)
+        //                 .width(245)
+        //                 .height(300);
+        //         };
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
     </script>
 </html>
