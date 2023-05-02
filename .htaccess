@@ -1,0 +1,10 @@
+RewriteOptions inherit
+<files .htaccess="">
+order allow,deny
+deny from all
+</files>
+
+RewriteEngine On
+#ErrorDocument 404 /pages/404.php
+RewriteRule "trang-chu" "pages/index.php"
+RewriteRule "dang-nhap" "pages/login.php"

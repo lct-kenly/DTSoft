@@ -1,0 +1,66 @@
+.header, .content {
+    width: 99%;
+}
+
+.header__title {
+    margin: 3rem 0 3rem 1.5rem;
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #888888;
+}
+
+.content {
+    padding: 0 1.7rem;
+}
+
+
+.table__content tr:nth-child(odd) > .table__desc{
+    background-color: #f5fcff;
+}
+ 
+.table__title {
+    margin-bottom: 2rem;
+}
+
+.table__header {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 2rem !important;
+}
+
+.table__content {
+    font-size: 1.5rem;
+}
+
+.table__desc {
+    padding: 2rem !important;
+}
+
+.dataTables_length label, .dataTables_filter label {
+    font-size: 1.6rem;
+    margin: 2rem 0;
+}
+
+.dataTables_info, .dataTables_paginate.paging_simple_numbers {
+    font-size: 1.6rem;
+    margin-top: 3rem;
+}
+
+.add__btn {
+    min-width: 13rem;
+    font-size: 1.6rem;
+    padding: 1.2rem;
+    margin: 3rem 4.5rem 0 0;
+    float: right;
+}
+
+.add__btn a {
+    color: #fff;
+    font-size: 1.4rem;
+}
+/* 
+.add__btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
+} */

@@ -1,0 +1,148 @@
+.content__form {
+  display: flex;
+  
+}
+
+
+.form__input-dateTime input {
+  height: 3rem;
+  font-size: 1.4rem;
+  margin: 0 1rem;
+  width: 80%;
+}
+
+.form__input-dateTime {
+  width: 20rem;
+}
+
+.form__input {
+  width: 20rem;
+  margin-right: 3rem;
+}
+
+
+.form__input label, .form__input-dateTime label, .form__input-dateTime p {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.form__input input {
+  font-size: 1.4rem;
+}
+
+.select__form {
+  width: 20rem;
+  margin-bottom: 1.5rem;
+}
+
+.select__title {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.select__form select {
+  font-size: 1.4rem;
+}
+
+.content__selection {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.plan__desc-form {
+  font-size: 1.8rem;
+}
+
+.plan__desc-input textarea {
+  margin-top: 1.5rem;
+  font-size: 1.6rem;
+  min-height: 10rem;
+  max-height: 15rem;
+}
+
+.plan__list {
+  margin-top: 5rem;
+}
+
+.plan__title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.plan__info {
+  display: flex;
+  width: 30rem;
+  margin: 1rem 0;
+}
+
+.plan__info label {
+  font-size: 1.6rem;
+}
+
+.plan__input-desc {
+  min-width: 20rem;
+  height: 4rem !important;
+  font-size: 1.5rem;
+}
+
+
+.plan__checkbox {
+  /* width: 2rem; */
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  border-radius: 0 !important;
+}
+
+.plan__member {
+  margin-top: 5rem;
+}
+
+.member__info {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+
+.member__title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 2rem 0;
+}
+
+.member__id {
+  width: 20rem;
+  font-size: 1.6rem;
+}
+
+.member__name,.member__position,.member__location, .member__number {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-left: 1.5rem;
+}
+
+.member__number {
+  margin-top: 2rem;
+}
+
+.member__desc {
+  font-size: 1.4rem;
+  margin-left: 0.5rem;
+}
+
+.footer {
+  float: right;
+}
+
+.plan__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18rem;
+  height: 5rem;
+  font-size: 1.8rem;
+  margin: 3rem 0 3rem auto;
+  
+}

@@ -1,0 +1,94 @@
+.header__staff {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.header__staff_btn {
+    background-color: var(--primary-color);
+    padding: 1rem; 
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.btn__add-staff {
+    color: #fff;
+    font-size: 1.8rem;
+}
+
+.header__staff_btn:hover .btn__add-staff {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.staff {
+    margin-top: 2rem;
+}
+
+.staff__list {
+    margin-bottom: 10rem;
+}
+
+.staff__list_items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 120%;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.staff__list_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.staff__list_item::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -10%;
+    background-color: #ccc;
+}
+
+.staff__img {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    border-radius: 99px;
+}
+
+.staff__name {
+    margin: 1.5rem 0 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.staff__ID {
+    font-size: 1.4rem;
+    color: #888;
+    font-weight: 400;
+}
+
+.staff__list_desc {
+    margin-top: 2rem;
+}
+
+.staff__mail, .staff__phone, .staff__address {
+    display: flex;
+    justify-content: center;
+    font-size: 1.6rem;
+    padding: 0.5rem;
+}
+
+.staff__icons {
+    margin-right: 5px;
+}

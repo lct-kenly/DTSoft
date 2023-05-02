@@ -1,0 +1,41 @@
+.content {
+  height: 120vh;
+  padding-left: 4rem;
+}
+
+
+.input__form {
+  width: 50%;
+}
+
+.input__label {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 2rem 0 1.5rem;
+}
+
+.input__value {
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+.avatar__input {
+  width: 245px;
+  height: 300px;
+  border: 0.5px solid #ccc;
+  margin: 2rem 0 1rem;
+}
+
+#avatar__img {
+  object-fit: cover;  
+}
+
+.add__staf-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18rem;
+  height: 4rem;
+  margin: 4.5rem 0 0 12rem;
+  font-size: 1.5rem;
+}

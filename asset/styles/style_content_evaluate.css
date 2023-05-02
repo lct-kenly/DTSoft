@@ -1,0 +1,80 @@
+.evaluate-content {
+    padding: 16px 12px;
+}
+
+.evaluate-content__header {
+
+}
+
+.evaluate-content__title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.evaluate-content__fliter {
+    width: 100%;
+    display: flex;
+    margin-top: 32px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.evaluate-content__fliter-form-group {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    margin-right: 32px;
+}
+
+.evaluate-content__fliter-label {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex: 1;
+}
+
+.evaluate-content__filter-select {
+    padding: 8px 12px;
+    font-size: 1.3rem;
+    flex: 2;
+}
+
+.evaluate-content__filter-input {
+    padding: 8px 12px;
+    font-size: 1.3rem;
+    text-align: center;
+    flex: 2;
+}
+
+.evaluate-content__body {
+    margin-top: 24px;
+}
+
+.evaluate-content__table-staff {
+    font-size: 1.5rem;
+    border: 1px solid #ccc;
+}
+
+.evaluate-content__table-staff th, 
+.evaluate-content__table-staff td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+
+}
+
+.dataTables_length label,
+.dataTables_filter label {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+}
+
+.dataTables_info, .dataTables_paginate.paging_simple_numbers{
+    margin-top: 8px;
+    font-size: 1.3rem;
+}
+
+table.dataTable thead th {
+    text-align: center;
+} 

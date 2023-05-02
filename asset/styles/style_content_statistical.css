@@ -1,0 +1,55 @@
+.statistical-manager-content {
+    padding: 12px;
+}
+
+.statistical-manager-content__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.statistical-manager-content__title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.statistical-manager-content__filter {
+    width: 200px;
+    font-size: 1.5rem;
+}
+
+.statistical-manager-content__body {
+    margin-top: 24px;
+}
+
+.statistical-manager-content__table-staff {
+    font-size: 1.5rem;
+    border: 1px solid #ccc;
+}
+
+.statistical-manager-content__table-staff th, 
+.statistical-manager-content__table-staff td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+
+}
+
+.statistical-manager-content__chart {
+    margin-top: 48px
+}
+
+.dataTables_length label,
+.dataTables_filter label {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+}
+
+.dataTables_info, .dataTables_paginate.paging_simple_numbers{
+    margin-top: 8px;
+    font-size: 1.3rem;
+}
+ 
+table.dataTable thead th {
+    text-align: center;
+}

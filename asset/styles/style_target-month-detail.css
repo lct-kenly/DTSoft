@@ -1,0 +1,53 @@
+html {
+  width: 120rem;
+}
+
+
+.header__title {
+    font-weight: 600;
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-left: 1.5rem;
+    text-transform: uppercase;
+    color: #888888;
+}
+
+.content {
+  margin-top: 3rem;
+}
+
+.content-detail {
+  display: flex;
+}
+
+.content__title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 0 1rem 2.5rem 2rem;
+}
+
+.content__desc {
+  font-size: 1.5rem;
+  padding-top: 0.2rem;
+}
+
+.report__input {
+  width: 40rem;
+  margin: 3rem 0 3rem 2rem;
+  font-size: 1.5rem;
+}
+
+.report__form-control {
+  height: 5rem !important;
+  font-size: 1.6rem;
+}
+
+.btn_report {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 93rem ;
+  font-size: 1.5rem;
+  width: 10rem;
+  height: 5rem;
+}
