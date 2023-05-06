@@ -397,9 +397,8 @@ if(isset($_SESSION['username'])){
                                     <?php }else{
                                         ?>
                                         <a
-                                        href="#"
-                                        class="header__profile-link btn-change-content"
-                                        data_content="../dang-nhap"
+                                        href="../dang-nhap"
+                                        class="header__profile-link"
                                     >
 
                                         <?php
@@ -434,7 +433,7 @@ if(isset($_SESSION['username'])){
                                                 <p
                                                     class="header__profile-name mt-3"
                                                 >
-                                                    Admin
+                                                    <?=$_SESSION['username']?>
                                                 </p>
                                             </div>
                                             <ul
