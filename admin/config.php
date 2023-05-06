@@ -24,13 +24,27 @@ $browser = $_SERVER['HTTP_USER_AGENT'];
 
 
 
-/*
+
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
+    $user = $ketnoi->query("SELECT * FROM `taikhoan` WHERE `tentk` = '".$_SESSION['username']."'")->fetch_array();
+    $profile =  $ketnoi->query("SELECT * FROM `nhanvien`,`taikhoan` WHERE nhanvien.manhanvien = '".$user['manv']."' and taikhoan.manv = '".$user['manv']."'")->fetch_array();
+    
+    $macv = "C".$profile['level'];
 
-    $user = $ketnoi->query("SELECT * FROM `users` WHERE `taikhoan` = '$username' ")->fetch_array();
+    $chucvu =  $ketnoi->query("SELECT * FROM  `chucvu` WHERE chucvu.machucvu = '".$macv."'")->fetch_array();
 
-    $userr = $user;
+    $bophan = $ketnoi->query("SELECT * FROM `bophan` WHERE `mabophan` = '".$profile['mabophan']."'")->fetch_array();
+
+
+    $chucvu_khuvuc = $chucvu['tenchucvu']." - Phòng ".$bophan['tenbophan'];
+
+
+
+
+
+    //$chuc_vu = 
+
 
     // if(empty($user['id_user'])) {
     // session_start();
@@ -45,4 +59,3 @@ if (isset($_SESSION['username'])) {
     // }
 
 }
-*/

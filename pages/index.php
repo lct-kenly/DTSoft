@@ -1,6 +1,14 @@
 <?php
 require_once('../admin/config.php');
 
+$acc = '';
+
+if(isset($_SESSION['username'])){
+    $acc = $user['tentk'];
+}
+
+
+
 
 
 
@@ -379,25 +387,41 @@ require_once('../admin/config.php');
                                 </li>
                                 <li class="header__menu-item header__profile">
                                     <!-- Start Profile -->
+                                    <?php if($acc != ''){
+                                        ?>
                                     <a
                                         href="#"
                                         class="header__profile-link btn-change-content"
                                         data_content="../pages/content_info_staff.php"
                                     >
+                                    <?php }else{
+                                        ?>
+                                        <a
+                                        href="#"
+                                        class="header__profile-link btn-change-content"
+                                        data_content="../dang-nhap"
+                                    >
+
+                                        <?php
+                                    } ?> 
                                         <img
                                             src="../asset/img/avatar-default.jfif"
                                             alt=""
                                             class="header__profile-avatar"
                                         />
+                                        <?php 
+                                        if($acc != ''){
+                                        
+                                        ?>
                                         <div class="header__profile-info">
                                             <p class="header__profile-name">
-                                                Admin
+                                                <?=$profile['hoten']?>
                                             </p>
                                             <span class="header__profile-level"
-                                                >Quản trị viên</span
+                                                ><?=$chucvu_khuvuc?></span
                                             >
                                         </div>
-
+                                        
                                         <div class="header__profile-menu">
                                             <div
                                                 class="header__profile-menu-heading"
@@ -460,6 +484,20 @@ require_once('../admin/config.php');
                                                 </a>
                                             </div>
                                         </div>
+                                    
+                                        <?php 
+                                        }else{
+                                        ?>
+                                        
+                                        <div class="header__profile-info">
+                                            <p class="header__profile-name">
+                                                Khách
+                                            </p>
+                                            <span class="header__profile-level"
+                                                >Đăng nhập</span
+                                            >
+                                        </div>
+                                        <?php }?>
                                     </a>
                                     <!-- End Profile -->
                                 </li>

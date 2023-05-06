@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 01, 2023 lúc 07:01 PM
--- Phiên bản máy phục vụ: 10.4.27-MariaDB
--- Phiên bản PHP: 8.0.25
+-- Thời gian đã tạo: Th5 06, 2023 lúc 07:54 PM
+-- Phiên bản máy phục vụ: 10.4.22-MariaDB
+-- Phiên bản PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `bophan` (
   `tenbophan` varchar(100) NOT NULL COMMENT 'tên bộ phận',
   `congviecphutrach` varchar(255) NOT NULL COMMENT 'công việc phụ trách',
   `makhuvuc` varchar(10) NOT NULL COMMENT 'mã số khu vực'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `bophan`
@@ -57,7 +57,7 @@ INSERT INTO `bophan` (`mabophan`, `tenbophan`, `congviecphutrach`, `makhuvuc`) V
 CREATE TABLE `chinhanh` (
   `machinhanh` varchar(10) NOT NULL COMMENT 'mã số chi nhánh',
   `tenchinhanh` varchar(50) NOT NULL COMMENT 'tên chi nhánh'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `chinhanh`
@@ -79,7 +79,7 @@ CREATE TABLE `chitietkehoach` (
   `level` varchar(5) NOT NULL COMMENT 'cấp bậc chỉnh sửa',
   `chitieucandat` int(10) NOT NULL COMMENT 'chỉ tiều cần đạt được trong kế hoạch',
   `chitieudatduoc` int(10) NOT NULL COMMENT 'chỉ tiêu đạt được sau khi kết thúc kế hoạch'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `chitietkehoach`
@@ -100,8 +100,8 @@ INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `
 CREATE TABLE `chitieu` (
   `machitieu` varchar(10) NOT NULL COMMENT 'mã số chỉ tiêu',
   `tenchitieu` varchar(255) NOT NULL COMMENT 'tên chỉ tiêu',
-  `mota` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'mô tả chỉ tiêu'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `mota` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'mô tả chỉ tiêu'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `chitieu`
@@ -124,18 +124,17 @@ INSERT INTO `chitieu` (`machitieu`, `tenchitieu`, `mota`) VALUES
 CREATE TABLE `chucvu` (
   `machucvu` varchar(10) NOT NULL COMMENT 'mã số chức vụ\r\n',
   `tenchucvu` varchar(50) NOT NULL COMMENT 'tên chức vụ',
-  `motachucvu` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'mô tả chức vụ'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `motachucvu` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'mô tả chức vụ'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `chucvu`
 --
 
 INSERT INTO `chucvu` (`machucvu`, `tenchucvu`, `motachucvu`) VALUES
-('C1', 'Giám đốc', ''),
-('C2', 'Phó giám đốc', ''),
-('C3', 'Nhân viên văn phòng', ''),
-('C4', 'Nhân viên marketing', '');
+('C1', 'Nhân Viên', ''),
+('C2', 'Trưởng Phòng', ''),
+('C3', 'Giám Đốc', '');
 
 -- --------------------------------------------------------
 
@@ -147,7 +146,7 @@ CREATE TABLE `congviec` (
   `macongviec` varchar(10) NOT NULL COMMENT 'mã số công việc',
   `tencongviec` varchar(100) NOT NULL COMMENT 'tên công việc',
   `motacongviec` varchar(255) NOT NULL COMMENT 'mô tả công việc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `congviec`
@@ -172,7 +171,7 @@ CREATE TABLE `danhgiakehoach` (
   `ketquadanhgia` varchar(100) NOT NULL COMMENT 'kết quả đánh giá',
   `truongphong` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
   `giamdoc` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `danhgiakehoach`
@@ -202,7 +201,7 @@ CREATE TABLE `kehoachgiaoviec` (
   `madanhgia` varchar(10) NOT NULL COMMENT 'kế hoạch có một bản đánh giá kế hoạch',
   `makhuvuc` varchar(10) NOT NULL COMMENT 'kế hoạch được đảm nhận bởi một khu vực',
   `mabophan` varchar(10) NOT NULL COMMENT 'kế hoạch được phân công cho một bộ phận đảm nhận'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `kehoachgiaoviec`
@@ -226,7 +225,7 @@ CREATE TABLE `khuvuc` (
   `makhuvuc` varchar(10) NOT NULL COMMENT 'mã số khu vực',
   `tenkhuvuc` varchar(100) NOT NULL COMMENT 'tên khu vực',
   `machinhanh` varchar(10) NOT NULL COMMENT 'khu vực có một mã chi nhánh quản lý'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `khuvuc`
@@ -254,7 +253,7 @@ CREATE TABLE `nhanvien` (
   `hinhanh` varchar(255) NOT NULL COMMENT 'hình ảnh đại diện cho nhân viên',
   `macongviec` varchar(10) NOT NULL COMMENT 'mã số công việc nhân việc phụ trách',
   `mabophan` varchar(10) NOT NULL COMMENT 'mã số bộ phận nhân việc tiếp nhận làm việc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `nhanvien`
@@ -280,14 +279,14 @@ CREATE TABLE `taikhoan` (
   `matkhau` varchar(100) NOT NULL,
   `level` int(10) NOT NULL,
   `trangthai` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `trangthai`) VALUES
-(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 2, 'hoạt động'),
+(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 3, 'hoạt động'),
 (14, 'NV2', 'truongphong', 'truongphong@gmail.com', '123', 2, 'hoạt động'),
 (15, 'NV3', 'ketoan', 'ketoan@gmail.com', '123', 1, 'hoạt động'),
 (16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động');
@@ -304,7 +303,7 @@ CREATE TABLE `theodoikehoach` (
   `machitieu` varchar(10) NOT NULL COMMENT 'mã số chỉ tiêu',
   `thang` varchar(10) NOT NULL COMMENT 'tháng thực hiện ',
   `chitieuthangcandat` varchar(10) NOT NULL COMMENT 'chỉ tiêu trong tháng'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `theodoikehoach`
@@ -329,17 +328,17 @@ CREATE TABLE `thoigiannhanchuc` (
   `machucvu` varchar(10) NOT NULL COMMENT 'mã số chức vụ nhân viên đảm nhận',
   `thoigianbatdau` date NOT NULL COMMENT 'thời gian bắt đầu nhận hức',
   `thoigianketthuc` date NOT NULL COMMENT 'thời gian kết thúc nhận chức'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `thoigiannhanchuc`
 --
 
 INSERT INTO `thoigiannhanchuc` (`manhanvien`, `machucvu`, `thoigianbatdau`, `thoigianketthuc`) VALUES
-('NV1', 'C1', '2023-01-01', '0000-00-00'),
+('NV1', 'C3', '2023-01-01', '0000-00-00'),
 ('NV2', 'C2', '2023-02-01', '0000-00-00'),
-('NV3', 'C3', '2023-06-01', '0000-00-00'),
-('NV4', 'C3', '2023-06-01', '0000-00-00');
+('NV3', 'C1', '2023-06-01', '0000-00-00'),
+('NV4', 'C1', '2023-06-01', '0000-00-00');
 
 --
 -- Chỉ mục cho các bảng đã đổ
