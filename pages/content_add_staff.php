@@ -1,165 +1,223 @@
+<?php
+    require_once('../admin/config.php');
+    if(!isset($_SESSION['username'])) {
+        header("location: ./login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
-            rel="stylesheet"
-        />
 
-        <!-- Fontawesome -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet" />
 
-        <!-- Bootstrap -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous"
-        />
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- JS -->
-        <link
-            class="jsbin"
-            href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
-            rel="stylesheet"
-            type="text/css"
-        />
-        <script
-            class="jsbin"
-            src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
-        ></script>
-        <script
-            class="jsbin"
-            src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"
-        ></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
 
-        <!-- Styles Css -->
-        <link rel="stylesheet" href="../asset/styles/reset.css" />
-        <link rel="stylesheet" href="../asset/styles/base.css" />
-        <link rel="stylesheet" href="../asset/styles/style_add_staff.css" />
-        <title>Quan Ly Nhan Su</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="container-flud">
-                <div class="row header">
-                    <h2 class="header__title">Thêm nhân viên</h2>
+    <!-- Styles Css -->
+    <link rel="stylesheet" href="../asset/styles/reset.css" />
+    <link rel="stylesheet" href="../asset/styles/base.css" />
+    <link rel="stylesheet" href="../asset/styles/style_add_staff.css" />
+    <title>Quan Ly Nhan Su</title>
+
+    <?php
+    
+    $sql_old_staff_id = "SELECT manhanvien from nhanvien";
+    $result_old_staff_id = mysqli_query($ketnoi, $sql_old_staff_id);
+
+    $sql_select_staffWork = "SELECT macongviec, tencongviec FROM congviec";
+    $result_select_staffWork = mysqli_query($ketnoi,$sql_select_staffWork);
+
+    $sql_select_position = "SELECT machucvu, tenchucvu FROM chucvu";
+    $result_select_position = mysqli_query($ketnoi,$sql_select_position);
+
+    $sql_select_department = "SELECT mabophan, tenbophan, khuvuc.tenkhuvuc FROM bophan, khuvuc WHERE bophan.makhuvuc = khuvuc.makhuvuc";
+    $result_select_department = mysqli_query($ketnoi,$sql_select_department);
+    
+
+    if (!isset($_SESSION["add_staff"])) {
+        $_SESSION["add_staff"] = array();
+    }
+
+    $error = false;
+    $success = false;
+    $current_StaffID = "";
+    $current_StaffName = "";
+    $current_staffDateofBirth = "";
+    $current_staffPhone = "";
+    $current_staffHome = "";
+    $current_staffNation = "";
+    $current_avatar = "";
+    $current_staffEmail = "";
+    $current_staffUser = "";
+    $current_staffPassword = "";
+    $current_time = date("Y-m-d H:i:s");
+
+    if (isset($_GET['action'])) {
+        $check = false;
+
+        $current_StaffID = $_POST['staffID'];
+        $current_StaffName = $_POST['staffName'];
+        $current_staffDateofBirth = $_POST['staffDateofBirth'];
+        $current_staffSexual = $_POST['staffSexual'];
+        $current_staffPhone = $_POST['staffPhone'];
+        $current_staffHome = $_POST['staffHome'];
+        $current_staffNation = $_POST['staffNation'];
+        $current_staffWork = $_POST['staffWork'];
+        $current_staffPosition = $_POST['staffPosition'];
+        $current_staffDepartment = $_POST['staffDepartment'];
+        $current_avatar = $_POST['avatar'];
+        $current_staffEmail = $_POST['staffEmail'];
+        $current_staffUser = $_POST['staffUser'];
+        $current_staffPassword = $_POST['staffPassword'];
+        $current_time = date("Y-m-d H:i:s");
+        while ($row_old_id = mysqli_fetch_array($result_old_staff_id)) {
+            if ($row_old_id['manhanvien'] === $current_StaffID) {
+                $check = true;
+                break;
+            }
+        }
+        if ($check) {
+            $error = "Mã nhân viên đã bị trùng lặp!";
+        } else {
+            $add_staff = "INSERT INTO nhanvien (manhanvien,hoten,ngaysinh,gioitinh,dantoc,quequan,sodienthoai,hinhanh,macongviec,mabophan)
+                                VALUES ('" . $current_StaffID . "', '" . $current_StaffName . "', '" . $current_staffDateofBirth . "', 
+                                '" . $current_staffSexual . "', '" . $current_staffNation . "', '" . $current_staffHome . "', 
+                                '" . $current_staffPhone . "', '" . $current_avatar . "', '" . $current_staffWork . "', 
+                                '" . $current_staffDepartment . "' ) ";
+            $add_Position = "INSERT INTO thoigiannhanchuc (manhanvien, machucvu, thoigianbatdau, thoigianketthuc)
+                                VALUES ( '" . $current_StaffID . "', '" . $current_staffPosition . "', '" . $current_time . "', '0000-00-00')";
+            $result_add_staff = mysqli_query($ketnoi, $add_staff);
+            $result_add_Position = mysqli_query($ketnoi, $add_Position);
+            $success = "Thêm nhân viên thành công!";
+            $current_StaffID = "";
+            $current_StaffName = "";
+            $current_staffDateofBirth = "";
+            $current_staffPhone = "";
+            $current_staffHome = "";
+            $current_staffNation = "";
+            $current_avatar = "";
+            $current_staffEmail = "";
+            $current_staffUser = "";
+            $current_staffPassword = "";
+            unset($_SESSION['add_staff']);
+        }
+    }
+    ?>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container-flud">
+            <div class="row header">
+                <h2 class="header__title">Thêm nhân viên</h2>
+            </div>
+            <?php if (!empty($error)) { ?>
+                <div class="notify-msg" id="notify-msg">
+                    <?= $error ?>
                 </div>
-
+            <?php } elseif (!empty($success)) { ?>
+                <div class="notify-msg" id="notify-msg">
+                    <?= $success ?>
+                </div>
+            <?php } ?>
+            <form action="content_add_staff.php?action=submit" class="needs-validation" novalidate method="POST">
                 <div class="row content">
                     <div class="col-md-6 content__left">
                         <!-- ID -->
                         <div class="input__form">
-                            <label for="staffID" class="form-label input__label"
-                                >Mã nhân viên</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control input__value"
-                                id="staffID"
-                                placeholder="Mã nhân viên"
-                            />
+                            <label for="staffID" class="form-label input__label">Mã nhân viên</label>
+                            <input type="text" class="form-control input__value" id="staffID" name="staffID" placeholder="Mã nhân viên" value="<?= $current_StaffID ?>" required/>
+                            <p class="invalid-feedback">Vui lòng nhập trường này!</p>
                         </div>
 
                         <!-- Name -->
                         <div class="input__form">
-                            <label
-                                for="staffName"
-                                class="form-label input__label"
-                                >Họ và tên</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control input__value"
-                                id="staffName"
-                                placeholder="Họ và tên"
-                            />
+                            <label for="staffName" class="form-label input__label">Họ và tên</label>
+                            <input type="text" class="form-control input__value" id="staffName" name="staffName" placeholder="Họ và tên" value="<?= $current_StaffName ?>" />
                         </div>
 
                         <!-- Date of birth -->
                         <div class="input__form">
-                            <label
-                                for="staffDateofBirth"
-                                class="form-label input__label"
-                                >Ngày sinh</label
-                            >
-                            <input
-                                type="date"
-                                class="form-control input__value"
-                                id="staffDateofBirth"
-                            />
+                            <label for="staffDateofBirth" class="form-label input__label">Ngày sinh</label>
+                            <input type="date" class="form-control input__value" id="staffDateofBirth" name="staffDateofBirth" value="<?= $current_staffDateofBirth ?>" />
                         </div>
 
                         <!-- Sex -->
                         <div class="input__form">
                             <p class="input__label">Giới tính</p>
-                            <select class="form-select input__value">
+                            <select class="form-select input__value" name="staffSexual">
                                 <option selected>Giới tính</option>
-                                <option value="1">Nam</option>
-                                <option value="2">Nữ</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
                             </select>
                         </div>
 
                         <!-- Phone Number -->
                         <div class="input__form">
-                            <label
-                                for="staffPhone"
-                                class="form-label input__label"
-                                >Số diện thoại</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control input__value"
-                                id="staffPhone"
-                            />
+                            <label for="staffPhone" class="form-label input__label">Số điện thoại</label>
+                            <input type="text" class="form-control input__value" id="staffPhone" name="staffPhone" value="<?= $current_staffPhone ?>" />
+                        </div>
+
+                        <!-- Home -->
+                        <div class="input__form">
+                            <label for="staffHome" class="form-label input__label">Quê quán</label>
+                            <input type="text" class="form-control input__value" id="staffHome" name="staffHome" placeholder="Quê quán" value="<?= $current_staffHome ?>" />
+                        </div>
+
+                        <!-- Nation -->
+                        <div class="input__form">
+                            <label for="staffNation" class="form-label input__label">Dân tộc</label>
+                            <input type="text" class="form-control input__value" id="staffNation" name="staffNation" placeholder="Dân tộc" value="<?= $current_staffNation ?>" />
+                        </div>
+
+                        <!-- Work -->
+                        <div class="input__form">
+                            <p class="input__label">Công việc</p>
+                            <select class="form-select input__value" name="staffWork">
+                            <?php
+                                while($row_select_staffWork=mysqli_fetch_array($result_select_staffWork)){                              
+                                        echo "<option value=\"".$row_select_staffWork["macongviec"]."\"". $selected_staffWork.">".$row_select_staffWork["macongviec"]." - ".$row_select_staffWork["tencongviec"]."</option>";
+                                    }
+                            ?>                               
+                            </select>
                         </div>
 
                         <!-- Position -->
                         <div class="input__form">
                             <p class="input__label">Chức vụ</p>
-                            <select class="form-select input__value">
-                                <option selected>Chức vụ</option>
-                                <option value="1">Trưởng phòng</option>
-                                <option value="2">Phó phòng</option>
-                                <option value="3">Nhân viên</option>
+                            <select class="form-select input__value" name="staffPosition">
+                            <?php
+                                while($row_select_position=mysqli_fetch_array($result_select_position)){                              
+                                        echo "<option value=\"".$row_select_position["machucvu"]."\"". $row_select_position.">".$row_select_position["machucvu"]." - ".$row_select_position["tenchucvu"]."</option>";
+                                    }
+                            ?>                                      
                             </select>
                         </div>
 
                         <!-- Department -->
                         <div class="input__form">
                             <p class="input__label">Phòng ban</p>
-                            <select class="form-select input__value">
-                                <option selected>Phòng ban</option>
-                                <option value="1">Nhân sự</option>
-                                <option value="2">Kế toán</option>
-                                <option value="3">Lập trình</option>
-                                <option value="4">Tester</option>
-                                <option value="5">Hổ trợ khách hàng</option>
+                            <select class="form-select input__value" id="staffDepartment" name="staffDepartment">
+                                <?php  ?>
+                                <?php  while($row_select_department=mysqli_fetch_array($result_select_department)){ ?>
+
+                                    <option value="<?=$row_select_department['mabophan']?>">
+                                        <?=$row_select_department['mabophan'] . ' - ' . $row_select_department['tenbophan'] . ' - ' . $row_select_department['tenkhuvuc']?>
+                                    </option>
+                                <?php }?>
+                                                      
                             </select>
                         </div>
 
-                        <!-- Places -->
-                        <div class="input__form">
-                            <p class="input__label">Khu vực</p>
-                            <select class="form-select input__value">
-                                <option selected>Khu vực</option>
-                                <option value="1">Hồ Chí Minh</option>
-                                <option value="2">Nha Trang</option>
-                                <option value="3">Cần Thơ</option>
-                            </select>
-                        </div>
                     </div>
 
                     <div class="col-md-6 content__right">
@@ -168,80 +226,121 @@
                             <div class="avatar__input">
                                 <img src="#" alt="avatar" id="avatar__img" />
                             </div>
-                            <input
-                                type="file"
-                                class="form-control input__value"
-                                onchange="readURL(this);"
-                            />
+                            <input type="file" class="form-control input__value" name="avatar" onchange="readURL(this)" value="<?= $current_avatar ?>" />
                         </div>
 
                         <!-- Email -->
                         <div class="input__form">
-                            <label
-                                for="staffEmail"
-                                class="form-label input__label"
-                                >Email</label
-                            >
-                            <input
-                                type="email"
-                                class="form-control input__value"
-                                id="staffEmail"
-                                placeholder="Email"
-                            />
+                            <label for="staffEmail" class="form-label input__label">Email</label>
+                            <input type="email" class="form-control input__value" id="staffEmail" name="staffEmail" placeholder="Email" value="<?= $current_staffEmail ?>" />
                         </div>
 
                         <!-- Staff Account -->
                         <div class="input__form">
-                            <label
-                                for="staffUser"
-                                class="form-label input__label"
-                                >Tài khoản</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control input__value"
-                                id="staffUser"
-                                placeholder="Tài khoản"
-                            />
+                            <label for="staffUser" class="form-label input__label">Tài khoản</label>
+                            <input type="text" class="form-control input__value" id="staffUser" name="staffUser" placeholder="Tài khoản" value="<?= $current_staffUser ?>" />
                         </div>
 
                         <div class="input__form">
-                            <label
-                                for="staffPassword"
-                                class="form-label input__label"
-                                >Mật khẩu</label
-                            >
-                            <input
-                                type="password"
-                                class="form-control input__value"
-                                id="staffPassword"
-                                placeholder="Mật khẩu"
-                            />
+                            <label for="staffPassword" class="form-label input__label">Mật khẩu</label>
+                            <input type="password" class="form-control input__value" id="staffPassword" name="staffPassword" placeholder="Mật khẩu" value="<?= $current_staffPassword ?>" />
+                            <span class="btn-show-current-password"><i class="fa-regular fa-eye eyes"></i></span>
                         </div>
 
                         <!-- Button -->
+
                         <div class="input__btn">
-                            <div class="btn btn-primary add__staf-btn">
-                                Thêm nhân viên
-                            </div>
+                            <button class="btn btn-primary add__staf-btn btn_add-staff" type="submit">Thêm nhân viên</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </body>
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#avatar__img")
-                        .attr("src", e.target.result)
-                        .width(245)
-                        .height(300);
-                };
-                reader.readAsDataURL(input.files[0]);
+    </div>
+</body>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Bundle JS Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#avatar__img")
+                    .attr("src", e.target.result)
+                    .width(245)
+                    .height(300);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    // (() => {
+    //     'use strict'
+
+    //     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    //     const forms = document.querySelectorAll('.needs-validation')
+
+    //     // Loop over them and prevent submission
+    //     Array.from(forms).forEach(form => {
+    //         form.addEventListener('submit', event => {
+    //             if (!form.checkValidity()) {
+    //                 event.preventDefault()
+    //                 event.stopPropagation()
+    //             }
+
+    //             form.classList.add('was-validated')
+    //         }, false)
+    //     })
+    // })()
+
+    const inputStaffID = document.querySelector('input#staffID');
+    const inputStaffUser = document.querySelector('input#staffUser');
+    const inputStaffEmail = document.querySelector('input#staffEmail');
+    const selectStaffDepartment = document.querySelector('select[name="staffDepartment"]');
+
+    // function handleUsername() {
+    //     console.log(123);
+    //     if(inputStaffID.value !== '' && selectStaffDepartment.value !== '') {
+    //         inputStaffUser.value = `${selectStaffDepartment.value}-${inputStaffID.value}`;
+    //         inputStaffEmail.value = `${selectStaffDepartment.value}-${inputStaffID.value}@gmail.com`;
+    //     }
+    // }
+
+    inputStaffID.addEventListener('keydown', function (e) {
+        // console.log(123);
+        if(inputStaffID.value !== '' && selectStaffDepartment.value !== '') {
+            inputStaffUser.value = `${selectStaffDepartment.value}-${inputStaffID.value}`;
+            inputStaffEmail.value = `${selectStaffDepartment.value}-${inputStaffID.value}@gmail.com`;
+        }
+    })
+</script>
+
+<script>
+        const btnShowCurrentPassword = document.querySelector('.btn-show-current-password');
+
+        btnShowCurrentPassword.onclick = function() {
+            const input = document.querySelector('input[id="staffPassword"]');
+
+            if(input.getAttribute('type') == 'password') {
+                input.setAttribute('type', 'text');
+                btnShowCurrentPassword.querySelector('i').className = 'fa-regular fa-eye-slash';
+            } else {
+                input.setAttribute('type', 'password')
+                btnShowCurrentPassword.querySelector('i').className = 'fa-regular fa-eye';
             }
         }
-    </script>
+
+        const btnShowNewPassword = document.querySelector('.btn-show-new-password');
+</script>      
+
+<script>
+    
+</script>
 </html>

@@ -19,7 +19,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
         // Tài khoản và mật khẩu chính xác
         $_SESSION['username'] = $username;
         echo '<script>alert("Đăng nhập thành công!");</script>';
-        echo "<script type='text/javascript'> document.location = '../trang-chu';</script>";
+        echo "<script type='text/javascript'> document.location = './index.php';</script>";
     } else {
         // Tài khoản hoặc mật khẩu không chính xác
         echo '<script>alert("Tài khoản hoặc mật khẩu không chính xác.");</script>';
@@ -62,24 +62,28 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
         <!-- Content -->
         <div class="row main__login">
             <form action="" method="POST">
-                <div class="col-lg-4 main__login_form">
-                    <h1 class="main__login_form__header">Quản lý nhân sự</h1>
-                    <div class="main__login_form__input">
-                        <div class="main__login_form__input_field">
-                            <label for="">Tài Khoản</label>
-                            <input type="text" class="input" id="taikhoan" name="username" required autocomplete="off" />
-                        </div>
-                        <div class="main__login_form__input_field">
-                            <label for="">Mật Khẩu</label>
-                            <input type="password" class="input" id="password" name="password" required />
-                        </div>
-                        <div class="main__login_form__input_field">
-                            <input type="submit" class="submit-btn" value="Đăng nhập" />
+                <div class="row">
+                    <div class="col-lg-4 main__login_form">
+                        <h1 class="main__login_form__header">Quản lý nhân sự</h1>
+                        <div class="main__login_form__input">
+                            <div class="main__login_form__input_field">
+                                <label for="">Tài Khoản</label>
+                                <input type="text" class="input" id="taikhoan" name="username" required autocomplete="off" />
+                            </div>
+                            <div class="main__login_form__input_field">
+                                <label for="">Mật Khẩu</label>
+                                <input type="password" class="input" id="password" name="password" required />
+                            </div>
+                            <div class="main__login_form__input_field">
+                                <input type="submit" class="submit-btn" value="Đăng nhập" />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-8 main__login_logo"></div>
+                    <div class="col-lg-8 main__login_logo">
+                        
+                    </div>
+                </div>
 
             </form>
         </div>

@@ -56,3 +56,9 @@ body {
 .content__staff-btn a {
     color: #fff;
 }
+
+.btn-show-password {
+    position: absolute;
+    right: 4px;
+    bottom: 0;
+}

@@ -97,7 +97,9 @@
                     </form>
                 </div>
 
-                <div class="col-lg-8 main__login_logo"></div>
+                <div class="col-lg-8 main__login_logo">
+                    <img src="../asset//img/logoDTSoft.png" alt="">
+                </div>
             </div>
             <!-- End Content -->
         </div>

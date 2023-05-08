@@ -5,7 +5,9 @@
 
 
 .input__form {
+  position: relative;
   width: 50%;
+  display: inline-block;
 }
 
 .input__label {
@@ -38,4 +40,12 @@
   height: 4rem;
   margin: 4.5rem 0 0 12rem;
   font-size: 1.5rem;
+}
+
+.btn-show-current-password {
+  position: absolute;
+  top: 70%;
+  right: 8px;
+  font-size: 1.6rem;
+  translate: translateY(-50%);
 }

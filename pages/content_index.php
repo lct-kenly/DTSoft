@@ -1,9 +1,8 @@
 <?php
-require_once('../admin/config.php');
-
-
-
-
+    require_once('../admin/config.php');
+    if(!isset($_SESSION['username'])) {
+        header("location: ./login.php");
+    }
 ?>
 
 

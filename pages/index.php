@@ -5,6 +5,8 @@ $acc = '';
 
 if(isset($_SESSION['username'])){
     $acc = $user['tentk'];
+} else {
+    header("location: ./login.php");
 }
 
 
@@ -473,7 +475,7 @@ if(isset($_SESSION['username'])){
                                                 class="header__profile-menu-footer"
                                             >
                                                 <a
-                                                    href="../dang-nhap"
+                                                    href="./logout.php"
                                                     class="header__profile-menu-btn"
                                                 >
                                                     <i

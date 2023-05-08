@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 06, 2023 lúc 07:54 PM
--- Phiên bản máy phục vụ: 10.4.22-MariaDB
--- Phiên bản PHP: 8.1.2
+-- Host: 127.0.0.1
+-- Generation Time: May 07, 2023 at 09:04 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `quanlynhansu`
+-- Database: `quanlynhansu`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bophan`
+-- Table structure for table `bophan`
 --
 
 CREATE TABLE `bophan` (
@@ -32,10 +32,10 @@ CREATE TABLE `bophan` (
   `tenbophan` varchar(100) NOT NULL COMMENT 'tên bộ phận',
   `congviecphutrach` varchar(255) NOT NULL COMMENT 'công việc phụ trách',
   `makhuvuc` varchar(10) NOT NULL COMMENT 'mã số khu vực'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `bophan`
+-- Dumping data for table `bophan`
 --
 
 INSERT INTO `bophan` (`mabophan`, `tenbophan`, `congviecphutrach`, `makhuvuc`) VALUES
@@ -51,16 +51,16 @@ INSERT INTO `bophan` (`mabophan`, `tenbophan`, `congviecphutrach`, `makhuvuc`) V
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chinhanh`
+-- Table structure for table `chinhanh`
 --
 
 CREATE TABLE `chinhanh` (
   `machinhanh` varchar(10) NOT NULL COMMENT 'mã số chi nhánh',
   `tenchinhanh` varchar(50) NOT NULL COMMENT 'tên chi nhánh'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chinhanh`
+-- Dumping data for table `chinhanh`
 --
 
 INSERT INTO `chinhanh` (`machinhanh`, `tenchinhanh`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `chinhanh` (`machinhanh`, `tenchinhanh`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chitietkehoach`
+-- Table structure for table `chitietkehoach`
 --
 
 CREATE TABLE `chitietkehoach` (
@@ -79,77 +79,82 @@ CREATE TABLE `chitietkehoach` (
   `level` varchar(5) NOT NULL COMMENT 'cấp bậc chỉnh sửa',
   `chitieucandat` int(10) NOT NULL COMMENT 'chỉ tiều cần đạt được trong kế hoạch',
   `chitieudatduoc` int(10) NOT NULL COMMENT 'chỉ tiêu đạt được sau khi kết thúc kế hoạch'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chitietkehoach`
+-- Dumping data for table `chitietkehoach`
 --
 
 INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `chitieucandat`, `chitieudatduoc`) VALUES
-('KH01', 'NV1', 'CT01', '1', 3, 3),
-('KH02', 'NV2', 'CT02', '1', 4, 4),
-('KH03', 'NV3', 'CT03', '2', 6, 6),
-('KH04', 'NV4', 'CT04', '2', 4, 2);
+('KH01', 'NV1', 'CT01', '2', 700000000, 0),
+('KH01', 'NV1', 'CT02', '1', 250, 0),
+('KH01', 'NV1', 'CT03', '2', 700000000, 0),
+('KH01', 'NV2', 'CT01', '1', 700000000, 0),
+('KH01', 'NV2', 'CT02', '1', 250, 0),
+('KH01', 'NV2', 'CT03', '2', 700000000, 0),
+('KH01', 'NV3', 'CT01', '', 700000000, 0),
+('KH01', 'NV3', 'CT02', '', 250, 0),
+('KH01', 'NV3', 'CT03', '', 700000000, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chitieu`
+-- Table structure for table `chitieu`
 --
 
 CREATE TABLE `chitieu` (
   `machitieu` varchar(10) NOT NULL COMMENT 'mã số chỉ tiêu',
   `tenchitieu` varchar(255) NOT NULL COMMENT 'tên chỉ tiêu',
-  `mota` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'mô tả chỉ tiêu'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `mota` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'mô tả chỉ tiêu'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chitieu`
+-- Dumping data for table `chitieu`
 --
 
 INSERT INTO `chitieu` (`machitieu`, `tenchitieu`, `mota`) VALUES
-('CT01', 'Chỉ tiêu đầu tiên', 'Hoàn thành trong 2 tuần'),
-('CT02', 'Chỉ tiêu thứ hai', 'Chỉnh sửa CT01, hoàn thành trong 1 tuần'),
-('CT03', 'Chỉ tiêu thứ ba', 'Hoàn thành chỉ tiêu trong vòng 2 tuần'),
-('CT04', 'Chỉ tiêu thứ tư', 'Hoàn thành chỉ tiêu trong 3 tháng'),
-('CT05', 'Chỉ tiêu thứ năm', 'Hoàn thành trong 24h'),
-('CT06', 'Chỉ tiêu thứ sáu', 'Chỉnh sửa CT06');
+('CT01', 'Doanh số', 'Hoàn thành trong 2 tuần'),
+('CT02', 'Xuất hóa đơn', 'Chỉnh sửa CT01, hoàn thành trong 1 tuần'),
+('CT03', 'Thu hồi công nợ', 'Hoàn thành chỉ tiêu trong vòng 2 tuần'),
+('CT04', 'Hỗ trợ khách hàng', 'Hoàn thành chỉ tiêu trong 3 tháng'),
+('CT05', 'Phát triển khách hàng', 'Hoàn thành trong 24h'),
+('CT06', 'Hiểu biết sản phẩm', 'Chỉnh sửa CT06');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `chucvu`
+-- Table structure for table `chucvu`
 --
 
 CREATE TABLE `chucvu` (
   `machucvu` varchar(10) NOT NULL COMMENT 'mã số chức vụ\r\n',
   `tenchucvu` varchar(50) NOT NULL COMMENT 'tên chức vụ',
-  `motachucvu` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'mô tả chức vụ'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `motachucvu` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'mô tả chức vụ'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `chucvu`
+-- Dumping data for table `chucvu`
 --
 
 INSERT INTO `chucvu` (`machucvu`, `tenchucvu`, `motachucvu`) VALUES
-('C1', 'Nhân Viên', ''),
-('C2', 'Trưởng Phòng', ''),
-('C3', 'Giám Đốc', '');
+('C1', 'Nhân viên', ''),
+('C2', 'Trưởng phòng', ''),
+('C3', 'Giám đốc', '');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `congviec`
+-- Table structure for table `congviec`
 --
 
 CREATE TABLE `congviec` (
   `macongviec` varchar(10) NOT NULL COMMENT 'mã số công việc',
   `tencongviec` varchar(100) NOT NULL COMMENT 'tên công việc',
   `motacongviec` varchar(255) NOT NULL COMMENT 'mô tả công việc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `congviec`
+-- Dumping data for table `congviec`
 --
 
 INSERT INTO `congviec` (`macongviec`, `tencongviec`, `motacongviec`) VALUES
@@ -163,7 +168,7 @@ INSERT INTO `congviec` (`macongviec`, `tencongviec`, `motacongviec`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `danhgiakehoach`
+-- Table structure for table `danhgiakehoach`
 --
 
 CREATE TABLE `danhgiakehoach` (
@@ -171,10 +176,10 @@ CREATE TABLE `danhgiakehoach` (
   `ketquadanhgia` varchar(100) NOT NULL COMMENT 'kết quả đánh giá',
   `truongphong` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
   `giamdoc` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `danhgiakehoach`
+-- Dumping data for table `danhgiakehoach`
 --
 
 INSERT INTO `danhgiakehoach` (`madanhgia`, `ketquadanhgia`, `truongphong`, `giamdoc`) VALUES
@@ -188,7 +193,7 @@ INSERT INTO `danhgiakehoach` (`madanhgia`, `ketquadanhgia`, `truongphong`, `giam
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `kehoachgiaoviec`
+-- Table structure for table `kehoachgiaoviec`
 --
 
 CREATE TABLE `kehoachgiaoviec` (
@@ -201,34 +206,29 @@ CREATE TABLE `kehoachgiaoviec` (
   `madanhgia` varchar(10) NOT NULL COMMENT 'kế hoạch có một bản đánh giá kế hoạch',
   `makhuvuc` varchar(10) NOT NULL COMMENT 'kế hoạch được đảm nhận bởi một khu vực',
   `mabophan` varchar(10) NOT NULL COMMENT 'kế hoạch được phân công cho một bộ phận đảm nhận'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `kehoachgiaoviec`
+-- Dumping data for table `kehoachgiaoviec`
 --
 
 INSERT INTO `kehoachgiaoviec` (`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `madanhgia`, `makhuvuc`, `mabophan`) VALUES
-('KH01', 'Kế hoạch phòng Kinh doanh 001', '2023-05-09', '2023-05-10', '2023-05-12', 'Đã hoàn thành', 'DG01', 'CT', 'KD001'),
-('KH02', 'Kế hoạch sửa kế hoạch 1 và kế hoạch cho phòng Kinh Doanh 002', '2023-04-04', '2023-05-19', '2023-05-25', 'Hoàn thành', 'DG02', 'CT', 'KD001'),
-('KH03', 'Thực hiện kế hoạch cho phòng Kế toán 001', '2023-05-04', '2023-05-26', '2023-05-27', 'Hoàn thành', 'DG03', 'CT', 'NS002'),
-('KH04', 'Thực hiện bổ sung kế hoạch Kinh Doanh 001, 002', '2023-05-12', '2023-06-02', '2023-06-02', 'Đang thực hiện', 'DG04', 'NT', 'KD001'),
-('KH05', 'Thực hiện kế hoạch điều chỉnh phòng Nhân Sự 001', '2023-05-11', '2023-05-20', '2023-05-31', 'Chưa hoàn thành', 'DG05', 'CT', 'NS001'),
-('KH06', 'Xem lại toàn bộ kế hoạch đã làm', '2023-05-19', '2023-05-20', '2023-05-21', 'Hoàn thành', 'DG06', 'CT', 'NS002');
+('KH01', 'Kế hoạch phòng Kinh doanh 0011                                                                                       ', '2023-01-01', '2023-12-31', '2023-12-31', 'Đã hoàn thành', 'DG01', 'CT', 'KD001');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `khuvuc`
+-- Table structure for table `khuvuc`
 --
 
 CREATE TABLE `khuvuc` (
   `makhuvuc` varchar(10) NOT NULL COMMENT 'mã số khu vực',
   `tenkhuvuc` varchar(100) NOT NULL COMMENT 'tên khu vực',
   `machinhanh` varchar(10) NOT NULL COMMENT 'khu vực có một mã chi nhánh quản lý'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `khuvuc`
+-- Dumping data for table `khuvuc`
 --
 
 INSERT INTO `khuvuc` (`makhuvuc`, `tenkhuvuc`, `machinhanh`) VALUES
@@ -238,7 +238,7 @@ INSERT INTO `khuvuc` (`makhuvuc`, `tenkhuvuc`, `machinhanh`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhanvien`
+-- Table structure for table `nhanvien`
 --
 
 CREATE TABLE `nhanvien` (
@@ -253,22 +253,22 @@ CREATE TABLE `nhanvien` (
   `hinhanh` varchar(255) NOT NULL COMMENT 'hình ảnh đại diện cho nhân viên',
   `macongviec` varchar(10) NOT NULL COMMENT 'mã số công việc nhân việc phụ trách',
   `mabophan` varchar(10) NOT NULL COMMENT 'mã số bộ phận nhân việc tiếp nhận làm việc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `nhanvien`
+-- Dumping data for table `nhanvien`
 --
 
 INSERT INTO `nhanvien` (`manhanvien`, `hoten`, `ngaysinh`, `gioitinh`, `noisinh`, `dantoc`, `quequan`, `sodienthoai`, `hinhanh`, `macongviec`, `mabophan`) VALUES
 ('NV1', 'Trần Văn A', '2000-02-20', 'Nam', 'Cần Thơ', 'Kinh', 'Cần thơ', '0780898586', '', 'CV1', 'KD001'),
-('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', '', 'CV4', 'NS002'),
-('NV3', 'Trần Văn C', '2000-03-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898586', '', 'CV5', 'NS001'),
-('NV4', 'Trần Văn D', '2000-03-15', 'Nam', 'Nha Trang', 'Kinh', 'Cần thơ', '0780898586', '', 'CV6', 'NS002');
+('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', '', 'CV4', 'KD001'),
+('NV3', 'Trần Văn C', '2000-03-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898586', '', 'CV5', 'KD001'),
+('NV4', 'Trần Văn D', '2000-03-15', 'Nam', 'Nha Trang', 'Kinh', 'Cần thơ', '0780898586', '', 'CV6', 'KD001');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `taikhoan`
+-- Table structure for table `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
@@ -279,14 +279,14 @@ CREATE TABLE `taikhoan` (
   `matkhau` varchar(100) NOT NULL,
   `level` int(10) NOT NULL,
   `trangthai` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `taikhoan`
+-- Dumping data for table `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `trangthai`) VALUES
-(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 3, 'hoạt động'),
+(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 2, 'hoạt động'),
 (14, 'NV2', 'truongphong', 'truongphong@gmail.com', '123', 2, 'hoạt động'),
 (15, 'NV3', 'ketoan', 'ketoan@gmail.com', '123', 1, 'hoạt động'),
 (16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động');
@@ -294,7 +294,7 @@ INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `tra
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `theodoikehoach`
+-- Table structure for table `theodoikehoach`
 --
 
 CREATE TABLE `theodoikehoach` (
@@ -302,25 +302,37 @@ CREATE TABLE `theodoikehoach` (
   `manhanvien` varchar(10) NOT NULL COMMENT 'mã số nhân viên',
   `machitieu` varchar(10) NOT NULL COMMENT 'mã số chỉ tiêu',
   `thang` varchar(10) NOT NULL COMMENT 'tháng thực hiện ',
-  `chitieuthangcandat` varchar(10) NOT NULL COMMENT 'chỉ tiêu trong tháng'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `chitieuthangdatduoc` varchar(10) NOT NULL COMMENT 'chỉ tiêu trong tháng'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `theodoikehoach`
+-- Dumping data for table `theodoikehoach`
 --
 
-INSERT INTO `theodoikehoach` (`makehoach`, `manhanvien`, `machitieu`, `thang`, `chitieuthangcandat`) VALUES
-('KH01', 'NV1', 'CT01', '4', '4'),
-('KH02', 'NV2', 'CT02', '6', '6'),
-('KH03', 'NV3', 'CT04', '5', '5'),
-('KH04', 'NV4', 'CT04', '9', '9'),
-('KH05', 'NV2', 'CT05', '4', '5'),
-('KH06', 'NV3', 'CT06', '11', '11');
+INSERT INTO `theodoikehoach` (`makehoach`, `manhanvien`, `machitieu`, `thang`, `chitieuthangdatduoc`) VALUES
+('KH01', 'NV1', 'CT01', '1', '50000000'),
+('KH01', 'NV1', 'CT01', '2', '60000000'),
+('KH01', 'NV1', 'CT01', '3', '50000000'),
+('KH01', 'NV1', 'CT02', '1', '20'),
+('KH01', 'NV1', 'CT02', '2', '30'),
+('KH01', 'NV1', 'CT02', '3', '25'),
+('KH01', 'NV1', 'CT03', '1', '50000000'),
+('KH01', 'NV1', 'CT03', '2', '60000000'),
+('KH01', 'NV1', 'CT03', '3', '70000000'),
+('KH01', 'NV2', 'CT01', '1', '50000000'),
+('KH01', 'NV2', 'CT01', '2', '60000000'),
+('KH01', 'NV2', 'CT01', '3', '50000000'),
+('KH01', 'NV2', 'CT02', '1', '20'),
+('KH01', 'NV2', 'CT02', '2', '30'),
+('KH01', 'NV2', 'CT02', '3', '25'),
+('KH01', 'NV2', 'CT03', '1', '50000000'),
+('KH01', 'NV2', 'CT03', '2', '60000000'),
+('KH01', 'NV2', 'CT03', '3', '70000000');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thoigiannhanchuc`
+-- Table structure for table `thoigiannhanchuc`
 --
 
 CREATE TABLE `thoigiannhanchuc` (
@@ -328,37 +340,37 @@ CREATE TABLE `thoigiannhanchuc` (
   `machucvu` varchar(10) NOT NULL COMMENT 'mã số chức vụ nhân viên đảm nhận',
   `thoigianbatdau` date NOT NULL COMMENT 'thời gian bắt đầu nhận hức',
   `thoigianketthuc` date NOT NULL COMMENT 'thời gian kết thúc nhận chức'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `thoigiannhanchuc`
+-- Dumping data for table `thoigiannhanchuc`
 --
 
 INSERT INTO `thoigiannhanchuc` (`manhanvien`, `machucvu`, `thoigianbatdau`, `thoigianketthuc`) VALUES
-('NV1', 'C3', '2023-01-01', '0000-00-00'),
+('NV1', 'C1', '2023-01-01', '0000-00-00'),
 ('NV2', 'C2', '2023-02-01', '0000-00-00'),
-('NV3', 'C1', '2023-06-01', '0000-00-00'),
-('NV4', 'C1', '2023-06-01', '0000-00-00');
+('NV3', 'C3', '2023-06-01', '0000-00-00'),
+('NV4', 'C3', '2023-06-01', '0000-00-00');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `bophan`
+-- Indexes for table `bophan`
 --
 ALTER TABLE `bophan`
   ADD PRIMARY KEY (`mabophan`),
   ADD KEY `fk_khuvuc` (`makhuvuc`);
 
 --
--- Chỉ mục cho bảng `chinhanh`
+-- Indexes for table `chinhanh`
 --
 ALTER TABLE `chinhanh`
   ADD PRIMARY KEY (`machinhanh`);
 
 --
--- Chỉ mục cho bảng `chitietkehoach`
+-- Indexes for table `chitietkehoach`
 --
 ALTER TABLE `chitietkehoach`
   ADD PRIMARY KEY (`makehoach`,`manhanvien`,`machitieu`),
@@ -366,31 +378,31 @@ ALTER TABLE `chitietkehoach`
   ADD KEY `fk_chitieu` (`machitieu`);
 
 --
--- Chỉ mục cho bảng `chitieu`
+-- Indexes for table `chitieu`
 --
 ALTER TABLE `chitieu`
   ADD PRIMARY KEY (`machitieu`);
 
 --
--- Chỉ mục cho bảng `chucvu`
+-- Indexes for table `chucvu`
 --
 ALTER TABLE `chucvu`
   ADD PRIMARY KEY (`machucvu`);
 
 --
--- Chỉ mục cho bảng `congviec`
+-- Indexes for table `congviec`
 --
 ALTER TABLE `congviec`
   ADD PRIMARY KEY (`macongviec`);
 
 --
--- Chỉ mục cho bảng `danhgiakehoach`
+-- Indexes for table `danhgiakehoach`
 --
 ALTER TABLE `danhgiakehoach`
   ADD PRIMARY KEY (`madanhgia`);
 
 --
--- Chỉ mục cho bảng `kehoachgiaoviec`
+-- Indexes for table `kehoachgiaoviec`
 --
 ALTER TABLE `kehoachgiaoviec`
   ADD PRIMARY KEY (`makehoach`),
@@ -399,14 +411,14 @@ ALTER TABLE `kehoachgiaoviec`
   ADD KEY `fk_bophan1` (`mabophan`);
 
 --
--- Chỉ mục cho bảng `khuvuc`
+-- Indexes for table `khuvuc`
 --
 ALTER TABLE `khuvuc`
   ADD PRIMARY KEY (`makhuvuc`),
   ADD KEY `fk_chinhanh` (`machinhanh`);
 
 --
--- Chỉ mục cho bảng `nhanvien`
+-- Indexes for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD PRIMARY KEY (`manhanvien`),
@@ -414,14 +426,14 @@ ALTER TABLE `nhanvien`
   ADD KEY `fk_bophan` (`mabophan`);
 
 --
--- Chỉ mục cho bảng `taikhoan`
+-- Indexes for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_nhanvien` (`manv`);
 
 --
--- Chỉ mục cho bảng `theodoikehoach`
+-- Indexes for table `theodoikehoach`
 --
 ALTER TABLE `theodoikehoach`
   ADD PRIMARY KEY (`makehoach`,`manhanvien`,`machitieu`,`thang`),
@@ -429,34 +441,34 @@ ALTER TABLE `theodoikehoach`
   ADD KEY `fk_chitieu1` (`machitieu`);
 
 --
--- Chỉ mục cho bảng `thoigiannhanchuc`
+-- Indexes for table `thoigiannhanchuc`
 --
 ALTER TABLE `thoigiannhanchuc`
   ADD PRIMARY KEY (`manhanvien`,`machucvu`),
   ADD KEY `fk_chucvu` (`machucvu`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `taikhoan`
+-- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `bophan`
+-- Constraints for table `bophan`
 --
 ALTER TABLE `bophan`
   ADD CONSTRAINT `fk_khuvuc` FOREIGN KEY (`makhuvuc`) REFERENCES `khuvuc` (`makhuvuc`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `chitietkehoach`
+-- Constraints for table `chitietkehoach`
 --
 ALTER TABLE `chitietkehoach`
   ADD CONSTRAINT `fk_chitieu` FOREIGN KEY (`machitieu`) REFERENCES `chitieu` (`machitieu`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -464,7 +476,7 @@ ALTER TABLE `chitietkehoach`
   ADD CONSTRAINT `fk_nhanvien2` FOREIGN KEY (`manhanvien`) REFERENCES `nhanvien` (`manhanvien`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `kehoachgiaoviec`
+-- Constraints for table `kehoachgiaoviec`
 --
 ALTER TABLE `kehoachgiaoviec`
   ADD CONSTRAINT `fk_bophan1` FOREIGN KEY (`mabophan`) REFERENCES `bophan` (`mabophan`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -472,26 +484,26 @@ ALTER TABLE `kehoachgiaoviec`
   ADD CONSTRAINT `fk_khuvuc1` FOREIGN KEY (`makhuvuc`) REFERENCES `khuvuc` (`makhuvuc`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `khuvuc`
+-- Constraints for table `khuvuc`
 --
 ALTER TABLE `khuvuc`
   ADD CONSTRAINT `fk_chinhanh` FOREIGN KEY (`machinhanh`) REFERENCES `chinhanh` (`machinhanh`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `nhanvien`
+-- Constraints for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD CONSTRAINT `fk_bophan` FOREIGN KEY (`mabophan`) REFERENCES `bophan` (`mabophan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_congviec` FOREIGN KEY (`macongviec`) REFERENCES `congviec` (`macongviec`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `taikhoan`
+-- Constraints for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `fk_nhanvien` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manhanvien`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `theodoikehoach`
+-- Constraints for table `theodoikehoach`
 --
 ALTER TABLE `theodoikehoach`
   ADD CONSTRAINT `fk_chitieu1` FOREIGN KEY (`machitieu`) REFERENCES `chitieu` (`machitieu`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -499,7 +511,7 @@ ALTER TABLE `theodoikehoach`
   ADD CONSTRAINT `fk_nhanvien3` FOREIGN KEY (`manhanvien`) REFERENCES `nhanvien` (`manhanvien`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `thoigiannhanchuc`
+-- Constraints for table `thoigiannhanchuc`
 --
 ALTER TABLE `thoigiannhanchuc`
   ADD CONSTRAINT `fk_chucvu` FOREIGN KEY (`machucvu`) REFERENCES `chucvu` (`machucvu`) ON DELETE CASCADE ON UPDATE CASCADE,

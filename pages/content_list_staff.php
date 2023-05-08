@@ -1,3 +1,10 @@
+<?php
+    require_once('../admin/config.php');
+    if(!isset($_SESSION['username'])) {
+        header("location: ./login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,6 +42,18 @@
         <link rel="stylesheet" href="../asset/styles/styles.css" />
         <link rel="stylesheet" href="../asset/styles/style_staff.css" />
         <title>Quan Ly Nhan Su</title>
+
+        <?php
+            
+
+            $sql_list_staff="SELECT nhanvien.manhanvien, hoten, tenchucvu, email, sodienthoai, quequan, hinhanh
+                                from nhanvien, taikhoan, thoigiannhanchuc, chucvu
+                                where nhanvien.manhanvien = taikhoan.manv
+                                    and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
+                                    and thoigiannhanchuc.machucvu = chucvu.machucvu";
+            $result_list_staff=mysqli_query($ketnoi,$sql_list_staff);
+        ?>
+
     </head>
     <body>
         <div class="wrapper">
@@ -56,478 +75,51 @@
 
                 <div class="row">
                     <div class="container-flud staff">
-                        <div class="row staff__list">
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
+                        <div class="row staff__list">                           
+                            <?php 
+                                while($row_list_staff = mysqli_fetch_array($result_list_staff)){
+                                    echo 
+                                        "<div class=\"col-md-3\">
+                                            <div class=\"staff__list_items\">
+                                                <div class=\"row staff__list_item\">
+                                                    <img
+                                                    class=\"staff__img\"
+                                                    src=\"../asset/img/".$row_list_staff['hinhanh']."\"
+                                                    alt=\"staff avatar\"
+                                                />
+                                                    <p class=\"staff__name\">".$row_list_staff['hoten']."</p>
+                                                    <p class=\"staff__ID\">
+                                                        ".$row_list_staff['manhanvien']." - ".$row_list_staff['tenchucvu']."
+                                                    </p>
+                                                </div>
+                                                <div class=\"row staff__list_desc\">
+                                                    <a href=\"#!\" class=\"staff__mail\">
+                                                        <i
+                                                            class=\"staff__icons fa-regular fa-envelope\"
+                                                        >
+                                                        </i>
+                                                        ".$row_list_staff['email']."
+                                                    </a>
+                                                    <p class=\"staff__phone\">
+                                                        <i
+                                                            class=\"staff__icons fa-solid fa-phone\"
+                                                        ></i>
+                                                        ".$row_list_staff['sodienthoai']."
+                                                    </p>
+                                                    <p class=\"staff__address\">
+                                                        <i
+                                                            class=\"staff__icons fa-solid fa-location-dot\"
+                                                        ></i>
+                                                        ".$row_list_staff['quequan']."
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>";
+                                    } 
+                                ?>
 
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row staff__list">
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row staff__list">
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="staff__list_items">
-                                    <div class="row staff__list_item">
-                                        <img
-                                            class="staff__img"
-                                            src="../asset/img/avatar-default.jfif"
-                                            alt="staff avatar"
-                                        />
-
-                                        <p class="staff__name">Nguyen Van A</p>
-                                        <p class="staff__ID">
-                                            A001 - Nhan Vien
-                                        </p>
-                                    </div>
-
-                                    <div class="row staff__list_desc">
-                                        <a href="#!" class="staff__mail">
-                                            <i
-                                                class="staff__icons fa-regular fa-envelope"
-                                            >
-                                            </i>
-                                            abc@gmail.com
-                                        </a>
-                                        <p class="staff__phone">
-                                            <i
-                                                class="staff__icons fa-solid fa-phone"
-                                            ></i>
-                                            0123456789
-                                        </p>
-                                        <p class="staff__address">
-                                            <i
-                                                class="staff__icons fa-solid fa-location-dot"
-                                            ></i>
-                                            Can Tho
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                                    
+                            
                         </div>
                     </div>
                 </div>
