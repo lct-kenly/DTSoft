@@ -79,7 +79,7 @@
                             <?php 
                                 while($row_list_staff = mysqli_fetch_array($result_list_staff)){
                                     echo 
-                                        "<div class=\"col-md-3\">
+                                        "<div class=\"col-md-3 mt-5\">
                                             <div class=\"staff__list_items\">
                                                 <div class=\"row staff__list_item\">
                                                     <img

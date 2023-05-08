@@ -74,11 +74,21 @@
         $current_staffWork = $_POST['staffWork'];
         $current_staffPosition = $_POST['staffPosition'];
         $current_staffDepartment = $_POST['staffDepartment'];
-        $current_avatar = $_POST['avatar'];
         $current_staffEmail = $_POST['staffEmail'];
         $current_staffUser = $_POST['staffUser'];
         $current_staffPassword = $_POST['staffPassword'];
         $current_time = date("Y-m-d H:i:s");
+
+        $current_avatar = $_FILES["avatar"]["name"];
+        $tempname = $_FILES["avatar"]["tmp_name"];
+        $folder = "../asset/img/" . $current_avatar;
+
+        if($_FILES['avatar']['error'] > 0) {
+            $error['avatar'] = 'Bạn chọn hình ảnh sản phẩm';
+        } else {
+            move_uploaded_file($tempname ,$folder);
+        }
+
         while ($row_old_id = mysqli_fetch_array($result_old_staff_id)) {
             if ($row_old_id['manhanvien'] === $current_StaffID) {
                 $check = true;
@@ -95,9 +105,29 @@
                                 '" . $current_staffDepartment . "' ) ";
             $add_Position = "INSERT INTO thoigiannhanchuc (manhanvien, machucvu, thoigianbatdau, thoigianketthuc)
                                 VALUES ( '" . $current_StaffID . "', '" . $current_staffPosition . "', '" . $current_time . "', '0000-00-00')";
+
+            $add_account = "INSERT INTO taikhoan (manv, tentk, email, matkhau)
+                                VALUES ('" . $current_StaffID . "','{$current_staffUser}','{$current_staffEmail}','{$current_staffPassword}')";
+
             $result_add_staff = mysqli_query($ketnoi, $add_staff);
-            $result_add_Position = mysqli_query($ketnoi, $add_Position);
+
+            if($result_add_staff) {
+                $result_add_Position = mysqli_query($ketnoi, $add_Position);
+                $result_add_Account = mysqli_query($ketnoi, $add_account);
+
+                if($result_add_staff && $result_add_Position && $result_add_Account) {
+                    echo '<script> alert("Thêm nhân viên mới thành công!"); </script>';
+                    
+                } else {
+                    echo '<script> alert("Có lỗi xảy ra, vui lòng thử lại!"); </script>';
+                }
+            } else {
+                echo '<script> alert("Có lỗi xảy ra, vui lòng thử lại!"); </script>';
+            }
+
+            
             $success = "Thêm nhân viên thành công!";
+            
             $current_StaffID = "";
             $current_StaffName = "";
             $current_staffDateofBirth = "";
@@ -129,13 +159,13 @@
                     <?= $success ?>
                 </div>
             <?php } ?>
-            <form action="content_add_staff.php?action=submit" class="needs-validation" novalidate method="POST">
+            <form action="content_add_staff.php?action=submit" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
                 <div class="row content">
                     <div class="col-md-6 content__left">
                         <!-- ID -->
                         <div class="input__form">
                             <label for="staffID" class="form-label input__label">Mã nhân viên</label>
-                            <input type="text" class="form-control input__value" id="staffID" name="staffID" placeholder="Mã nhân viên" value="<?= $current_StaffID ?>" required/>
+                            <input type="text" class="form-control input__value" id="staffID" name="staffID" placeholder="Mã nhân viên" value="<?php echo !empty($current_StaffID) ? $current_staffID : ''?>" required/>
                             <p class="invalid-feedback">Vui lòng nhập trường này!</p>
                         </div>
 
@@ -232,13 +262,15 @@
                         <!-- Email -->
                         <div class="input__form">
                             <label for="staffEmail" class="form-label input__label">Email</label>
-                            <input type="email" class="form-control input__value" id="staffEmail" name="staffEmail" placeholder="Email" value="<?= $current_staffEmail ?>" />
+                            <input type="email" class="form-control input__value" id="staffEmail" placeholder="Email" value="<?= $current_staffEmail ?>" disabled/>
+                            <input type="hidden" name="staffEmail" value="<?= $current_staffEmail ?>"/>
                         </div>
 
                         <!-- Staff Account -->
                         <div class="input__form">
                             <label for="staffUser" class="form-label input__label">Tài khoản</label>
-                            <input type="text" class="form-control input__value" id="staffUser" name="staffUser" placeholder="Tài khoản" value="<?= $current_staffUser ?>" />
+                            <input type="text" class="form-control input__value" id="staffUser" placeholder="Tài khoản" value="<?= $current_staffUser ?>" disabled/>
+                            <input type="hidden" name="staffUser" value="<?= $current_staffEmail ?>"/>
                         </div>
 
                         <div class="input__form">
@@ -299,27 +331,6 @@
     //         }, false)
     //     })
     // })()
-
-    const inputStaffID = document.querySelector('input#staffID');
-    const inputStaffUser = document.querySelector('input#staffUser');
-    const inputStaffEmail = document.querySelector('input#staffEmail');
-    const selectStaffDepartment = document.querySelector('select[name="staffDepartment"]');
-
-    // function handleUsername() {
-    //     console.log(123);
-    //     if(inputStaffID.value !== '' && selectStaffDepartment.value !== '') {
-    //         inputStaffUser.value = `${selectStaffDepartment.value}-${inputStaffID.value}`;
-    //         inputStaffEmail.value = `${selectStaffDepartment.value}-${inputStaffID.value}@gmail.com`;
-    //     }
-    // }
-
-    inputStaffID.addEventListener('keydown', function (e) {
-        // console.log(123);
-        if(inputStaffID.value !== '' && selectStaffDepartment.value !== '') {
-            inputStaffUser.value = `${selectStaffDepartment.value}-${inputStaffID.value}`;
-            inputStaffEmail.value = `${selectStaffDepartment.value}-${inputStaffID.value}@gmail.com`;
-        }
-    })
 </script>
 
 <script>
@@ -341,6 +352,22 @@
 </script>      
 
 <script>
-    
+    const inputStaffID = document.querySelector('input#staffID');
+    const inputStaffUser = document.querySelector('input#staffUser');
+    const inputStaffEmail = document.querySelector('input#staffEmail');
+    const inputStaffUserHidden = document.querySelector('input[name="staffUser"]');
+    const inputStaffEmailHidden = document.querySelector('input[name="staffEmail"]');
+    const selectStaffDepartment = document.querySelector('select[name="staffDepartment"]');
+
+    function handleUsername() {
+        inputStaffUser.value = `${selectStaffDepartment.value}-${inputStaffID.value}`;
+        inputStaffUserHidden.value = `${selectStaffDepartment.value}-${inputStaffID.value}`;
+
+        inputStaffEmail.value = `${selectStaffDepartment.value}-${inputStaffID.value}@gmail.com`;
+        inputStaffEmailHidden.value = `${selectStaffDepartment.value}-${inputStaffID.value}@gmail.com`;
+    }
+
+    inputStaffID.addEventListener('input', handleUsername);
+    selectStaffDepartment.addEventListener('change', handleUsername);
 </script>
 </html>
