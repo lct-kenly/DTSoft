@@ -59,22 +59,62 @@
                     <div class="row m-0">
                         <div class="col-md-12">
                             <div class="statistical-manager-content__header">
-                                <h2 class="header__title">
-                                    Thống kê danh sách nhân viên phòng kinh
-                                    doanh
+                                <h2 class="header__title ms-0">
+                                    Thống kê danh sách nhân viên
                                 </h2>
-                                <select
-                                    class="statistical-manager-content__filter form-select"
-                                    aria-label="Default select example"
-                                >
-                                    <option selected value="ALL">
-                                        ------ Tất cả -----
-                                    </option>
-                                    <option value="Đạt">Đạt kết quả</option>
-                                    <option value="Chưa đạt">
-                                        Chưa đạt kết quả
-                                    </option>
-                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <label for="khuvuc" class="fs-4 fw-bold mb-4">Khu vực</label>
+                                    <select
+                                        class="statistical-manager-content__filter form-select"
+                                        aria-label="Default select example"
+                                        id="khuvuc"
+                                    >
+                                        <option selected value="ALL">
+                                            ------ Khu vực -----
+                                        </option>
+                                        <option value="Đạt">Cần Thơ</option>
+                                        <option value="Chưa đạt">
+                                            Nha Trang
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="khuvuc" class="fs-4 fw-bold mb-4">Bộ phận</label>
+                                    <select
+                                        class="statistical-manager-content__filter form-select"
+                                        aria-label="Default select example"
+                                        id="bophan"
+                                    >
+                                        <option selected value="ALL">
+                                            ------ Bộ phận -----
+                                        </option>
+                                        <option value="Đạt">Đạt kết quả</option>
+                                        <option value="Chưa đạt">
+                                            Chưa đạt kết quả
+                                        </option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="khuvuc" class="fs-4 fw-bold mb-4">Trạng thái</label>
+                                    <select
+                                        class="statistical-manager-content__filter form-select"
+                                        aria-label="Default select example"
+                                        id="select-statistical"
+                                    >
+                                        <option selected value="ALL">
+                                            ------ Tất cả -----
+                                        </option>
+                                        <option value="Đạt">Đạt kết quả</option>
+                                        <option value="Chưa đạt">
+                                            Chưa đạt kết quả
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="statistical-manager-content__body">
@@ -192,7 +232,7 @@
             ".statistical-manager-content__table-staff tbody"
         );
         const selectBox = document.querySelector(
-            ".statistical-manager-content__filter"
+            "#select-statistical"
         );
 
         const render = (arrData) => {

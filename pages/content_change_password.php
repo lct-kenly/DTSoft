@@ -1,8 +1,8 @@
 <?php
-    require_once('../admin/config.php');
-    if(!isset($_SESSION['username'])) {
-        header("location: ./login.php");
-    }
+require_once('../admin/config.php');
+if(!isset($_SESSION['username'])) {
+    header("location: ./login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,12 +50,8 @@
             href="./asset/styles/style_change_password.css"
         />
         <?php
-            
-            
-            if (!isset($_SESSION["Change_pass"])) {
-                $_SESSION["Change_pass"] = array();
-                $manv = $_GET["manv"];
-            }
+
+            $manv = $profile['manv'];
             
             $error = false;
             $success = false;
