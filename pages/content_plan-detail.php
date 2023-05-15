@@ -48,6 +48,9 @@ function chitieutungnhanvien($conn, $makehoach, $manv)
 // Lấy danh sách nhân viên chưa thuộc kế hoạch
 function get_all_nhanvien($conn, $mabophan, $makehoach)
 {
+
+    $data = array();
+    
     $sql = "SELECT nhanvien.manhanvien, nhanvien.hoten
                 FROM nhanvien, bophan
                 WHERE nhanvien.mabophan = bophan.mabophan AND bophan.mabophan = '{$mabophan}' AND nhanvien.manhanvien NOT IN
@@ -94,6 +97,7 @@ if ($makehoach) {
         $danhsachchitieu[] = $row;
     }
 
+
     // Tổng đạt được của các chỉ tiêu
     $sql = "SELECT chitieu.tenchitieu, SUM(theodoikehoach.chitieuthangdatduoc) as TONGDATDUOC
                 FROM chitieu, theodoikehoach
@@ -109,16 +113,11 @@ if ($makehoach) {
 
     // Update thông tin kế hoạch
     if (isset($_POST["submit-update-plan"]) && $_POST["submit-update-plan"] == "submit") {
-        $makehoach_update = isset($_POST["makehoach"]) ? $_POST["makehoach"] : '';
         $thoigianbatdau = isset($_POST["thoigianbatdau"]) ? $_POST["thoigianbatdau"] : '';
         $thoigiandukien = isset($_POST["thoigiandukien"]) ? $_POST["thoigiandukien"] : '';
         $makhuvuc = isset($_POST["makhuvuc"]) ? $_POST["makhuvuc"] : '';
         $mabophan = isset($_POST["mabophan"]) ? $_POST["mabophan"] : '';
         $motakehoach = isset($_POST["motakehoach"]) ? $_POST["motakehoach"] : '';
-
-        if (empty($makehoach_update)) {
-            $error['makehoach'] = 'Bạn chưa nhập mã kế hoạch!';
-        }
 
         if (empty($thoigianbatdau)) {
             $error['thoigianbatdau'] = 'Bạn chưa nhập thời gian bắt đầu!';
@@ -143,20 +142,7 @@ if ($makehoach) {
 
         if (empty($error)) {
 
-            if ($makehoach != $makehoach_update) {
-                $sql = "SELECT makehoach FROM kehoachgiaoviec WHERE makehoach = '{$makehoach}'";
-
-                $result = $conn->query($sql);
-
-                // Nếu mã kế hoạch đã tồn tại
-                if ($result->num_rows > 0) {
-                    echo '<script> alert("Đã tồn tại mã kế hoạch này, vui lòng thử lại!"); </script>';
-                } else {
-                    $sql_update = "UPDATE `kehoachgiaoviec` SET `makehoach`='{$makehoach}',`motakehoach`='{$motakehoach}',`thoigianbatdau`='{$thoigianbatdau}',`thoigiandukien`='{$thoigiandukien}', `makhuvuc`='{$makhuvuc}',`mabophan`='{$mabophan}' WHERE makehoach = '{$makehoach_update}'";
-                }
-            } else {
-                $sql_update = "UPDATE `kehoachgiaoviec` SET `makehoach`='{$makehoach}',`motakehoach`='{$motakehoach}',`thoigianbatdau`='{$thoigianbatdau}',`thoigiandukien`='{$thoigiandukien}', `makhuvuc`='{$makhuvuc}',`mabophan`='{$mabophan}' WHERE makehoach = '{$makehoach}'";
-            }
+            $sql_update = "UPDATE `kehoachgiaoviec` SET `motakehoach`='{$motakehoach}',`thoigianbatdau`='{$thoigianbatdau}',`thoigiandukien`='{$thoigiandukien}', `makhuvuc`='{$makhuvuc}',`mabophan`='{$mabophan}' WHERE makehoach = '{$makehoach}'";
 
             if ($conn->query($sql_update)) {
                 echo '<script> alert("Cập nhật kế hoạch thành công!"); </script>';
@@ -487,7 +473,7 @@ if ($makehoach) {
                     <form id="form-update-plan" action="" method="POST">
                         <div class="mb-3 mt-4">
                             <label for="MAKH" class="form-label fw-bold fs-5 fw-bold fs-5">Mã kế hoạch</label>
-                            <input type="text" class="form-control fs-5" id="MAKH" value="<?= $thongtinkehoach[0]['makehoach'] ?>" name="makehoach" />
+                            <input type="text" class="form-control fs-5" id="MAKH" value="<?= $thongtinkehoach[0]['makehoach'] ?>" name="makehoach" readonly disabled />
                         </div>
                         <div class="mb-3 mt-4">
                             <label for="exampleInputPassword1" class="form-label fw-bold fs-5 fw-bold fs-5">Thời gian</label>

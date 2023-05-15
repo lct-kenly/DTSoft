@@ -3,6 +3,21 @@
     if(!isset($_SESSION['username'])) {
         header("location: ./login.php");
     }
+
+    $evaluates = array();
+    $index = 1;
+
+    $sql_evaluate = "SELECT makehoach, bophan.tenbophan, khuvuc.tenkhuvuc, thoigianbatdau, thoigiandukien
+            FROM kehoachgiaoviec, bophan, khuvuc
+            WHERE kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc";
+    
+    $result_evaluate = $conn->query($sql_evaluate);
+
+    if($result_evaluate->num_rows > 0) {
+        while($row = $result_evaluate->fetch_assoc()) {
+            $evaluates[] = $row;
+        }  
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,101 +82,43 @@
                                         STT
                                     </th>
                                     <th class="table__header" scope="col">
-                                        Nhân viên thực hiện
+                                        Mã kế hoạch
                                     </th>
                                     <th class="table__header" scope="col">
-                                        Tên kế hoạch
+                                        Bộ phận
+                                    </th>
+                                    <th class="table__header" scope="col">
+                                        Khu vực
                                     </th>
                                     <th class="table__header" scope="col">
                                         Ngày bắt đầu
                                     </th>
                                     <th class="table__header" scope="col">
-                                        Tình trạng
+                                        Ngày kết thúc dự kiến
                                     </th>
-                                    <th class="table__header" scope="col"></th>
+                                    <th class="table__header" scope="col">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table__content">
-                                <tr>
-                                    <th class="table__desc" scope="row">1</th>
-                                    <td class="table__desc">Nguyễn Văn A</td>
-                                    <td class="table__desc">Kế hoạch 01</td>
-                                    <td class="table__desc">01/01/2023</td>
-                                    <td class="table__desc">Đang tién hành</td>
-                                    <td class="table__desc">
-                                        <a
-                                            href="content_plan-detail.php"
-                                            class="table__plan-detail"
-                                        >
-                                            Chi tiết</a
-                                        >
-                                    </td>
-                                </tr>
-
-                                <tr class="table__content">
-                                    <th class="table__desc" scope="row">2</th>
-                                    <td class="table__desc">Nguyễn Văn A</td>
-                                    <td class="table__desc">Kế hoạch 01</td>
-                                    <td class="table__desc">01/01/2023</td>
-                                    <td class="table__desc">Đang tién hành</td>
-                                    <td class="table__desc">
-                                        <a
-                                            href="content_plan-detail.php"
-                                            class="table__plan-detail"
-                                        >
-                                            Chi tiết</a
-                                        >
-                                    </td>
-                                </tr>
-
-                                <tr class="table__content">
-                                    <th class="table__desc" scope="row">3</th>
-                                    <td class="table__desc">Nguyễn Văn A</td>
-                                    <td class="table__desc">Kế hoạch 01</td>
-                                    <td class="table__desc">01/01/2023</td>
-                                    <td class="table__desc">Đang tién hành</td>
-                                    <td class="table__desc">
-                                        <a
-                                            href="content_plan-detail.php"
-                                            class="table__plan-detail"
-                                        >
-                                            Chi tiết</a
-                                        >
-                                    </td>
-                                </tr>
-
-                                <tr class="table__content">
-                                    <th class="table__desc" scope="row">4</th>
-                                    <td class="table__desc">Nguyễn Văn A</td>
-                                    <td class="table__desc">Kế hoạch 01</td>
-                                    <td class="table__desc">01/01/2023</td>
-                                    <td class="table__desc">Đang tién hành</td>
-                                    <td class="table__desc">
-                                        <a
-                                            href="content_plan-detail.php"
-                                            class="table__plan-detail"
-                                        >
-                                            Chi tiết</a
-                                        >
-                                    </td>
-                                </tr>
-
-                                <tr class="table__content">
-                                    <th class="table__desc" scope="row">5</th>
-                                    <td class="table__desc">Nguyễn Văn A</td>
-                                    <td class="table__desc">Kế hoạch 01</td>
-                                    <td class="table__desc">01/01/2023</td>
-                                    <td class="table__desc">Đang tién hành</td>
-                                    <td class="table__desc">
-                                        <a
-                                            href="content_plan-detail.php"
-                                            class="table__plan-detail"
-                                        >
-                                            Chi tiết</a
-                                        >
-                                    </td>
-                                </tr>
+                                <?php foreach ($evaluates as $item) {?>
+                                    <tr>
+                                        <th class="table__desc" scope="row"><?=$index?></th>
+                                        <td class="table__desc"><?=$item['makehoach']?></td>
+                                        <td class="table__desc"><?=$item['tenbophan']?></td>
+                                        <td class="table__desc"><?=$item['tenkhuvuc']?></td>
+                                        <td class="table__desc"><?=$item['thoigianbatdau']?></td>
+                                        <td class="table__desc"><?=$item['thoigiandukien']?></td>
+                                        <td class="table__desc">
+                                            <a
+                                                href="content_plan-detail.php?makehoach=<?=$item['makehoach']?>"
+                                                class="table__plan-detail"
+                                            >
+                                                Chi tiết</a
+                                            >
+                                        </td>
+                                    </tr>
+                                <?php $index++; } ?>
                             </tbody>
                         </table>
                     </div>
