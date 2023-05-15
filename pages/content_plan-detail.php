@@ -50,7 +50,7 @@ function get_all_nhanvien($conn, $mabophan, $makehoach)
 {
 
     $data = array();
-    
+
     $sql = "SELECT nhanvien.manhanvien, nhanvien.hoten
                 FROM nhanvien, bophan
                 WHERE nhanvien.mabophan = bophan.mabophan AND bophan.mabophan = '{$mabophan}' AND nhanvien.manhanvien NOT IN
@@ -96,6 +96,9 @@ if ($makehoach) {
     while ($row = $result->fetch_assoc()) {
         $danhsachchitieu[] = $row;
     }
+
+    // print_r($danhsachchitieu);
+    // die();
 
 
     // Tổng đạt được của các chỉ tiêu
@@ -420,20 +423,11 @@ if ($makehoach) {
                                         </th>
                                         <?php foreach ($danhsachchitieu as $item) { ?>
                                             <th class="fw-bold text-center">
-                                                <?= $item['TONGCHITIEU'] ?>
+                                                <?=$item['TONGCHITIEU'] ?>
                                             </th>
                                         <?php } ?>
                                     </tr>
-                                    <tr>
-                                        <th class="fw-bold text-center" colspan="2">
-                                            Tổng chỉ tiêu đã đạt (4 tháng)
-                                        </th>
-                                        <?php foreach ($tongchitieudadat as $item) { ?>
-                                            <th class="fw-bold text-center">
-                                                <?= $item['TONGDATDUOC'] ?>
-                                            </th>
-                                        <?php } ?>
-                                    </tr>
+                                    
                                 </tfoot>
                             </table>
 

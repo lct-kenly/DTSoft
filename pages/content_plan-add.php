@@ -143,8 +143,8 @@ if (isset($_POST['addPlan'])) {
     //     $madanhgia = "DG" . $row;
     //   }
 
-      $sql_0 = "INSERT INTO `danhgiakehoach`(`ketquadanhgia`, `truongphong`, `giamdoc`) VALUES ('Không đạt','Không đạt','Không đạt')";
-      $query_0 = mysqli_query($ketnoi, $sql_0);
+      // $sql_0 = "INSERT INTO `danhgiakehoach`(`ketquadanhgia`, `truongphong`, `giamdoc`) VALUES ('Không đạt','Không đạt','Không đạt')";
+      // $query_0 = mysqli_query($ketnoi, $sql_0);
 
       $sql_1 = "INSERT INTO `kehoachgiaoviec`(`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `makhuvuc`, `mabophan`) VALUES ('" . $makehoach . "','" . $motakehoach . "','" . $thoigianthuchien . "','" . $thoigianketthuc . "','" . $thoigianketthuc . "','Đang thực hiện','" . $makhuvuc . "','" . $mabophan . "')";
       $query_1 = mysqli_query($ketnoi, $sql_1);
