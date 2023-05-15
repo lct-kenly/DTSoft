@@ -100,7 +100,7 @@ if(!isset($_SESSION['username'])) {
     </head>
 
     <body>
-        <div class="wrapper">
+        <div class="wrapper p-4">
             <div class="container-flud">
                 <div class="row header">
                     <h2 class="header__title">Đổi mật khẩu</h2>
@@ -117,57 +117,59 @@ if(!isset($_SESSION['username'])) {
                         </div>
                 <?php } ?>
                     <form class="form__content" action="content_change_password.php?action=submit" method="POST" >
-                        <div class="form-group">
+
+                        <div class="form-group position-relative mt-3">
                             <label for="CurrentPassword"
                                 >Mật khẩu hiện tại</label
                             >
-                            <div class="d-inline position-relative">
+                            <div class="d-inline">
                                 <input
                                     type="password"
-                                    class="form-control"
+                                    class="form-control mt-2"
                                     id="CurrentPassword"
                                     name="CurrentPassword"
                                     placeholder="Nhập mật khẩu hiện tại"
                                     value="<?php echo $current_password; ?>"
                                 />                            
-                                <span class="btn-show-current-password"><i class="fa-regular fa-eye"></i></span>
+                                <span class="btn-show-password position-absolute" style="top: 56%; right: 8px;"><i class="fa-regular fa-eye"></i></span>
                             </div>
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-group position-relative mt-3">
                             <label for="NewPassword">Mật khẩu mới</label>
-                            <div class="d-inline position-relative">
+                            <div class="d-inline">
                                 <input
                                     type="password"
-                                    class="form-control"
+                                    class="form-control mt-2"
                                     id="NewPassword"
                                     name="NewPassword"
                                     placeholder="Nhập mật khẩu mới"
                                     value="<?php echo $new_password; ?>"
                                     
                                 />
-                                <span class="btn-show-new-password" ><i class="fa-regular fa-eye"></i></span>
+                                <span class="btn-show-password position-absolute" style="top: 56%; right: 8px;" ><i class="fa-regular fa-eye"></i></span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group position-relative mt-3">
                             <label for="ConfirmNewPassword">
                                 Nhập lại mật khẩu mới</label
                             >
-                            <div class="d-inline position-relative">
+                            <div class="d-inline">
                                 <input
                                     type="password"
-                                    class="form-control"
+                                    class="form-control mt-2"
                                     id="ConfirmNewPassword"
                                     name="ConfirmNewPassword"
                                     placeholder="Nhập lại mật khẩu mới"
                                     value="<?php echo $confirm_new_password; ?>"
                                 />
-                                <span class="btn-show-confirm-new-password"><i class="fa-regular fa-eye"></i></span>
+                                <span class="btn-show-password position-absolute" style="top: 32%; right: 8px;"><i class="fa-regular fa-eye"></i></span>
                             </div>
                             <input type="hidden" name="manv_check" value="<?=$manv?>">
                         <button
                             type="submit"
-                            class="btn btn-primary btn-change-password"
+                            class="btn btn-primary btn-change-password mt-3"
                         >
                             Đổi mật khẩu
                         </button>
