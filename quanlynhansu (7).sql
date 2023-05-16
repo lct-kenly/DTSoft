@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:04 PM
+-- Generation Time: May 15, 2023 at 05:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -86,6 +86,15 @@ CREATE TABLE `chitietkehoach` (
 --
 
 INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `chitieucandat`, `chitieudatduoc`) VALUES
+('KH002', 'NV1', 'CT01', '2', 5415455, 0),
+('KH002', 'NV1', 'CT02', '2', 55451, 0),
+('KH002', 'NV1', 'CT03', '2', 5454561, 0),
+('KH002', 'NV2', 'CT01', '1', 5415455, 0),
+('KH002', 'NV2', 'CT02', '1', 55451, 0),
+('KH002', 'NV2', 'CT03', '1', 5454561, 0),
+('KH002', 'NV3', 'CT01', '1', 5415455, 0),
+('KH002', 'NV3', 'CT02', '1', 55451, 0),
+('KH002', 'NV3', 'CT03', '1', 5454561, 0),
 ('KH01', 'NV1', 'CT01', '2', 700000000, 0),
 ('KH01', 'NV1', 'CT02', '1', 250, 0),
 ('KH01', 'NV1', 'CT03', '2', 700000000, 0),
@@ -173,22 +182,11 @@ INSERT INTO `congviec` (`macongviec`, `tencongviec`, `motacongviec`) VALUES
 
 CREATE TABLE `danhgiakehoach` (
   `madanhgia` varchar(10) NOT NULL COMMENT 'mã số đánh giá kế hoạch',
-  `ketquadanhgia` varchar(100) NOT NULL COMMENT 'kết quả đánh giá',
-  `truongphong` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
-  `giamdoc` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
+  `makehoach` varchar(10) NOT NULL,
+  `nguoi_danh_gia` varchar(10) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
+  `ketqua` varchar(100) NOT NULL,
+  `noi_dung_chi_tiet` varchar(255) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `danhgiakehoach`
---
-
-INSERT INTO `danhgiakehoach` (`madanhgia`, `ketquadanhgia`, `truongphong`, `giamdoc`) VALUES
-('DG01', 'Đạt', 'Đạt', 'Đạt'),
-('DG02', 'Đạt', 'Đạt', 'Đạt'),
-('DG03', 'Đạt', 'Đạt', 'Đạt'),
-('DG04', 'Đạt', 'Chưa đạt', 'Chưa đạt'),
-('DG05', 'Chưa đạt', 'Chưa đạt', 'Chưa đạt'),
-('DG06', 'Đạt', 'Đạt', 'Chưa đạt');
 
 -- --------------------------------------------------------
 
@@ -203,7 +201,6 @@ CREATE TABLE `kehoachgiaoviec` (
   `thoigiandukien` date NOT NULL COMMENT 'thời gian dự kiến kết thúc kế hoạch',
   `thoigianketthuc` date NOT NULL COMMENT 'thời gian kết thúc kế hoạch',
   `tiendo` varchar(255) NOT NULL COMMENT 'tiến độ kế hoạch',
-  `madanhgia` varchar(10) NOT NULL COMMENT 'kế hoạch có một bản đánh giá kế hoạch',
   `makhuvuc` varchar(10) NOT NULL COMMENT 'kế hoạch được đảm nhận bởi một khu vực',
   `mabophan` varchar(10) NOT NULL COMMENT 'kế hoạch được phân công cho một bộ phận đảm nhận'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -212,8 +209,9 @@ CREATE TABLE `kehoachgiaoviec` (
 -- Dumping data for table `kehoachgiaoviec`
 --
 
-INSERT INTO `kehoachgiaoviec` (`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `madanhgia`, `makhuvuc`, `mabophan`) VALUES
-('KH01', 'Kế hoạch phòng Kinh doanh 0011                                                                                       ', '2023-01-01', '2023-12-31', '2023-12-31', 'Đã hoàn thành', 'DG01', 'CT', 'KD001');
+INSERT INTO `kehoachgiaoviec` (`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `makhuvuc`, `mabophan`) VALUES
+('KH002', 'MO TA', '2023-01-15', '2023-05-15', '2023-05-15', 'Đang thực hiện', 'CT', 'KD001'),
+('KH01', 'Kế hoạch phòng Kinh doanh 0011                                                                                       ', '2023-01-01', '2023-12-31', '2023-12-31', 'Đã hoàn thành', 'CT', 'KD001');
 
 -- --------------------------------------------------------
 
@@ -260,10 +258,10 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manhanvien`, `hoten`, `ngaysinh`, `gioitinh`, `noisinh`, `dantoc`, `quequan`, `sodienthoai`, `hinhanh`, `macongviec`, `mabophan`) VALUES
-('NV1', 'Trần Văn A', '2000-02-20', 'Nam', 'Cần Thơ', 'Kinh', 'Cần thơ', '0780898586', '', 'CV1', 'KD001'),
-('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', '', 'CV4', 'KD001'),
-('NV3', 'Trần Văn C', '2000-03-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898586', '', 'CV5', 'KD001'),
-('NV4', 'Trần Văn D', '2000-03-15', 'Nam', 'Nha Trang', 'Kinh', 'Cần thơ', '0780898586', '', 'CV6', 'KD001');
+('NV1', 'Trần Văn A', '2000-02-20', 'Nam', 'Cần Thơ', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV1', 'KD001'),
+('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV4', 'KD001'),
+('NV3', 'Trần Văn C', '2000-03-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV5', 'KD001'),
+('NV4', 'Trần Văn D', '2000-03-15', 'Nam', 'Nha Trang', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV6', 'KD001');
 
 -- --------------------------------------------------------
 
@@ -277,7 +275,7 @@ CREATE TABLE `taikhoan` (
   `tentk` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `matkhau` varchar(100) NOT NULL,
-  `level` int(10) NOT NULL,
+  `level` int(10) NOT NULL DEFAULT 1,
   `trangthai` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -286,7 +284,7 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `trangthai`) VALUES
-(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 2, 'hoạt động'),
+(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123456', 2, 'hoạt động'),
 (14, 'NV2', 'truongphong', 'truongphong@gmail.com', '123', 2, 'hoạt động'),
 (15, 'NV3', 'ketoan', 'ketoan@gmail.com', '123', 1, 'hoạt động'),
 (16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động');
@@ -399,14 +397,15 @@ ALTER TABLE `congviec`
 -- Indexes for table `danhgiakehoach`
 --
 ALTER TABLE `danhgiakehoach`
-  ADD PRIMARY KEY (`madanhgia`);
+  ADD PRIMARY KEY (`madanhgia`,`makehoach`,`nguoi_danh_gia`),
+  ADD KEY `makehoach` (`makehoach`),
+  ADD KEY `nguoi_danh_gia` (`nguoi_danh_gia`);
 
 --
 -- Indexes for table `kehoachgiaoviec`
 --
 ALTER TABLE `kehoachgiaoviec`
   ADD PRIMARY KEY (`makehoach`),
-  ADD KEY `fk_danhgia` (`madanhgia`),
   ADD KEY `fk_khuvuc1` (`makhuvuc`),
   ADD KEY `fk_bophan1` (`mabophan`);
 
@@ -455,7 +454,7 @@ ALTER TABLE `thoigiannhanchuc`
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -476,11 +475,17 @@ ALTER TABLE `chitietkehoach`
   ADD CONSTRAINT `fk_nhanvien2` FOREIGN KEY (`manhanvien`) REFERENCES `nhanvien` (`manhanvien`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `danhgiakehoach`
+--
+ALTER TABLE `danhgiakehoach`
+  ADD CONSTRAINT `danhgiakehoach_ibfk_1` FOREIGN KEY (`makehoach`) REFERENCES `kehoachgiaoviec` (`makehoach`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `danhgiakehoach_ibfk_2` FOREIGN KEY (`nguoi_danh_gia`) REFERENCES `nhanvien` (`manhanvien`);
+
+--
 -- Constraints for table `kehoachgiaoviec`
 --
 ALTER TABLE `kehoachgiaoviec`
   ADD CONSTRAINT `fk_bophan1` FOREIGN KEY (`mabophan`) REFERENCES `bophan` (`mabophan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_danhgia` FOREIGN KEY (`madanhgia`) REFERENCES `danhgiakehoach` (`madanhgia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_khuvuc1` FOREIGN KEY (`makhuvuc`) REFERENCES `khuvuc` (`makhuvuc`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
