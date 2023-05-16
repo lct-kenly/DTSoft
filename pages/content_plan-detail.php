@@ -2,7 +2,7 @@
 require_once('../admin/config.php');
 require_once('../lib/helper.php');
 
-if(!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username'])) {
     header("location: ./login.php");
 }
 
@@ -16,6 +16,8 @@ $danhsachmabophan = get_all_db($conn, 'bophan');
 
 function chitieutheothang($conn, $makehoach, $machitieu)
 {
+    $data = array();
+
     $sql = "SELECT thang, SUM(chitieuthangdatduoc) AS CHITIEUTHANG
                 FROM theodoikehoach
                 WHERE makehoach = '{$makehoach}' AND machitieu = '{$machitieu}'
@@ -158,27 +160,27 @@ if ($makehoach) {
 
 
     // Thêm nhân viên vào kế hoạch
-    if(isset($_POST['submit-add-staff']) && $_POST['submit-add-staff'] == "submit" ) {
+    if (isset($_POST['submit-add-staff']) && $_POST['submit-add-staff'] == "submit") {
         $manhanvien = isset($_POST['manhanvien']) ? $_POST['manhanvien'] : '';
         $chitieu = isset($_POST['chitieu']) ? $_POST['chitieu'] : array();
 
-        if(empty($manhanvien)) {
+        if (empty($manhanvien)) {
             $error['manhanvien'] = 'Bạn chưa chọn mã nhân viên!';
         }
 
-        if(empty($chitieu)) {
+        if (empty($chitieu)) {
             $error['chitieu'] = 'Bạn chưa nhập chỉ tiêu!';
         }
 
-        if(empty($error)) {
+        if (empty($error)) {
 
             $index = 0;
             $isQuery = false;
 
-            foreach($danhsachchitieu as $item) {
+            foreach ($danhsachchitieu as $item) {
                 $sql = "INSERT INTO `chitietkehoach`(`makehoach`, `manhanvien`, `machitieu`, `chitieucandat`) VALUES ('{$makehoach}','{$manhanvien}','{$item["machitieu"]}','{$chitieu[$index]}')";
-                
-                if($conn->query($sql)) {
+
+                if ($conn->query($sql)) {
                     $isQuery = true;
                 } else {
                     $isQuery = false;
@@ -187,7 +189,7 @@ if ($makehoach) {
                 $index++;
             }
 
-            if($isQuery) {
+            if ($isQuery) {
                 echo '<script> alert("Thêm mới nhân viên vào kế hoạch thành công!"); </script>';
                 header("Refresh:0");
             } else {
@@ -197,29 +199,29 @@ if ($makehoach) {
     }
 
     // Chỉnh sửa nhân viên trong kế hoạch
-    if(isset($_POST['submit-edit-staff']) && $_POST['submit-edit-staff'] == "submit" ) {
+    if (isset($_POST['submit-edit-staff']) && $_POST['submit-edit-staff'] == "submit") {
 
         $manhanvien = isset($_POST['manhanvien']) ? $_POST['manhanvien'] : '';
         $old_manhanvien = isset($_POST['old-manv']) ? $_POST['old-manv'] : '';
         $chitieu = isset($_POST['chitieu']) ? $_POST['chitieu'] : array();
 
-        if(empty($manhanvien)) {
+        if (empty($manhanvien)) {
             $error['manhanvien'] = 'Bạn chưa chọn mã nhân viên!';
         }
 
-        if(empty($chitieu)) {
+        if (empty($chitieu)) {
             $error['chitieu'] = 'Bạn chưa nhập chỉ tiêu!';
         }
 
-        if(empty($error)) {
+        if (empty($error)) {
 
             $index = 0;
             $isQuery = false;
 
-            foreach($danhsachchitieu as $item) {
+            foreach ($danhsachchitieu as $item) {
                 $sql = "UPDATE `chitietkehoach` SET `manhanvien`='{$manhanvien}', `chitieucandat`='{$chitieu[$index]}' WHERE makehoach = '{$makehoach}' AND manhanvien = '{$old_manhanvien}' AND machitieu = '{$item["machitieu"]}' ";
 
-                if($conn->query($sql)) {
+                if ($conn->query($sql)) {
                     $isQuery = true;
                 } else {
                     $isQuery = false;
@@ -228,7 +230,7 @@ if ($makehoach) {
                 $index++;
             }
 
-            if($isQuery) {
+            if ($isQuery) {
                 echo '<script> alert("Cập nhật chỉ tiêu nhân thành công!"); </script>';
                 header("Refresh:0");
             } else {
@@ -239,10 +241,10 @@ if ($makehoach) {
 
 
     // Xóa nhân viên khỏi kế hoạch
-    if(isset($_POST['submit-delete-staff']) && $_POST['submit-delete-staff'] == "submit" ) {
+    if (isset($_POST['submit-delete-staff']) && $_POST['submit-delete-staff'] == "submit") {
         $manhanvien = isset($_POST['manhanvien']) ? $_POST['manhanvien'] : '';
 
-        if(!empty($manhanvien)) {
+        if (!empty($manhanvien)) {
             $sql = "DELETE FROM `chitietkehoach` WHERE makehoach = '{$makehoach}' AND manhanvien = '{$manhanvien}'";
 
             if ($conn->query($sql)) {
@@ -393,13 +395,7 @@ if ($makehoach) {
                                             <?php } ?>
 
                                             <td>
-                                                <button 
-                                                    class="btn btn-info text-white fs-5 js-edit-staff" 
-                                                    data-bs-toggle="modal" 
-                                                    data-bs-target="#modal-plan-edit-staff" 
-                                                    data-manv="<?= $item['manhanvien'] ?>" 
-                                                    data-tennv="<?= $item['hoten'] ?>"
-                                                >
+                                                <button class="btn btn-info text-white fs-5 js-edit-staff" data-bs-toggle="modal" data-bs-target="#modal-plan-edit-staff" data-manv="<?= $item['manhanvien'] ?>" data-tennv="<?= $item['hoten'] ?>">
                                                     <i class="fa-regular fa-pen-to-square"></i>
 
                                                     <?php foreach ($danhsachchitieunhanvien as $chitieu) { ?>
@@ -407,9 +403,9 @@ if ($makehoach) {
                                                         <input type="hidden" name="tenchitieu[]" value="<?= $chitieu['tenchitieu'] ?>">
                                                         <input type="hidden" name="chitieu[]" value="<?= $chitieu['chitieucandat'] ?>">
                                                     <?php } ?>
-                                                    
+
                                                 </button>
-                                                <button class="btn btn-danger fs-5" data-bs-toggle="modal" data-bs-target="#modal-delete-staff" data-manv="<?= $item['manhanvien'] ?>">
+                                                <button class="btn btn-danger fs-5" data-bs-toggle="modal" data-bs-target="#modal-delete-staff" data-manv="<?=$item['manhanvien'] ?>">
                                                     <i class="fa-regular fa-trash-can"></i>
                                                 </button>
                                             </td>
@@ -423,11 +419,11 @@ if ($makehoach) {
                                         </th>
                                         <?php foreach ($danhsachchitieu as $item) { ?>
                                             <th class="fw-bold text-center">
-                                                <?=$item['TONGCHITIEU'] ?>
+                                                <?= $item['TONGCHITIEU'] ?>
                                             </th>
                                         <?php } ?>
                                     </tr>
-                                    
+
                                 </tfoot>
                             </table>
 
@@ -650,131 +646,126 @@ if ($makehoach) {
 <script src="../asset/js/main.js"></script>
 
 <script>
-    const exampleModal = document.getElementById("modal-delete-staff");
-    exampleModal.addEventListener("show.bs.modal", (event) => {
-        // Button that triggered the modal
-        const button = event.relatedTarget;
-        const manhanvien = button.getAttribute('data-manv');
+    $(document).ready(function() {
+        const exampleModal = document.getElementById("modal-delete-staff");
+        exampleModal.addEventListener("show.bs.modal", (event) => {
+            // Button that triggered the modal
+            const button = event.relatedTarget;
+            const manhanvien = button.getAttribute('data-manv');
 
-        const form = exampleModal.querySelector(".modal-body form");
-        const input = exampleModal.querySelector(".modal-body form input");
+            const form = exampleModal.querySelector(".modal-body form");
+            const input = exampleModal.querySelector(".modal-body form input");
 
-        input.setAttribute('value', manhanvien);
-    });
-</script>
-
-<script>
-    const editStaffleModal = document.getElementById("modal-plan-edit-staff");
-    editStaffleModal.addEventListener("show.bs.modal", (event) => {
-        // Button that triggered the modal
-        const button = event.relatedTarget;
-        const manhanvien = button.getAttribute('data-manv');
-        const tennhanvien = button.getAttribute('data-tennv');
-        const dsMaChiTieu = button.querySelectorAll('input[name="machitieu[]"]');
-        const dsTenChiTieu = button.querySelectorAll('input[name="tenchitieu[]"]');
-        const dsChiTieu = button.querySelectorAll('input[name="chitieu[]"]');
-
-        const form = editStaffleModal.querySelector(".modal-body form");
-        const inputOldManv = editStaffleModal.querySelector(".modal-body form input[name='old-manv']");
-        const select = editStaffleModal.querySelector(".modal-body select option:first-child");
-
-        select.value = manhanvien;
-        inputOldManv.value = manhanvien;
-        select.innerText = `${manhanvien} - ${tennhanvien}`;
-
-        let html = [...dsTenChiTieu].map((item, index) => {
-            const dsMaChiTieuItem = dsMaChiTieu[index].value;
-            const dsChiTieuItem = dsChiTieu[index].value;
-
-            return `<div class="mb-3 mt-4">
-                        <label for="${dsMaChiTieuItem}" class="form-label fw-bold fs-5">${item.value}</label>
-                        <input type="text" class="form-control fs-5" id="${dsMaChiTieuItem}" value="${dsChiTieuItem}" form="form-edit-staff" name="chitieu[]" />
-                    </div>`
+            input.setAttribute('value', manhanvien);
         });
 
-        html = html.join('');
+        //
+        const editStaffleModal = document.getElementById("modal-plan-edit-staff");
+        editStaffleModal.addEventListener("show.bs.modal", (event) => {
+            // Button that triggered the modal
+            const button = event.relatedTarget;
+            const manhanvien = button.getAttribute('data-manv');
+            const tennhanvien = button.getAttribute('data-tennv');
+            const dsMaChiTieu = button.querySelectorAll('input[name="machitieu[]"]');
+            const dsTenChiTieu = button.querySelectorAll('input[name="tenchitieu[]"]');
+            const dsChiTieu = button.querySelectorAll('input[name="chitieu[]"]');
 
-        form.insertAdjacentHTML('afterend', html);
+            const form = editStaffleModal.querySelector(".modal-body form");
+            const inputOldManv = editStaffleModal.querySelector(".modal-body form input[name='old-manv']");
+            const select = editStaffleModal.querySelector(".modal-body select option:first-child");
 
-    });
-</script>
+            select.value = manhanvien;
+            inputOldManv.value = manhanvien;
+            select.innerText = `${manhanvien} - ${tennhanvien}`;
 
-<script>
-    const district = document.querySelector('select[name="makhuvuc"]');
-    const department = document.querySelector('select[name="mabophan"]');
+            let html = [...dsTenChiTieu].map((item, index) => {
+                const dsMaChiTieuItem = dsMaChiTieu[index].value;
+                const dsChiTieuItem = dsChiTieu[index].value;
 
-    const dataDepartment = <?php echo json_encode($danhsachmabophan) ?>;
+                return `<div class="mb-3 mt-4">
+                            <label for="${dsMaChiTieuItem}" class="form-label fw-bold fs-5">${item.value}</label>
+                            <input type="text" class="form-control fs-5" id="${dsMaChiTieuItem}" value="${dsChiTieuItem}" form="form-edit-staff" name="chitieu[]" />
+                        </div>`
+            });
 
-    district.onchange = function(e) {
-        const value = e.target.value;
-        department.length = 0;
+            html = html.join('');
 
-        dataDepartment.forEach((item) => {
-            if (item.makhuvuc == value) {
-                department.options[department.options.length] = new Option(`${item.mabophan} - ${item.tenbophan}`, item.mabophan)
-            }
-        })
-    }
-</script>
+            form.insertAdjacentHTML('afterend', html);
 
-<script>
-    $(document).ready(function() {
+        });
+
+        //
+        const district = document.querySelector('select[name="makhuvuc"]');
+        const department = document.querySelector('select[name="mabophan"]');
+
+        const dataDepartment = <?php echo json_encode($danhsachmabophan) ?>;
+
+        district.onchange = function(e) {
+            const value = e.target.value;
+            department.length = 0;
+
+            dataDepartment.forEach((item) => {
+                if (item.makhuvuc == value) {
+                    department.options[department.options.length] = new Option(`${item.mabophan} - ${item.tenbophan}`, item.mabophan)
+                }
+            })
+        }
+
+        //
+        <?php foreach ($danhsachchitieu as $item) { ?>
+            const <?= $item['machitieu'] ?> = document.getElementById("<?= $item['machitieu'] ?>");
+
+            const <?= $item['machitieu'] ?>Data = <?= json_encode(chitieutheothang($conn, $makehoach, $item['machitieu'])) ?>
+
+            const <?= $item['machitieu'] ?>NewData = <?= $item['machitieu'] ?>Data.map((item) => {
+                return Number.parseInt(item);
+            });
+
+            var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+            new Chart(<?= $item['machitieu'] ?>, {
+                type: "line",
+                data: {
+                    labels: [
+                        "Tháng 1",
+                        "Tháng 2",
+                        "Tháng 3",
+                        "Tháng 4",
+                        "Tháng 5",
+                        "Tháng 6",
+                        "Tháng 7",
+                        "Tháng 8",
+                        "Tháng 9",
+                        "Thánh 10",
+                        "Tháng 11",
+                        "Tháng 12",
+                    ],
+                    datasets: [{
+                        label: "<?= $item['tenchitieu'] ?>",
+                        data: <?= $item['machitieu'] ?>NewData,
+                        borderWidth: 1,
+                        backgroundColor: `#${randomColor}`,
+                        borderColor: `#${randomColor}`,
+                    }, ],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "Biểu đồ tổng <?= $item['tenchitieu'] ?> qua từng tháng",
+                        },
+                    },
+                },
+            });
+        <?php } ?>
+
         $("#evaluate-detail-table-list-staff").DataTable();
     });
-</script>
-
-<script>
-    <?php foreach ($danhsachchitieu as $item) { ?>
-        const <?= $item['machitieu'] ?> = document.getElementById("<?= $item['machitieu'] ?>");
-
-        const <?= $item['machitieu'] ?>Data = <?= json_encode(chitieutheothang($conn, $makehoach, $item['machitieu'])) ?>
-
-        const <?= $item['machitieu'] ?>NewData = <?= $item['machitieu'] ?>Data.map((item) => {
-            return Number.parseInt(item);
-        });
-
-        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-
-        new Chart(<?= $item['machitieu'] ?>, {
-            type: "line",
-            data: {
-                labels: [
-                    "Tháng 1",
-                    "Tháng 2",
-                    "Tháng 3",
-                    "Tháng 4",
-                    "Tháng 5",
-                    "Tháng 6",
-                    "Tháng 7",
-                    "Tháng 8",
-                    "Tháng 9",
-                    "Thánh 10",
-                    "Tháng 11",
-                    "Tháng 12",
-                ],
-                datasets: [{
-                    label: "<?= $item['tenchitieu'] ?>",
-                    data: <?= $item['machitieu'] ?>NewData,
-                    borderWidth: 1,
-                    backgroundColor: `#${randomColor}`,
-                    borderColor: `#${randomColor}`,
-                }, ],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: "Biểu đồ tổng <?= $item['tenchitieu'] ?> qua từng tháng",
-                    },
-                },
-            },
-        });
-    <?php } ?>
 </script>
 
 </html>
