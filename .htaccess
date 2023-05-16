@@ -8,3 +8,4 @@ RewriteEngine On
 #ErrorDocument 404 /pages/404.php
 RewriteRule "trang-chu" "pages/index.php"
 RewriteRule "dang-nhap" "pages/login.php"
+RewriteRule "dang-xuat" "pages/logout.php"

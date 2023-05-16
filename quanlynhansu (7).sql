@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 04:25 PM
+-- Generation Time: May 07, 2023 at 09:04 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -182,9 +182,10 @@ INSERT INTO `congviec` (`macongviec`, `tencongviec`, `motacongviec`) VALUES
 
 CREATE TABLE `danhgiakehoach` (
   `madanhgia` varchar(10) NOT NULL COMMENT 'mã số đánh giá kế hoạch',
-  `ketquadanhgia` varchar(100) NOT NULL COMMENT 'kết quả đánh giá',
-  `truongphong` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
-  `giamdoc` varchar(100) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
+  `makehoach` varchar(10) NOT NULL,
+  `nguoi_danh_gia` varchar(10) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
+  `ketqua` varchar(100) NOT NULL,
+  `noi_dung_chi_tiet` varchar(255) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -192,17 +193,12 @@ CREATE TABLE `danhgiakehoach` (
 --
 
 INSERT INTO `danhgiakehoach` (`madanhgia`, `ketquadanhgia`, `truongphong`, `giamdoc`) VALUES
-('', 'Không đạt', 'Không đạt', 'Không đạt'),
 ('DG01', 'Đạt', 'Đạt', 'Đạt'),
 ('DG02', 'Đạt', 'Đạt', 'Đạt'),
 ('DG03', 'Đạt', 'Đạt', 'Đạt'),
 ('DG04', 'Đạt', 'Chưa đạt', 'Chưa đạt'),
 ('DG05', 'Chưa đạt', 'Chưa đạt', 'Chưa đạt'),
-('DG06', 'Đạt', 'Đạt', 'Chưa đạt'),
-('DG07', 'Không đạt', 'Không đạt', 'Không đạt'),
-('DG08', 'Không đạt', 'Không đạt', 'Không đạt'),
-('DG09', 'Không đạt', 'Không đạt', 'Không đạt'),
-('DG10', 'Không đạt', 'Không đạt', 'Không đạt');
+('DG06', 'Đạt', 'Đạt', 'Chưa đạt');
 
 -- --------------------------------------------------------
 
@@ -300,7 +296,7 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `trangthai`) VALUES
-(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 2, 'hoạt động'),
+(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123456', 2, 'hoạt động'),
 (14, 'NV2', 'truongphong', 'truongphong@gmail.com', '123', 2, 'hoạt động'),
 (15, 'NV3', 'ketoan', 'ketoan@gmail.com', '123', 1, 'hoạt động'),
 (16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động');
@@ -413,7 +409,9 @@ ALTER TABLE `congviec`
 -- Indexes for table `danhgiakehoach`
 --
 ALTER TABLE `danhgiakehoach`
-  ADD PRIMARY KEY (`madanhgia`);
+  ADD PRIMARY KEY (`madanhgia`,`makehoach`,`nguoi_danh_gia`),
+  ADD KEY `makehoach` (`makehoach`),
+  ADD KEY `nguoi_danh_gia` (`nguoi_danh_gia`);
 
 --
 -- Indexes for table `kehoachgiaoviec`
@@ -487,6 +485,13 @@ ALTER TABLE `chitietkehoach`
   ADD CONSTRAINT `fk_chitieu` FOREIGN KEY (`machitieu`) REFERENCES `chitieu` (`machitieu`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_kehoach` FOREIGN KEY (`makehoach`) REFERENCES `kehoachgiaoviec` (`makehoach`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_nhanvien2` FOREIGN KEY (`manhanvien`) REFERENCES `nhanvien` (`manhanvien`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `danhgiakehoach`
+--
+ALTER TABLE `danhgiakehoach`
+  ADD CONSTRAINT `danhgiakehoach_ibfk_1` FOREIGN KEY (`makehoach`) REFERENCES `kehoachgiaoviec` (`makehoach`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `danhgiakehoach_ibfk_2` FOREIGN KEY (`nguoi_danh_gia`) REFERENCES `nhanvien` (`manhanvien`);
 
 --
 -- Constraints for table `kehoachgiaoviec`
