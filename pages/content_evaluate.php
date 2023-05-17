@@ -35,42 +35,6 @@ while ($row = $result->fetch_assoc()) {
     $plans[] = $row;
 }
 
-// Load Ajax
-if(isset($_POST['makhuvuc']) && isset($_POST['nam'])) {
-    $makhuvuc = $_POST['makhuvuc'];
-    $nam = $_POST['nam'];
-
-    $listPlans = array();
-
-    if(empty($nam)) {
-        $nam = date("Y");
-    }
-
-    if($makhuvuc == 'all') {
-        $sql_get_list_plans = "SELECT kehoachgiaoviec.makehoach, khuvuc.tenkhuvuc, bophan.tenbophan, kehoachgiaoviec.thoigiandukien, kehoachgiaoviec.tiendo
-                FROM khuvuc, bophan, kehoachgiaoviec
-                WHERE khuvuc.makhuvuc = kehoachgiaoviec.makhuvuc AND bophan.mabophan = kehoachgiaoviec.mabophan AND YEAR(kehoachgiaoviec.thoigiandukien) = '{$nam}'";
-    } else {
-        $sql_get_list_plans = "SELECT kehoachgiaoviec.makehoach, khuvuc.tenkhuvuc, bophan.tenbophan, kehoachgiaoviec.thoigiandukien, kehoachgiaoviec.tiendo
-                FROM khuvuc, bophan, kehoachgiaoviec
-                WHERE khuvuc.makhuvuc = kehoachgiaoviec.makhuvuc AND bophan.mabophan = kehoachgiaoviec.mabophan AND khuvuc.makhuvuc = '{$makhuvuc}' AND YEAR(kehoachgiaoviec.thoigiandukien) = '{$nam}'";
-    }
-
-    $result_list_plans = $conn->query($sql_get_list_plans);
-
-    while ($row = $result->fetch_assoc()) {
-        if(check_danh_gia($conn, $row['makehoach']) > 0) {
-            $row['trangthai'] = 'Đã đánh giá';
-        } else {
-            $row['trangthai'] = 'Chưa đánh giá';
-        }
-
-        $listPlans[] = $row;
-    }
-
-    echo json_encode($listPlans);
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,8 +124,14 @@ if(isset($_POST['makhuvuc']) && isset($_POST['nam'])) {
                                             <td>
                                                 <?= $item['tiendo'] ?>
                                             </td>
-                                            <td class="text-danger">
-                                               <?=$item['trangthai']?>
+                                            <td>
+                                               <?php 
+                                                    if($item['trangthai'] == 'Đã đánh giá') {
+                                                        echo '<span class="text-success"> Đã đánh giá </span>';
+                                                    } else {
+                                                        echo '<span class="text-danger"> Chưa đánh giá </span>';
+                                                    }
+                                               ?>
                                             </td>
                                             <td>
                                                 <a href="./content_evaluate-detail.php?makehoach=<?= $item['makehoach'] ?>">

@@ -56,11 +56,22 @@
         return $str;
     }
 
+    function check_danh_gia($conn, $makehoach)
+{
+
+    $sql = "SELECT * FROM danhgiakehoach WHERE makehoach = '{$makehoach}'";
+
+    $result = $conn->query($sql);
+
+    return $result->num_rows;
+}
+
     $makehoach = isset($_GET['makehoach']) ? $_GET['makehoach'] : '';
 
     $plan = array();
     $chitieukehoach = array();
     $nhanvien = array();
+    $ketquadanhgia = array();
 
     if (!empty($makehoach)) {
         $sql_get_plan = "SELECT khuvuc.makhuvuc, khuvuc.tenkhuvuc, bophan.mabophan, bophan.tenbophan, kehoachgiaoviec.makehoach, kehoachgiaoviec.thoigianbatdau, kehoachgiaoviec.thoigiandukien, kehoachgiaoviec.thoigianketthuc
@@ -69,7 +80,7 @@
 
         $plan = $conn->query($sql_get_plan)->fetch_assoc();
 
-
+        //
         $sql_chi_tieu = "SELECT chitieu.machitieu, chitieu.tenchitieu, SUM(chitieucandat) AS TONGCANDAT
                         FROM chitietkehoach, chitieu
                         WHERE chitietkehoach.machitieu = chitieu.machitieu AND chitietkehoach.makehoach = '{$makehoach}'
@@ -81,7 +92,7 @@
             $chitieukehoach[] = $row;
         }
 
-
+        //
         $sql_nhan_vien = "SELECT nhanvien.manhanvien, nhanvien.hoten, chitieu.machitieu, chitieu.tenchitieu, chitietkehoach.chitieucandat
                         FROM nhanvien, chitieu, chitietkehoach
                         WHERE nhanvien.manhanvien = chitietkehoach.manhanvien AND chitietkehoach.machitieu = chitieu.machitieu AND chitietkehoach.makehoach = '{$makehoach}'";
@@ -91,6 +102,18 @@
         while ($row = $result_nhan_vien->fetch_assoc()) {
             $nhanvien[] = $row;
         }
+
+        //
+        $sql_danh_gia = "SELECT nhanvien.hoten, bophan.tenbophan, chucvu.tenchucvu, danhgiakehoach.ketqua, danhgiakehoach.noi_dung_chi_tiet
+                         FROM bophan, chucvu, nhanvien, danhgiakehoach, thoigiannhanchuc
+                         WHERE bophan.mabophan = nhanvien.mabophan AND nhanvien.manhanvien = thoigiannhanchuc.manhanvien AND thoigiannhanchuc.machucvu = chucvu.machucvu AND nhanvien.manhanvien = danhgiakehoach.nguoi_danh_gia AND danhgiakehoach.makehoach = '{$makehoach}'";
+
+        $result_danh_gia = $conn->query($sql_danh_gia);
+
+        while ($row = $result_danh_gia->fetch_assoc()) {
+            $ketquadanhgia[] = $row;
+        }
+
     }
 
 
@@ -172,9 +195,13 @@
                                     <p class="fs-4">
                                         <span class="fw-bold">Mã kế hoạch:</span>
                                         <span class="ms-2"><?= $plan['makehoach'] ?>
-                                            <span class="badge bg-danger">
-                                                Chưa đánh giá
-                                            </span>
+                                            <?php 
+                                                if(check_danh_gia($conn, $makehoach) <= 0) {
+                                                    echo '<span class="badge bg-danger"> Chưa đánh giá </span>';
+                                                } else {
+                                                    echo '<span class="badge bg-success"> Đã đánh giá </span>';
+                                                }
+                                            ?>
                                         </span>
                                     </p>
                                 </div>
@@ -296,46 +323,86 @@
                                 </tbody>
                             </table>
 
-                        </div>
-                        <hr class="border border-secondary border-1 opacity-50">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3 class="mt-5 fs-2 fw-bold text-secondary">
-                                    Đánh giá tổng thể kế hoạch
-                                </h3>
+                            <hr class="border border-secondary border-1 my-5 opacity-50">
 
-                                <form class="form-evaluate" action="" method="POST">
-                                    <div class="mb-3 d-flex align-items-center">
-                                        <label for="exampleInputEmail1" class="form-label">Đánh giá mức độ: </label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="evaluate" value="Đạt" id="dat" checked>
-                                            <label class="form-check-label" for="dat">
-                                                Đạt
-                                            </label>
+                            <?php if(!empty($ketquadanhgia)) { ?>
+                                <table id="evaluate-detail-table-list-staff" class="table table-bordered display evaluate-detail-content__table-staff">
+                                    <caption class="mt-4 text-center">
+                                        Kết quả đánh giá kế hoạch
+                                    </caption>
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Người đánh giá</th>
+                                            <th scope="col">Bộ phận</th>
+                                            <th scope="col">
+                                                Chức vụ
+                                            </th>
+                                            <th scope="col">
+                                                Kết quả đánh giá
+                                            </th>
+                                            <th scope="col">
+                                                Mô tả chi tiết
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        <?php foreach ($ketquadanhgia as $item) {?>
+                                            <tr>
+                                                <th><?= $item['hoten'] ?></th>
+                                                <th><?= $item['tenbophan'] ?></th>
+                                                <td><?= $item['tenchucvu'] ?></td>
+                                                <td><?= $item['ketqua'] ?></td>
+                                                <td><?= $item['noi_dung_chi_tiet'] ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                                
+
+                            <?php }?>
+
+                        </div>
+                        
+
+                        <?php if($macv == 'C2' || $macv == 'C3') { ?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="mt-5 fs-2 fw-bold text-secondary">
+                                        Đánh giá tổng thể kế hoạch
+                                    </h3>
+
+                                    <form class="form-evaluate" action="" method="POST">
+                                        <div class="mb-3 d-flex align-items-center">
+                                            <label for="exampleInputEmail1" class="form-label">Đánh giá mức độ: </label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="evaluate" value="Đạt" id="dat" checked>
+                                                <label class="form-check-label" for="dat">
+                                                    Đạt
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="evaluate" value="Chưa đạt" id="chuadat">
+                                                <label class="form-check-label" for="chuadat">
+                                                    Chưa đạt
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="evaluate" value="Không đạt" id="khongdat">
+                                                <label class="form-check-label" for="khongdat">
+                                                    Không đạt
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="evaluate" value="Chưa đạt" id="chuadat">
-                                            <label class="form-check-label" for="chuadat">
-                                                Chưa đạt
-                                            </label>
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">Đánh giá chi tiết</label>
+                                            <textarea name="evaluate-detail" id="" cols="30" rows="10" class="form-control mt-3"></textarea>
+                                            <span class="form-text"></span>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="evaluate" value="Không đạt" id="khongdat">
-                                            <label class="form-check-label" for="khongdat">
-                                                Không đạt
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Đánh giá chi tiết</label>
-                                        <textarea name="evaluate-detail" id="" cols="30" rows="10" class="form-control mt-3"></textarea>
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <button type="submit" name="evaluate-submit" value="submit" class="btn btn-lg btn-primary">Xác nhận</button>
-                                </form>
+                                        <button type="submit" name="evaluate-submit" value="submit" class="btn btn-lg btn-primary">Xác nhận</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-
+                        <?php } ?>
                     </div>
                 </div>
             </div>

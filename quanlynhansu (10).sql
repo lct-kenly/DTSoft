@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 09:04 PM
+-- Generation Time: May 17, 2023 at 06:27 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -77,8 +77,8 @@ CREATE TABLE `chitietkehoach` (
   `manhanvien` varchar(10) NOT NULL COMMENT 'mã số nhân viên nhận kế hoạch',
   `machitieu` varchar(10) NOT NULL COMMENT 'mã số chỉ tiêu trong kế hoạch đó ',
   `level` varchar(5) NOT NULL COMMENT 'cấp bậc chỉnh sửa',
-  `chitieucandat` int(10) NOT NULL COMMENT 'chỉ tiều cần đạt được trong kế hoạch',
-  `chitieudatduoc` int(10) NOT NULL COMMENT 'chỉ tiêu đạt được sau khi kết thúc kế hoạch'
+  `chitieucandat` int(11) NOT NULL COMMENT 'chỉ tiều cần đạt được trong kế hoạch',
+  `chitieudatduoc` int(11) NOT NULL COMMENT 'chỉ tiêu đạt được sau khi kết thúc kế hoạch'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -86,24 +86,27 @@ CREATE TABLE `chitietkehoach` (
 --
 
 INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `chitieucandat`, `chitieudatduoc`) VALUES
-('KH002', 'NV1', 'CT01', '2', 5415455, 0),
-('KH002', 'NV1', 'CT02', '2', 55451, 0),
-('KH002', 'NV1', 'CT03', '2', 5454561, 0),
-('KH002', 'NV2', 'CT01', '1', 5415455, 0),
-('KH002', 'NV2', 'CT02', '1', 55451, 0),
-('KH002', 'NV2', 'CT03', '1', 5454561, 0),
-('KH002', 'NV3', 'CT01', '1', 5415455, 0),
-('KH002', 'NV3', 'CT02', '1', 55451, 0),
-('KH002', 'NV3', 'CT03', '1', 5454561, 0),
-('KH01', 'NV1', 'CT01', '2', 700000000, 0),
-('KH01', 'NV1', 'CT02', '1', 250, 0),
-('KH01', 'NV1', 'CT03', '2', 700000000, 0),
 ('KH01', 'NV2', 'CT01', '1', 700000000, 0),
 ('KH01', 'NV2', 'CT02', '1', 250, 0),
 ('KH01', 'NV2', 'CT03', '2', 700000000, 0),
-('KH01', 'NV3', 'CT01', '', 700000000, 0),
-('KH01', 'NV3', 'CT02', '', 250, 0),
-('KH01', 'NV3', 'CT03', '', 700000000, 0);
+('KH03', 'NV005', 'CT01', '', 700000000, 0),
+('KH03', 'NV005', 'CT02', '', 250, 0),
+('KH03', 'NV005', 'CT03', '', 700000000, 0),
+('KH03', 'NV1', 'CT01', '2', 700000000, 0),
+('KH03', 'NV1', 'CT02', '2', 250, 0),
+('KH03', 'NV1', 'CT03', '2', 700000000, 0),
+('KH04', 'NV1', 'CT01', '2', 70000000, 0),
+('KH04', 'NV1', 'CT02', '2', 250, 0),
+('KH04', 'NV1', 'CT03', '2', 700000000, 0),
+('KH04', 'NV2', 'CT01', '1', 70000000, 0),
+('KH04', 'NV2', 'CT02', '1', 250, 0),
+('KH04', 'NV2', 'CT03', '1', 700000000, 0),
+('KH04', 'NV3', 'CT01', '1', 70000000, 0),
+('KH04', 'NV3', 'CT02', '1', 250, 0),
+('KH04', 'NV3', 'CT03', '1', 700000000, 0),
+('KH04', 'NV4', 'CT01', '1', 70000000, 0),
+('KH04', 'NV4', 'CT02', '1', 250, 0),
+('KH04', 'NV4', 'CT03', '1', 700000000, 0);
 
 -- --------------------------------------------------------
 
@@ -181,24 +184,19 @@ INSERT INTO `congviec` (`macongviec`, `tencongviec`, `motacongviec`) VALUES
 --
 
 CREATE TABLE `danhgiakehoach` (
-  `madanhgia` varchar(10) NOT NULL COMMENT 'mã số đánh giá kế hoạch',
   `makehoach` varchar(10) NOT NULL,
-  `nguoi_danh_gia` varchar(10) NOT NULL COMMENT 'tình trạng đánh giá của trưởng phòng ',
+  `nguoi_danh_gia` varchar(10) NOT NULL,
   `ketqua` varchar(100) NOT NULL,
-  `noi_dung_chi_tiet` varchar(255) NOT NULL COMMENT 'tình trạng đánh giá của giám đốc'
+  `noi_dung_chi_tiet` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `danhgiakehoach`
 --
 
-INSERT INTO `danhgiakehoach` (`madanhgia`, `ketquadanhgia`, `truongphong`, `giamdoc`) VALUES
-('DG01', 'Đạt', 'Đạt', 'Đạt'),
-('DG02', 'Đạt', 'Đạt', 'Đạt'),
-('DG03', 'Đạt', 'Đạt', 'Đạt'),
-('DG04', 'Đạt', 'Chưa đạt', 'Chưa đạt'),
-('DG05', 'Chưa đạt', 'Chưa đạt', 'Chưa đạt'),
-('DG06', 'Đạt', 'Đạt', 'Chưa đạt');
+INSERT INTO `danhgiakehoach` (`makehoach`, `nguoi_danh_gia`, `ketqua`, `noi_dung_chi_tiet`) VALUES
+('KH01', 'NV1', 'Chưa đạt', ''),
+('KH04', 'NV1', 'Không đạt', '');
 
 -- --------------------------------------------------------
 
@@ -222,8 +220,9 @@ CREATE TABLE `kehoachgiaoviec` (
 --
 
 INSERT INTO `kehoachgiaoviec` (`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `makhuvuc`, `mabophan`) VALUES
-('KH002', 'MO TA', '2023-01-15', '2023-05-15', '2023-05-15', 'Đang thực hiện', 'CT', 'KD001'),
-('KH01', 'Kế hoạch phòng Kinh doanh 0011                                                                                       ', '2023-01-01', '2023-12-31', '2023-12-31', 'Đã hoàn thành', 'CT', 'KD001');
+('KH01', '                                                                        Kế hoạch phòng Kinh doanh 0011                                                                                                                                                       ', '2023-01-01', '2023-05-16', '2023-12-31', 'Đã hoàn thành', 'CT', 'KD001'),
+('KH03', 'MO TA', '2023-01-01', '2023-12-31', '2023-12-31', 'Đang thực hiện', 'CT', 'KD001'),
+('KH04', 'MO TA', '2023-05-16', '2023-05-16', '2023-05-16', 'Đang thực hiện', 'CT', 'KD001');
 
 -- --------------------------------------------------------
 
@@ -270,6 +269,7 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manhanvien`, `hoten`, `ngaysinh`, `gioitinh`, `noisinh`, `dantoc`, `quequan`, `sodienthoai`, `hinhanh`, `macongviec`, `mabophan`) VALUES
+('NV005', 'NGUYEN VAN A', '2023-05-16', 'Nam', '', 'KINH', 'CT', '0123456789', 'hp-eliteone-870-g9-aio-i7-76n72pa-3.jpg', 'CV1', 'KD001'),
 ('NV1', 'Trần Văn A', '2000-02-20', 'Nam', 'Cần Thơ', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV1', 'KD001'),
 ('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV4', 'KD001'),
 ('NV3', 'Trần Văn C', '2000-03-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV5', 'KD001'),
@@ -296,10 +296,11 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `trangthai`) VALUES
-(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123456', 2, 'hoạt động'),
+(13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 3, 'hoạt động'),
 (14, 'NV2', 'truongphong', 'truongphong@gmail.com', '123', 2, 'hoạt động'),
 (15, 'NV3', 'ketoan', 'ketoan@gmail.com', '123', 1, 'hoạt động'),
-(16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động');
+(16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động'),
+(24, 'NV005', 'KD001-NV005', 'KD001-NV005@gmail.com', '123456', 1, '');
 
 -- --------------------------------------------------------
 
@@ -320,15 +321,6 @@ CREATE TABLE `theodoikehoach` (
 --
 
 INSERT INTO `theodoikehoach` (`makehoach`, `manhanvien`, `machitieu`, `thang`, `chitieuthangdatduoc`) VALUES
-('KH01', 'NV1', 'CT01', '1', '50000000'),
-('KH01', 'NV1', 'CT01', '2', '60000000'),
-('KH01', 'NV1', 'CT01', '3', '50000000'),
-('KH01', 'NV1', 'CT02', '1', '20'),
-('KH01', 'NV1', 'CT02', '2', '30'),
-('KH01', 'NV1', 'CT02', '3', '25'),
-('KH01', 'NV1', 'CT03', '1', '50000000'),
-('KH01', 'NV1', 'CT03', '2', '60000000'),
-('KH01', 'NV1', 'CT03', '3', '70000000'),
 ('KH01', 'NV2', 'CT01', '1', '50000000'),
 ('KH01', 'NV2', 'CT01', '2', '60000000'),
 ('KH01', 'NV2', 'CT01', '3', '50000000'),
@@ -357,7 +349,8 @@ CREATE TABLE `thoigiannhanchuc` (
 --
 
 INSERT INTO `thoigiannhanchuc` (`manhanvien`, `machucvu`, `thoigianbatdau`, `thoigianketthuc`) VALUES
-('NV1', 'C1', '2023-01-01', '0000-00-00'),
+('NV005', 'C1', '2023-05-16', '0000-00-00'),
+('NV1', 'C3', '2023-01-01', '0000-00-00'),
 ('NV2', 'C2', '2023-02-01', '0000-00-00'),
 ('NV3', 'C3', '2023-06-01', '0000-00-00'),
 ('NV4', 'C3', '2023-06-01', '0000-00-00');
@@ -409,8 +402,7 @@ ALTER TABLE `congviec`
 -- Indexes for table `danhgiakehoach`
 --
 ALTER TABLE `danhgiakehoach`
-  ADD PRIMARY KEY (`madanhgia`,`makehoach`,`nguoi_danh_gia`),
-  ADD KEY `makehoach` (`makehoach`),
+  ADD PRIMARY KEY (`makehoach`,`nguoi_danh_gia`) USING BTREE,
   ADD KEY `nguoi_danh_gia` (`nguoi_danh_gia`);
 
 --
@@ -466,7 +458,7 @@ ALTER TABLE `thoigiannhanchuc`
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
