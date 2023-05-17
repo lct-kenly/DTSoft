@@ -28,20 +28,16 @@ if (isset($_POST['button_save'])) {
 
 
     if (isset($_FILES['image'])) {
-        $file = $_FILES['image'];
-        $filename1 = "AVT_" . $_SESSION["staff-fix"] . ".png";   //$file['name']; // Lấy tên file ảnh
-        $filetmp = $file['tmp_name']; // Đường dẫn tạm thời của file
-        $destination = '../asset/img/' . $filename1; // Đường dẫn lưu trữ file
+        $avatar = $_FILES["image"]["name"];
+        $tempname = $_FILES["image"]["tmp_name"];
+        $folder = "../asset/img/" . $avatar;
 
-        // Di chuyển file ảnh vào thư mục lưu trữ
-        move_uploaded_file($filetmp, $destination);
-
-        //echo "File ảnh đã được tải lên thành công!";
+		move_uploaded_file($tempname ,$folder);
     }
 
     $sdt = $_POST['staffPhone'];
 
-    $sql_update = "UPDATE `nhanvien` SET `sodienthoai`='" . $sdt . "', `hinhanh`='" . $filename1 . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
+    $sql_update = "UPDATE `nhanvien` SET `sodienthoai`='" . $sdt . "', `hinhanh`='" . $avatar . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
     //echo $sql_update;
 
     $result_update = mysqli_query($ketnoi, $sql_update);
