@@ -41,6 +41,9 @@ if (isset($_POST['button_save'])) {
     //echo $sql_update;
 
     $result_update = mysqli_query($ketnoi, $sql_update);
+
+    $profile['hinh_anh'] = $avatar;
+
     echo "<script>";
     if ($result_update) {
         echo "alert(\"Cập nhật thành công\");";
