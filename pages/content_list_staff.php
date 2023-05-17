@@ -94,13 +94,12 @@ $result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
                                                         " . $row_list_staff['quequan'] . "
                                                     </p>
                                                 </div>
+
+                                            
                                             </div>
                                         </div>";
                         }
                         ?>
-
-
-
                     </div>
                 </div>
             </div>

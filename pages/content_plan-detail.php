@@ -245,11 +245,19 @@ if ($makehoach) {
         $manhanvien = isset($_POST['manhanvien']) ? $_POST['manhanvien'] : '';
 
         if (!empty($manhanvien)) {
-            $sql = "DELETE FROM `chitietkehoach` WHERE makehoach = '{$makehoach}' AND manhanvien = '{$manhanvien}'";
+            $sql_delete_chi_tiet_ke_hoach = "DELETE FROM `chitietkehoach` WHERE makehoach = '{$makehoach}' AND manhanvien = '{$manhanvien}'";
 
-            if ($conn->query($sql)) {
-                echo '<script> alert("Xóa nhân viên khỏi kế hoạch thành công!"); </script>';
-                header("Refresh:0");
+            if ($conn->query($sql_delete_chi_tiet_ke_hoach)) {
+
+                $sql_delete_theo_doi_ke_hoach = "DELETE FROM `theodoikehoach` WHERE makehoach = '{$makehoach}' AND manhanvien = '{$manhanvien}'";
+
+                if($conn->query($sql_delete_theo_doi_ke_hoach)) {
+                    echo '<script> alert("Xóa nhân viên khỏi kế hoạch thành công!"); </script>';
+                    header("Refresh:0");
+                } else {
+                    echo '<script> alert("Có lỗi xảy ra, vui lòng thử lại!"); </script>';
+                }
+                
             } else {
                 echo '<script> alert("Có lỗi xảy ra, vui lòng thử lại!"); </script>';
             }

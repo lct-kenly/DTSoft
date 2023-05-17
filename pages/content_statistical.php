@@ -25,72 +25,61 @@ if (!isset($_SESSION['username'])) {
     <!-- DataTables plugins jquery -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 
-        <title>Quan Ly Nhan Su</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="container-fluid p-0">
-                <!-- Thống kê level trưởng phòng -->
-                <div class="statistical-manager-content">
-                    <div class="row m-0">
-                        <div class="col-md-12">
-                            <div class="statistical-manager-content__header">
-                                <h2 class="header__title ms-0">
-                                    Thống kê danh sách nhân viên
-                                </h2>
+    <!-- Styles Css -->
+    <link rel="stylesheet" href="../asset/styles/reset.css" />
+    <link rel="stylesheet" href="../asset/styles/base.css" />
+    <link rel="stylesheet" href="../asset/styles/style_content_statistical.css" />
+
+    <title>Quan Ly Nhan Su</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container-fluid p-0">
+            <!-- Thống kê level trưởng phòng -->
+            <div class="statistical-manager-content">
+                <div class="row m-0">
+                    <div class="col-md-12">
+                        <div class="statistical-manager-content__header">
+                            <h2 class="header__title ms-0">
+                                Thống kê danh sách nhân viên
+                            </h2>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <label for="khuvuc" class="fs-4 fw-bold mb-4">Khu vực</label>
+                                <select class="statistical-manager-content__filter form-select" aria-label="Default select example" id="makhuvuc">
+                                    <option selected value="ALL">
+                                        ------ Khu vực -----
+                                    </option>
+                                    <?php
+                                    $res = $conn->query("SELECT * FROM khuvuc WHERE 1");
+                                    while ($row = mysqli_fetch_array($res)) {
+                                    ?>
+                                        <option value="<?php echo $row['makhuvuc'] ?>"><?php echo $row['tenkhuvuc']; ?></option>
+                                    <?php  } ?>
+                                </select>
                             </div>
 
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <label for="khuvuc" class="fs-4 fw-bold mb-4">Khu vực</label>
-                                    <select
-                                        class="statistical-manager-content__filter form-select"
-                                        aria-label="Default select example"
-                                        id="khuvuc"
-                                    >
-                                        <option selected value="ALL">
-                                            ------ Khu vực -----
-                                        </option>
-                                        <option value="Đạt">Cần Thơ</option>
-                                        <option value="Chưa đạt">
-                                            Nha Trang
-                                        </option>
-                                    </select>
-                                </div>
+                            <div>
+                                <label for="khuvuc" class="fs-4 fw-bold mb-4">Bộ phận</label>
+                                <select class="statistical-manager-content__filter form-select" aria-label="Default select example" name="mabophan" id="mabophan">
 
-                                <div>
-                                    <label for="khuvuc" class="fs-4 fw-bold mb-4">Bộ phận</label>
-                                    <select
-                                        class="statistical-manager-content__filter form-select"
-                                        aria-label="Default select example"
-                                        id="bophan"
-                                    >
-                                        <option selected value="ALL">
-                                            ------ Bộ phận -----
-                                        </option>
-                                        <option value="Đạt">Đạt kết quả</option>
-                                        <option value="Chưa đạt">
-                                            Chưa đạt kết quả
-                                        </option>
-                                    </select>
-                                </div>
-                                
-                                <div>
-                                    <label for="khuvuc" class="fs-4 fw-bold mb-4">Trạng thái</label>
-                                    <select
-                                        class="statistical-manager-content__filter form-select"
-                                        aria-label="Default select example"
-                                        id="select-statistical"
-                                    >
-                                        <option selected value="ALL">
-                                            ------ Tất cả -----
-                                        </option>
-                                        <option value="Đạt">Đạt kết quả</option>
-                                        <option value="Chưa đạt">
-                                            Chưa đạt kết quả
-                                        </option>
-                                    </select>
-                                </div>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="khuvuc" class="fs-4 fw-bold mb-4">Trạng thái</label>
+                                <select class="statistical-manager-content__filter form-select" aria-label="Default select example" id="select-statistical">
+                                    <option selected value="ALL">
+                                        ------ Tất cả -----
+                                    </option>
+                                    <option value="Đạt">Đạt kết quả</option>
+                                    <option value="Chưa đạt">
+                                        Chưa đạt kết quả
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
@@ -170,8 +159,6 @@ if (!isset($_SESSION['username'])) {
     });
 
 
-        var bodyTable = document.querySelector(".statistical-manager-content__table-staff tbody");
-        var selectBox = document.querySelector("#select-statistical");
 
 
 
@@ -216,10 +203,10 @@ if (!isset($_SESSION['username'])) {
 
 
 
-    var bodyTable = document.querySelector(
+    const bodyTable = document.querySelector(
         ".statistical-manager-content__table-staff tbody"
     );
-    var selectBox = document.querySelector(
+    const selectBox = document.querySelector(
         "#select-statistical"
     );
 

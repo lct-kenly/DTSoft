@@ -79,3 +79,57 @@
 table.dataTable thead th {
     text-align: center;
 }
+
+.form-evaluate {
+    margin-top: 32px;
+}
+
+.form-evaluate .form-label {
+    margin-right: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #464545;
+}
+
+.form-evaluate .form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-evaluate .form-check-input {
+    display: none;
+}
+
+.form-evaluate .form-check-label {
+    margin-right: .4rem;
+    padding: 6px 12px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #333;
+    border: 1.5px solid #eee;
+    border-radius: 2px;
+    transition: all .2s linear;
+}
+
+.form-evaluate .form-check-label:hover {
+    cursor: pointer;
+}
+
+
+.form-evaluate .form-check-input:checked ~ .form-check-label {
+    color: #fff;
+    background-color: #0d9488;
+    border-color: #0d9488;
+}
+
+.form-evaluate #chuadat.form-check-input:checked ~ .form-check-label {
+    color: #fff;
+    background-color: #d97706;
+    border-color: #d97706;
+}
+
+.form-evaluate #khongdat.form-check-input:checked ~ .form-check-label {
+    color: #fff;
+    background-color: #dc2626;
+    border-color: #dc2626;
+}

@@ -218,7 +218,7 @@ if (isset($_POST['button_save'])) {
 
 
                             <div class="content__staff-img">
-                                <img src=".../asset/img/<?= $row_result_info['hinhanh'] ?>" alt="avatar" />
+                                <img src="../asset/img/<?= $row_result_info['hinhanh'] ?>" alt="avatar" />
                             </div>
 
                             <div class="content__staff-img">
