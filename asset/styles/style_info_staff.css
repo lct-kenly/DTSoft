@@ -62,3 +62,37 @@ body {
     right: 4px;
     bottom: 0;
 }
+
+.staff-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.upload-avatar {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.upload-avatar input {
+    display: none;
+}
+
+.upload-avatar label {
+    padding: 8px 24px;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    transition: all .2s linear;
+    cursor: pointer;
+}
+
+.upload-avatar label i {
+    margin-right: 6px;
+}
+
+.upload-avatar label:hover {
+    color: #fff;
+    background-color: var(--primary-color);
+}

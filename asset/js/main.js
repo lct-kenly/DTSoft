@@ -65,3 +65,28 @@ const changeContent = () => {
 }
 
 changeContent();
+
+
+//upload file image
+function uploadFile(inputFile, grid) {
+    // Khởi tạo đối tượng FileReader
+    const reader = new FileReader();
+
+    // Lắng nghe trạng thái đăng tải tệp
+    inputFile.addEventListener("change", (event) => {
+        // Lấy thông tin tập tin được đăng tải
+        const files = event.target.files;
+
+        // Đọc thông tin tập tin đã được đăng tải
+        reader.readAsDataURL(files[0]);
+
+        const getSizeImage = files[0].size;
+
+        reader.addEventListener("load", (event) => {
+            // Lấy chuỗi Binary thông tin hình ảnh
+            const img = grid.querySelector('img');
+
+            img.setAttribute("src", event.target.result);
+        })
+    })
+}

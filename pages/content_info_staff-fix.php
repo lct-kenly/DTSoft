@@ -14,6 +14,7 @@ $info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkh
                     and bophan.makhuvuc = khuvuc.makhuvuc
                     and nhanvien.manhanvien = taikhoan.manv
                     and nhanvien.manhanvien = '" . $_SESSION["staff-fix"] . "' ";
+
 $result_info = mysqli_query($ketnoi, $info);
 $row_result_info = mysqli_fetch_array($result_info);
 
@@ -31,22 +32,19 @@ if (isset($_POST['button_delete'])) {
     $sql_delete = "DELETE FROM nhanvien WHERE manhanvien = '" . $_SESSION["staff-fix"] . "'";
     $result_delete = mysqli_query($ketnoi, $sql_delete);
     unset($_SESSION["staff-fix"]);
-    header('Location: content_info_staff.php');
+    echo '<script> alert("Xóa thông tin nhân viên thành công!"); </script>';
+    header('Location: content_list_staff.php');
 }
 
 if (isset($_POST['button_save'])) {
 
 
     if (isset($_FILES['image'])) {
-        $file = $_FILES['image'];
-        $filename1 = "AVT_" . $_SESSION["staff-fix"] . ".png";   //$file['name']; // Lấy tên file ảnh
-        $filetmp = $file['tmp_name']; // Đường dẫn tạm thời của file
-        $destination = '.../asset/img/' . $filename1; // Đường dẫn lưu trữ file
+        $avatar = $_FILES["image"]["name"];
+        $tempname = $_FILES["image"]["tmp_name"];
+        $folder = "../asset/img/" . $avatar;
 
-        // Di chuyển file ảnh vào thư mục lưu trữ
-        move_uploaded_file($filetmp, $destination);
-
-        //echo "File ảnh đã được tải lên thành công!";
+		move_uploaded_file($tempname ,$folder);
     }
 
 
@@ -72,11 +70,13 @@ if (isset($_POST['button_save'])) {
     // }
 
 
-    $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $filename1 . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
+    $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $avatar . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
     //echo $sql_update;
 
     $result_update = mysqli_query($ketnoi, $sql_update);
-    header('Location: content_info_staff-fix.php?manv=' . $_SESSION["staff-fix"]);
+
+    echo '<script> alert("Cập nhật thông tin nhân viên thành công!"); </script>';
+    header("Refresh:0");
 }
 
 
@@ -126,153 +126,188 @@ if (isset($_POST['button_save'])) {
             <div class="row header">
                 <h2 class="header__title">Thông tin nhân viên</h2>
             </div>
-            <div class="row main">
+            <div class="row">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <div class="col-md-12">
-                        <div class="content p-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="content p-4">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="content__staff-info">
-                                        <h3 class="staff__info-title">Mã nhân viên:</h3>
-                                        <p class="staff__info-desc" name="staffID"><?= $row_result_info["manhanvien"] ?> </p>
+                                <div class="row">
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Mã nhân viên:</label>
+                                            <input type="text" class="form-control fs-5" readonly disabled value="<?= $row_result_info["manhanvien"] ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Họ tên:</label>
+                                            <input type="text" class="form-control fs-5" name="staffName" value="<?= $row_result_info["hoten"] ?>">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Phòng ban:</label>
+                                            <select class="form-select fs-5" name="staffDepartment">
+                                                <option selected value="<?= $row_result_info["mabophan"] ?>"><?= $row_result_info["mabophan"] ?> - <?= $row_result_info["tenbophan"] ?></option>
+                                                <?php
+                                                while ($row_select_department = mysqli_fetch_array($result_select_department)) {
+                                                    echo "<option value=\"" . $row_select_department["mabophan"] . "\">" . $row_select_department["mabophan"] . " - " . $row_select_department["tenbophan"] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Chức vụ:</label>
+                                            <select class="form-select fs-5" name="staffPosition">
+                                                <option selected value="<?= $row_result_info["machucvu"] ?>"><?= $row_result_info["machucvu"] ?> - <?= $row_result_info["tenchucvu"] ?></option>
+                                                <?php
+                                                while ($row_select_position = mysqli_fetch_array($result_select_position)) {
+                                                    echo "<option value=\"" . $row_select_position["machucvu"] . "\">" . $row_select_position["machucvu"] . " - " . $row_select_position["tenchucvu"] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Khu vực:</label>
+                                            <select class="form-select fs-5" name="staffArea">
+                                                <option selected value="<?= $row_result_info["makhuvuc"] ?>"><?= $row_result_info["makhuvuc"] ?> - <?= $row_result_info["tenkhuvuc"] ?></option>
+                                                <?php
+                                                while ($row_select_area = mysqli_fetch_array($result_select_area)) {
+                                                    echo "<option value=\"" . $row_select_area["makhuvuc"] . "\">" . $row_select_area["makhuvuc"] . " - " . $row_select_area["tenkhuvuc"] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Ngày sinh:</label>
+                                            <input type="date" class="form-control fs-5" name="staffDateofBirth" value="<?= $row_result_info["ngaysinh"] ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Giới tính:</label>
+                                            <select class="form-select fs-5" name="staffSexual">
+                                                <option selected><?= $row_result_info["gioitinh"] ?></option>
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">
+                                                Số điện thoại:
+                                            </label>
+                                            <input type="text" class="form-control fs-5" name="staffPhone" value="<?= $row_result_info["sodienthoai"] ?>">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <h3 class="form-label fs-5 fw-bold">Email:</h3>
+                                            <input type="text" class="form-control fs-5" name="staffEmail" value="<?= $row_result_info["email"] ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <h3 class="form-label fs-5 fw-bold">Tài khoản:</h3>
+                                            <input type="text" class="form-control fs-5" name="staffUser" value="<?= $row_result_info["tentk"] ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <h3 class="form-label fs-5 fw-bold">Mật khẩu:</h3>
+                                            <div class="d-inline position-relative">
+                                                <input type="password" id="password" name="staffPassword" style="background-color: white;" class="form-control fs-5" value="<?= $row_result_info["matkhau"] ?>">
+                                                <span class="btn-show-password fs-5" style="top: 30%"><i class="fa-regular fa-eye"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary fs-4 me-4" name="button_save">Lưu thông tin</button>
+                                            <button class="btn btn-outline-danger fs-4" name="button_delete">Xóa nhân viên</button>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="col-md-6">
-                                <div class="content__staff-info">
-                                        <h3 class="staff__info-title">Họ tên:</h3>
-                                        <input type="text" class="staff__info-desc form-control" name="staffName" value="<?= $row_result_info["hoten"] ?>">
-
-                                    </div>
+                        <div class="col-md-4">
+                            <div class="content p-4">
+                                <div class="text-center grid-image">
+                                    <img src="../asset/img/<?= $row_result_info['hinhanh'] ?>" alt="avatar" class="staff-avatar" />
                                 </div>
-                            </div>
 
-
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Phòng ban:</h3>
-                                <select class="staff__info-desc" name="staffDepartment">
-                                    <option selected value="<?= $row_result_info["mabophan"] ?>"><?= $row_result_info["mabophan"] ?> - <?= $row_result_info["tenbophan"] ?></option>
-                                    <?php
-                                    while ($row_select_department = mysqli_fetch_array($result_select_department)) {
-                                        echo "<option value=\"" . $row_select_department["mabophan"] . "\">" . $row_select_department["mabophan"] . " - " . $row_select_department["tenbophan"] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Chức vụ:</h3>
-                                <select class="staff__info-desc" name="staffPosition">
-                                    <option selected value="<?= $row_result_info["machucvu"] ?>"><?= $row_result_info["machucvu"] ?> - <?= $row_result_info["tenchucvu"] ?></option>
-                                    <?php
-                                    while ($row_select_position = mysqli_fetch_array($result_select_position)) {
-                                        echo "<option value=\"" . $row_select_position["machucvu"] . "\">" . $row_select_position["machucvu"] . " - " . $row_select_position["tenchucvu"] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Khu vực:</h3>
-                                <select class="staff__info-desc" name="staffArea">
-                                    <option selected value="<?= $row_result_info["makhuvuc"] ?>"><?= $row_result_info["makhuvuc"] ?> - <?= $row_result_info["tenkhuvuc"] ?></option>
-                                    <?php
-                                    while ($row_select_area = mysqli_fetch_array($result_select_area)) {
-                                        echo "<option value=\"" . $row_select_area["makhuvuc"] . "\">" . $row_select_area["makhuvuc"] . " - " . $row_select_area["tenkhuvuc"] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Ngày sinh:</h3>
-                                <input type="date" class="staff__info-desc" name="staffDateofBirth" value="<?= $row_result_info["ngaysinh"] ?>">
-
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Giới tính:</h3>
-                                <select class="staff__info-desc" name="staffSexual">
-                                    <option selected><?= $row_result_info["gioitinh"] ?></option>
-                                    <option value="Nam">Nam</option>
-                                    <option value="Nữ">Nữ</option>
-                                </select>
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">
-                                    Số điện thoại:
-                                </h3>
-                                <input type="text" class="staff__info-desc" name="staffPhone" value="<?= $row_result_info["sodienthoai"] ?>">
-
+                                <div class="upload-avatar">
+                                    <label for="avatar"><i class="fa-solid fa-upload"></i> Upload Image</label>
+                                    <input id="avatar" type="file" name="image" />
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="content p-4">
 
 
-                            <div class="content__staff-img">
-                                <img src="../asset/img/<?= $row_result_info['hinhanh'] ?>" alt="avatar" />
-                            </div>
-
-                            <div class="content__staff-img">
-                                <input type="file" name="image" />
-                            </div>
-
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Email:</h3>
-                                <input type="text" class="staff__info-desc" name="staffEmail" value="<?= $row_result_info["email"] ?>">
-
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Tài khoản:</h3>
-                                <input type="text" class="staff__info-desc" name="staffUser" value="<?= $row_result_info["tentk"] ?>">
-
-                            </div>
-
-                            <div class="content__staff-info">
-                                <h3 class="staff__info-title">Mật khẩu:</h3>
-                                <div class="d-inline position-relative">
-                                    <input type="password" id="password" name="staffPassword" style="background-color: white; border: none;" class="staff__info-desc" value="<?= $row_result_info["matkhau"] ?>">
-                                    <span class="btn-show-password"><i class="fa-regular fa-eye"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="mt-4">
-                                <button class="btn btn-primary fs-4 me-4" name="button_save">Lưu thông tin</button>
-                                <button class="btn btn-outline-danger fs-4" name="button_delete">Xóa nhân viên</button>
-                            </div>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
-</body>
 
-<script>
-    const btnShowPassword = document.querySelector('.btn-show-password');
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    btnShowPassword.onclick = function() {
-        const input = document.querySelector('input[id="password"]');
+    <!-- Bootstrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-        if (input.getAttribute('type') == 'password') {
-            input.setAttribute('type', 'text');
-            btnShowPassword.querySelector('i').className = 'fa-regular fa-eye-slash';
-        } else {
-            input.setAttribute('type', 'password')
-            btnShowPassword.querySelector('i').className = 'fa-regular fa-eye';
+    <!-- DataTables plugins jquery -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
+    <!-- Main JS -->
+    <script src="../asset/js/main.js"></script>
+
+    <script>
+        const btnShowPassword = document.querySelector('.btn-show-password');
+
+        btnShowPassword.onclick = function() {
+            const input = document.querySelector('input[id="password"]');
+
+            if (input.getAttribute('type') == 'password') {
+                input.setAttribute('type', 'text');
+                btnShowPassword.querySelector('i').className = 'fa-regular fa-eye-slash';
+            } else {
+                input.setAttribute('type', 'password')
+                btnShowPassword.querySelector('i').className = 'fa-regular fa-eye';
+
+            }
         }
-    }
-</script>
+    </script>
 
+    <script>
+        const inputFile =document.querySelector('input#avatar');
+        const gridImage = document.querySelector('.grid-image');
+
+        uploadFile(inputFile, gridImage);
+    </script>
+</body>
 </html>
