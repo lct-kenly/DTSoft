@@ -125,13 +125,13 @@ if(!isset($_SESSION['username'])) {
                             <div class="d-inline">
                                 <input
                                     type="password"
-                                    class="form-control mt-2"
+                                    class="form-control form__password mt-2"
                                     id="CurrentPassword"
                                     name="CurrentPassword"
                                     placeholder="Nhập mật khẩu hiện tại"
                                     value="<?php echo $current_password; ?>"
                                 />                            
-                                <span class="btn-show-password position-absolute" style="top: 56%; right: 8px;"><i class="fa-regular fa-eye"></i></span>
+                                <!-- <span class="btn-show-password position-absolute" style="top: 56%; right: 8px;"><i class="fa-regular fa-eye"></i></span> -->
                             </div>
                         </div>
 
@@ -140,14 +140,14 @@ if(!isset($_SESSION['username'])) {
                             <div class="d-inline">
                                 <input
                                     type="password"
-                                    class="form-control mt-2"
+                                    class="form-control form__password mt-2"
                                     id="NewPassword"
                                     name="NewPassword"
                                     placeholder="Nhập mật khẩu mới"
                                     value="<?php echo $new_password; ?>"
                                     
                                 />
-                                <span class="btn-show-password position-absolute" style="top: 56%; right: 8px;" ><i class="fa-regular fa-eye"></i></span>
+                                <!-- <span class="btn-show-password position-absolute" style="top: 56%; right: 8px;" ><i class="fa-regular fa-eye"></i></span> -->
                             </div>
                         </div>
 
@@ -158,13 +158,13 @@ if(!isset($_SESSION['username'])) {
                             <div class="d-inline">
                                 <input
                                     type="password"
-                                    class="form-control mt-2"
+                                    class="form-control form__password mt-2"
                                     id="ConfirmNewPassword"
                                     name="ConfirmNewPassword"
                                     placeholder="Nhập lại mật khẩu mới"
                                     value="<?php echo $confirm_new_password; ?>"
                                 />
-                                <span class="btn-show-password position-absolute" style="top: 32%; right: 8px;"><i class="fa-regular fa-eye"></i></span>
+                                <!-- <span class="btn-show-password position-absolute" style="top: 32%; right: 8px;"><i class="fa-regular fa-eye"></i></span> -->
                             </div>
                             <input type="hidden" name="manv_check" value="<?=$manv?>">
                         <button
