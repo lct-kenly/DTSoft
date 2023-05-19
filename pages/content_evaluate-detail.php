@@ -283,6 +283,10 @@
                                 </tbody>
                             </table>
 
+                            <div class="d-flex align-items-center justify-content-center" style="margin: 36px 0;">
+                                <p class="w-50 bg-dark border border-2"></p>
+                            </div>
+
                             <table id="evaluate-detail-table-list-staff" class="table table-bordered display evaluate-detail-content__table-staff">
                                 <caption class="mt-4 text-center">
                                     Danh sách nhân viên thuộc kế hoạch
@@ -323,7 +327,9 @@
                                 </tbody>
                             </table>
 
-                            <hr class="border border-secondary border-1 my-5 opacity-50">
+                            <div class="d-flex align-items-center justify-content-center" style="margin: 36px 0;">
+                                <p class="w-50 bg-dark border border-2"></p>
+                            </div>
 
                             <?php if(!empty($ketquadanhgia)) { ?>
                                 <table id="evaluate-detail-table-list-staff" class="table table-bordered display evaluate-detail-content__table-staff">
@@ -362,12 +368,16 @@
                             <?php }?>
 
                         </div>
+
+                        <div class="d-flex align-items-center justify-content-center" style="margin: 36px 0;">
+                            <p class="w-50 bg-dark border border-2"></p>
+                        </div>
                         
 
                         <?php if($macv == 'C2' || $macv == 'C3') { ?>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="mt-5 fs-2 fw-bold text-secondary">
+                                    <h3 class="fs-2 fw-bold text-secondary">
                                         Đánh giá tổng thể kế hoạch
                                     </h3>
 

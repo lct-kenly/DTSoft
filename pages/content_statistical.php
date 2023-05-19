@@ -195,14 +195,6 @@ if (!isset($_SESSION['username'])) {
 <script>
     var listStaff = [];
 
-
-
-
-
-
-
-
-
     const bodyTable = document.querySelector(
         ".statistical-manager-content__table-staff tbody"
     );

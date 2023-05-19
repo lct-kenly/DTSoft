@@ -15,6 +15,7 @@
 
     if($result_evaluate->num_rows > 0) {
         while($row = $result_evaluate->fetch_assoc()) {
+            
             $evaluates[] = $row;
         }  
     }

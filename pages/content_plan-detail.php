@@ -10,6 +10,7 @@ $makehoach = isset($_GET['makehoach']) ? $_GET['makehoach'] : 'KH01';
 $thongtinkehoach = array();
 $danhsachchitieu = array();
 $tongchitieudadat = array();
+$chi_tieu_nhan_vien_theo_thang = array();
 
 $danhsachmakhuvuc = get_all_db($conn, 'khuvuc');
 $danhsachmabophan = get_all_db($conn, 'bophan');
@@ -99,9 +100,6 @@ if ($makehoach) {
         $danhsachchitieu[] = $row;
     }
 
-    // print_r($danhsachchitieu);
-    // die();
-
 
     // Tổng đạt được của các chỉ tiêu
     $sql = "SELECT chitieu.tenchitieu, SUM(theodoikehoach.chitieuthangdatduoc) as TONGDATDUOC
@@ -113,6 +111,17 @@ if ($makehoach) {
 
     while ($row = $result->fetch_assoc()) {
         $tongchitieudadat[] = $row;
+    }
+
+    // Chỉ tiêu đạt được của nhân viên theo tháng
+    $sql = "SELECT nhanvien.manhanvien, nhanvien.hoten, chitieu.tenchitieu, theodoikehoach.thang, theodoikehoach.chitieuthangdatduoc
+            FROM nhanvien, theodoikehoach, chitieu
+            WHERE nhanvien.manhanvien = theodoikehoach.manhanvien AND theodoikehoach.machitieu = chitieu.machitieu AND theodoikehoach.makehoach = '{$makehoach}'";
+
+    $result = $conn->query($sql);
+
+    while ($row = $result->fetch_assoc()) {
+        $chi_tieu_nhan_vien_theo_thang[] = $row;
     }
 
 
@@ -302,7 +311,7 @@ if ($makehoach) {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="evaluate-detail-content__header">
-                            <h2 class="header__title">Chi tiết kế hoạch</h2>
+                            <h2 class="header__title ms-0">Chi tiết kế hoạch</h2>
                             <div class="row mt-4">
                                 <div class="col-md-4">
                                     <p class="fs-4">
@@ -375,6 +384,7 @@ if ($makehoach) {
                         </div>
 
                         <div class="evaluate-detail-content__body">
+                            <!-- Danh sách nhân viên thuộc kế hoạch -->
                             <table id="evaluate-detail-table-list-staff" class="table table-bordered display evaluate-detail-content__table-staff">
                                 <caption class="mt-4 text-center">
                                     Danh sách nhân viên thuộc kế hoạch
@@ -399,7 +409,7 @@ if ($makehoach) {
 
 
                                             <?php foreach ($danhsachchitieunhanvien as $chitieu) { ?>
-                                                <td><?= $chitieu['chitieucandat'] ?></td>
+                                                <td><?= number_format($chitieu['chitieucandat'], 0, ',', '.') ?></td>
                                             <?php } ?>
 
                                             <td>
@@ -427,15 +437,54 @@ if ($makehoach) {
                                         </th>
                                         <?php foreach ($danhsachchitieu as $item) { ?>
                                             <th class="fw-bold text-center">
-                                                <?= $item['TONGCHITIEU'] ?>
+                                                <?= number_format($item['TONGCHITIEU'], 0, ',', '.') ?>
                                             </th>
                                         <?php } ?>
                                     </tr>
 
                                 </tfoot>
                             </table>
+                            <!-- / Danh sách nhân viên thuộc kế hoạch -->
 
-                            <div class="row my-4">
+                            <div class="d-flex align-items-center justify-content-center" style="margin: 36px 0;">
+                                <p class="w-50 bg-dark border border-2"></p>
+                            </div>
+
+                            <!-- Chỉ tiêu đạt được của nhân viên theo từng tháng -->
+                            <div>
+                                <table id="chitieunhanvientheothang" class="table table-bordered display evaluate-detail-content__table-staff">
+                                    <caption class="mt-4 text-center">
+                                        Chỉ tiêu đạt được của nhân viên theo từng tháng
+                                    </caption>
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Mã nhân viên</th>
+                                            <th scope="col">Tên nhân viên</th>
+                                            <th scope="col">Tên chỉ tiêu</th>
+                                            <th scope="col">Tháng</th>
+                                            <th scope="col">Chỉ tiêu đạt được trong tháng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        <?php foreach ($chi_tieu_nhan_vien_theo_thang as $item) { ?>
+                                            <tr>
+                                                <th><?= $item['manhanvien'] ?></th>
+                                                <th><?= $item['hoten'] ?></th>
+                                                <th><?= $item['tenchitieu'] ?></th>
+                                                <th><?= $item['thang'] ?></th>
+                                                <th><?= number_format($item['chitieuthangdatduoc'], 0, ',', '.') ?></th>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- / Chỉ tiêu đạt được của nhân viên theo từng tháng -->
+
+                            <div class="d-flex align-items-center justify-content-center" style="margin: 36px 0;">
+                                <p class="w-50 bg-dark border border-2"></p>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-12">
                                     <h4 class="text-center fs-3 fw-bold">
                                         Biểu đồ theo dõi chỉ tiêu theo tháng
@@ -773,6 +822,7 @@ if ($makehoach) {
         <?php } ?>
 
         $("#evaluate-detail-table-list-staff").DataTable();
+        $("#chitieunhanvientheothang").DataTable();
     });
 </script>
 
