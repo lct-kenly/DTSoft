@@ -5,7 +5,9 @@ $sql_list_staff = "SELECT nhanvien.manhanvien, hoten, tenchucvu, email, sodienth
                                 from nhanvien, taikhoan, thoigiannhanchuc, chucvu
                                 where nhanvien.manhanvien = taikhoan.manv
                                     and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
-                                    and thoigiannhanchuc.machucvu = chucvu.machucvu";
+                                    and thoigiannhanchuc.machucvu = chucvu.machucvu
+                                    and thoigiannhanchuc.thoigianketthuc = '0000-00-00'
+                                    ";
 $result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
 ?>
 

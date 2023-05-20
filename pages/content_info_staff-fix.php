@@ -13,6 +13,7 @@ $info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkh
                     and thoigiannhanchuc.machucvu = chucvu.machucvu
                     and bophan.makhuvuc = khuvuc.makhuvuc
                     and nhanvien.manhanvien = taikhoan.manv
+                    and thoigiannhanchuc.thoigianketthuc = '0000-00-00'
                     and nhanvien.manhanvien = '" . $_SESSION["staff-fix"] . "' ";
 
 $result_info = mysqli_query($ketnoi, $info);
@@ -27,6 +28,7 @@ $result_select_department = mysqli_query($ketnoi, $sql_select_department);
 $sql_select_area = "SELECT makhuvuc, tenkhuvuc FROM khuvuc";
 $result_select_area = mysqli_query($ketnoi, $sql_select_area);
 
+$current_time = date("Y-m-d H:i:s");
 
 if (isset($_POST['button_delete'])) {
     $sql_delete = "DELETE FROM nhanvien WHERE manhanvien = '" . $_SESSION["staff-fix"] . "'";
@@ -44,7 +46,7 @@ if (isset($_POST['button_save'])) {
         $tempname = $_FILES["image"]["tmp_name"];
         $folder = "../asset/img/" . $avatar;
 
-		move_uploaded_file($tempname ,$folder);
+        move_uploaded_file($tempname, $folder);
     }
 
 
@@ -73,7 +75,47 @@ if (isset($_POST['button_save'])) {
     $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $avatar . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
     //echo $sql_update;
 
+
+    if ($row_result_info["machucvu"] != $_POST['staffPosition']) {
+        $sql_kt = "SELECT COUNT(*) as total FROM thoigiannhanchuc WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $chucvu . "'";
+        $result_kt = mysqli_query($conn, $sql_kt);
+        $row_kt = mysqli_fetch_assoc($result_kt)["total"];
+        if ($row_kt > 0) {
+            $update_new_Position = "UPDATE thoigiannhanchuc SET thoigianbatdau ='" . $current_time . "' and thoigianketthuc = '0000-00-00' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $chucvu . "'";
+
+            $update_old_Position = "UPDATE thoigiannhanchuc SET thoigianketthuc = '" . $current_time . "' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $row_result_info["machucvu"] . "'";
+
+            $level = str_replace("C", "", $chucvu);
+
+            $update_level = "UPDATE taikhoan SET `level` = '" . $level . "' where manv = '" . $_SESSION["staff-fix"] . "'";
+
+            $result_update_new_Position = mysqli_query($ketnoi, $update_new_Position);
+
+            $result_update_old_Position = mysqli_query($ketnoi, $update_old_Position);
+
+            $result_update_level = mysqli_query($ketnoi, $update_level);
+        } else {
+            $add_Position = "INSERT INTO thoigiannhanchuc (manhanvien, machucvu, thoigianbatdau, thoigianketthuc)
+            VALUES ( '" . $_SESSION["staff-fix"] . "', '" . $chucvu . "', '" . $current_time . "', '0000-00-00')";
+
+            $update_Position = "UPDATE thoigiannhanchuc SET thoigianketthuc = '" . $current_time . "' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $row_result_info["machucvu"] . "'";
+
+            $level = str_replace("C", "", $chucvu);
+
+            $update_level = "UPDATE taikhoan SET `level` = '" . $level . "' where manv = '" . $_SESSION["staff-fix"] . "'";
+
+            $result_add_Position = mysqli_query($ketnoi, $add_Position);
+
+            $result_update_Position = mysqli_query($ketnoi, $update_Position);
+
+            $result_update_level = mysqli_query($ketnoi, $update_level);
+        }
+    }
+
+
     $result_update = mysqli_query($ketnoi, $sql_update);
+
+
 
     echo '<script> alert("Cập nhật thông tin nhân viên thành công!"); </script>';
     header("Refresh:0");
@@ -148,6 +190,20 @@ if (isset($_POST['button_save'])) {
                                         </div>
                                     </div>
 
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Khu vực:</label>
+                                            <select class="form-select fs-5" name="staffArea" id="staffArea">
+                                                <option selected value="<?= $row_result_info["makhuvuc"] ?>"><?= $row_result_info["makhuvuc"] ?> - <?= $row_result_info["tenkhuvuc"] ?></option>
+                                                <?php
+                                                while ($row_select_area = mysqli_fetch_array($result_select_area)) {
+                                                    echo "<option value=\"" . $row_select_area["makhuvuc"] . "\">" . $row_select_area["makhuvuc"] . " - " . $row_select_area["tenkhuvuc"] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Chức vụ:</label>
@@ -165,28 +221,9 @@ if (isset($_POST['button_save'])) {
 
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
-                                            <label class="form-label fs-5 fw-bold">Khu vực:</label>
-                                            <select class="form-select fs-5" name="staffArea">
-                                                <option selected value="<?= $row_result_info["makhuvuc"] ?>"><?= $row_result_info["makhuvuc"] ?> - <?= $row_result_info["tenkhuvuc"] ?></option>
-                                                <?php
-                                                while ($row_select_area = mysqli_fetch_array($result_select_area)) {
-                                                    echo "<option value=\"" . $row_select_area["makhuvuc"] . "\">" . $row_select_area["makhuvuc"] . " - " . $row_select_area["tenkhuvuc"] . "</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mt-4">
-                                        <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Phòng ban:</label>
-                                            <select class="form-select fs-5" name="staffDepartment">
-                                                <option selected value="<?= $row_result_info["mabophan"] ?>"><?= $row_result_info["mabophan"] ?> - <?= $row_result_info["tenbophan"] ?></option>
-                                                <?php
-                                                while ($row_select_department = mysqli_fetch_array($result_select_department)) {
-                                                    echo "<option value=\"" . $row_select_department["mabophan"] . "\">" . $row_select_department["mabophan"] . " - " . $row_select_department["tenbophan"] . "</option>";
-                                                }
-                                                ?>
+                                            <select class="form-select fs-5" name="staffDepartment" id="staffDepartment">
+
                                             </select>
                                         </div>
                                     </div>
@@ -287,6 +324,56 @@ if (isset($_POST['button_save'])) {
     <script src="../asset/js/main.js"></script>
 
     <script>
+        //Lấy giá trị của option đã chọn
+        var selectedFruit = this.value;
+        // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Nhận kết quả từ tập tin PHP xử lý
+                var result = this.responseText;
+                document.getElementById("staffDepartment").innerHTML = result;
+
+
+            }
+        };
+
+        var manv = '<?= $row_result_info["manhanvien"] ?>';
+        // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
+        // alert();
+        xhttp.open("GET", "content_additional.php?makv=" + selectedFruit + "&chon=bophan&manv=" + manv, true);
+        xhttp.send();
+
+
+        // Lắng nghe sự kiện khi chọn option
+        document.getElementById('staffArea').addEventListener('change', function() {
+            //Lấy giá trị của option đã chọn
+            var selectedFruit = this.value;
+            // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Nhận kết quả từ tập tin PHP xử lý
+                    var result = this.responseText;
+                    document.getElementById("staffDepartment").innerHTML = result;
+
+
+                }
+            };
+
+            var manv = '<?= $row_result_info["manhanvien"] ?>';
+            // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
+            // alert();
+            xhttp.open("GET", "content_additional.php?makv=" + selectedFruit + "&chon=bophan&manv=" + manv, true);
+            xhttp.send();
+        });
+
+
+
+
+
+
+
         const btnShowPassword = document.querySelector('.btn-show-password');
 
         btnShowPassword.onclick = function() {
@@ -304,10 +391,11 @@ if (isset($_POST['button_save'])) {
     </script>
 
     <script>
-        const inputFile =document.querySelector('input#avatar');
+        const inputFile = document.querySelector('input#avatar');
         const gridImage = document.querySelector('.grid-image');
 
         uploadFile(inputFile, gridImage);
     </script>
 </body>
+
 </html>

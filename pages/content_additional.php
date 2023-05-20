@@ -9,12 +9,27 @@ if (isset($_GET['makv'])) {
     $makv = $_GET['makv'];
     $chon = $_GET['chon'];
 
+    $manv = '';
+    if(isset($_GET['manv'])){
+        $manv = $_GET['manv'];
+        if(strlen($manv)>2){
+            $sql_bophan1 = "SELECT * FROM khuvuc, nhanvien, bophan WHERE nhanvien.mabophan = bophan.mabophan and bophan.makhuvuc = khuvuc.makhuvuc and manhanvien ='".$manv."'";
+            $result_bophan1 = $ketnoi->query($sql_bophan1)->fetch_array();
+            $mabophan1 = $result_bophan1['mabophan'];
+            $tenbophan1 = $result_bophan1['tenbophan'];
+        }
+    }
+        
     $sql_bophan = "SELECT * FROM `bophan` WHERE `makhuvuc` = '" . $makv . "'";
+    
 
     $result_bophan = mysqli_query($ketnoi, $sql_bophan);
 
-
-    echo '<option value="" selected>Tất cả</option>';
+    if(strlen($manv)>2){
+        echo '<option value="' . $mabophan1 . '">' . $tenbophan1 . '</option>';
+    }else{
+        echo '<option value="" selected>Tất cả</option>';
+    }
     // Lấy dữ liệu
     while ($row = mysqli_fetch_array($result_bophan)) {
         $mabophan = $row[0];

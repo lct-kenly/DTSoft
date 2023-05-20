@@ -1,7 +1,6 @@
 html {
-  width: 120rem;
+    width: 120rem;
 }
-
 
 .header__title {
     font-weight: 600;
@@ -13,41 +12,53 @@ html {
 }
 
 .content {
-  margin-top: 3rem;
+    margin-top: 3rem;
 }
 
 .content-detail {
-  display: flex;
+    display: flex;
+}
+
+.content-detail.details {
+    display: flex;
+    align-items: center;
 }
 
 .content__title {
-  font-size: 1.6rem;
-  font-weight: 600;
-  padding: 0 1rem 2.5rem 2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 0 1rem 2.5rem 2rem;
 }
 
 .content__desc {
-  font-size: 1.5rem;
-  padding-top: 0.2rem;
+    font-size: 1.5rem;
+    padding-top: 0.2rem;
+}
+
+.content__desc.desc {
+    margin-bottom: 22px;
+    width: 285px;
+    height: 35px;
+    margin-left: 10px;
 }
 
 .report__input {
-  width: 40rem;
-  margin: 3rem 0 3rem 2rem;
-  font-size: 1.5rem;
+    width: 40rem;
+    margin: 3rem 0 3rem 2rem;
+    font-size: 1.5rem;
 }
 
 .report__form-control {
-  height: 5rem !important;
-  font-size: 1.6rem;
+    height: 5rem !important;
+    font-size: 1.6rem;
 }
 
 .btn_report {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 93rem ;
-  font-size: 1.5rem;
-  width: 10rem;
-  height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 93rem;
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 5rem;
 }
