@@ -19,6 +19,7 @@ $info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkh
             and thoigiannhanchuc.machucvu = chucvu.machucvu
             and bophan.makhuvuc = khuvuc.makhuvuc
             and nhanvien.manhanvien = taikhoan.manv
+            and thoigiannhanchuc.thoigianketthuc = '0000-00-00'
             and nhanvien.manhanvien = '" . $_SESSION["staff-fix"] . "' ";
 
 $result_info = mysqli_query($ketnoi, $info);
@@ -108,6 +109,13 @@ if (isset($_POST['button_save'])) {
 
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Phòng ban:</label>
+                                            <input class="form-control fs-5" value="<?= $row_result_info["tenbophan"] ?>" readonly disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Chức vụ:</label>
                                             <input class="form-control fs-5" value="<?= $row_result_info["tenchucvu"] ?>" readonly disabled>
                                         </div>
@@ -117,13 +125,6 @@ if (isset($_POST['button_save'])) {
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Khu vực:</label>
                                             <input class="form-control fs-5" value="<?= $row_result_info["tenkhuvuc"] ?>" readonly disabled>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mt-4">
-                                        <div class="mb-3">
-                                            <label class="form-label fs-5 fw-bold">Phòng ban:</label>
-                                            <input class="form-control fs-5" value="<?= $row_result_info["tenbophan"] ?>" readonly disabled>
                                         </div>
                                     </div>
 

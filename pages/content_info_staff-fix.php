@@ -4,7 +4,13 @@ if (isset($_GET['manv'])) {
     $_SESSION["staff-fix"] = $_GET['manv'];
 }
 
+$disable = "";
+ 
+$malevel = $chucvu["machucvu"];
 
+if($malevel == "C1" ){
+    $disable = "disabled";
+}
 
 $info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkhuvuc, ngaysinh, gioitinh, sodienthoai, email, tentk, matkhau, thoigiannhanchuc.machucvu, nhanvien.mabophan, bophan.makhuvuc
                     from nhanvien, bophan, chucvu, khuvuc, taikhoan, thoigiannhanchuc
@@ -29,97 +35,100 @@ $sql_select_area = "SELECT makhuvuc, tenkhuvuc FROM khuvuc";
 $result_select_area = mysqli_query($ketnoi, $sql_select_area);
 
 $current_time = date("Y-m-d H:i:s");
+if($disable == ""){
 
-if (isset($_POST['button_delete'])) {
-    $sql_delete = "DELETE FROM nhanvien WHERE manhanvien = '" . $_SESSION["staff-fix"] . "'";
-    $result_delete = mysqli_query($ketnoi, $sql_delete);
-    unset($_SESSION["staff-fix"]);
-    echo '<script> alert("Xóa thông tin nhân viên thành công!"); </script>';
-    header('Location: content_list_staff.php');
-}
-
-if (isset($_POST['button_save'])) {
-
-
-    if (isset($_FILES['image'])) {
-        $avatar = $_FILES["image"]["name"];
-        $tempname = $_FILES["image"]["tmp_name"];
-        $folder = "../asset/img/" . $avatar;
-
-        move_uploaded_file($tempname, $folder);
+    if (isset($_POST['button_delete'])) {
+        $sql_delete = "DELETE FROM nhanvien WHERE manhanvien = '" . $_SESSION["staff-fix"] . "'";
+        $result_delete = mysqli_query($ketnoi, $sql_delete);
+        unset($_SESSION["staff-fix"]);
+        echo '<script> alert("Xóa thông tin nhân viên thành công!"); </script>';
+        header('Location: content_list_staff.php');
     }
 
+    if (isset($_POST['button_save'])) {
 
 
-    $hoten = $_POST['staffName'];
-    $phongban = $_POST['staffDepartment'];
-    $chucvu = $_POST['staffPosition'];
-    $khuvuc = $_POST['staffArea'];
-    $ngaysinh = $_POST['staffDateofBirth'];
-    $gioitinh = $_POST['staffSexual'];
-    $sdt = $_POST['staffPhone'];
-    $matkhau = $_POST['staffPassword'];
-
-
-    // $doihoten = "";
-    // if($hoten != $result_info['hoten']){
-    //     $doihoten = "`hoten`='".$hoten."',";
-    // }
-
-    // $doihoten = "";
-    // if($hoten != $result_info['hoten']){
-    //     $doihoten = "`hoten`='".$hoten."',";
-    // }
-
-
-    $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $avatar . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
-    //echo $sql_update;
-
-
-    if ($row_result_info["machucvu"] != $_POST['staffPosition']) {
-        $sql_kt = "SELECT COUNT(*) as total FROM thoigiannhanchuc WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $chucvu . "'";
-        $result_kt = mysqli_query($conn, $sql_kt);
-        $row_kt = mysqli_fetch_assoc($result_kt)["total"];
-        if ($row_kt > 0) {
-            $update_new_Position = "UPDATE thoigiannhanchuc SET thoigianbatdau ='" . $current_time . "' and thoigianketthuc = '0000-00-00' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $chucvu . "'";
-
-            $update_old_Position = "UPDATE thoigiannhanchuc SET thoigianketthuc = '" . $current_time . "' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $row_result_info["machucvu"] . "'";
-
-            $level = str_replace("C", "", $chucvu);
-
-            $update_level = "UPDATE taikhoan SET `level` = '" . $level . "' where manv = '" . $_SESSION["staff-fix"] . "'";
-
-            $result_update_new_Position = mysqli_query($ketnoi, $update_new_Position);
-
-            $result_update_old_Position = mysqli_query($ketnoi, $update_old_Position);
-
-            $result_update_level = mysqli_query($ketnoi, $update_level);
-        } else {
-            $add_Position = "INSERT INTO thoigiannhanchuc (manhanvien, machucvu, thoigianbatdau, thoigianketthuc)
-            VALUES ( '" . $_SESSION["staff-fix"] . "', '" . $chucvu . "', '" . $current_time . "', '0000-00-00')";
-
-            $update_Position = "UPDATE thoigiannhanchuc SET thoigianketthuc = '" . $current_time . "' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $row_result_info["machucvu"] . "'";
-
-            $level = str_replace("C", "", $chucvu);
-
-            $update_level = "UPDATE taikhoan SET `level` = '" . $level . "' where manv = '" . $_SESSION["staff-fix"] . "'";
-
-            $result_add_Position = mysqli_query($ketnoi, $add_Position);
-
-            $result_update_Position = mysqli_query($ketnoi, $update_Position);
-
-            $result_update_level = mysqli_query($ketnoi, $update_level);
+        if (isset($_FILES['image'])) {
+            $avatar = $_FILES["image"]["name"];
+            $tempname = $_FILES["image"]["tmp_name"];
+            $folder = "../asset/img/" . $avatar;
+    
+            move_uploaded_file($tempname, $folder);
         }
+    
+    
+    
+        $hoten = $_POST['staffName'];
+        $phongban = $_POST['staffDepartment'];
+        $chucvu = $_POST['staffPosition'];
+        $khuvuc = $_POST['staffArea'];
+        $ngaysinh = $_POST['staffDateofBirth'];
+        $gioitinh = $_POST['staffSexual'];
+        $sdt = $_POST['staffPhone'];
+        $matkhau = $_POST['staffPassword'];
+    
+    
+        // $doihoten = "";
+        // if($hoten != $result_info['hoten']){
+        //     $doihoten = "`hoten`='".$hoten."',";
+        // }
+    
+        // $doihoten = "";
+        // if($hoten != $result_info['hoten']){
+        //     $doihoten = "`hoten`='".$hoten."',";
+        // }
+    
+    
+        $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $avatar . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
+        //echo $sql_update;
+    
+    
+        if ($row_result_info["machucvu"] != $_POST['staffPosition']) {
+            $sql_kt = "SELECT COUNT(*) as total FROM thoigiannhanchuc WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $chucvu . "'";
+            $result_kt = mysqli_query($conn, $sql_kt);
+            $row_kt = mysqli_fetch_assoc($result_kt)["total"];
+            if ($row_kt > 0) {
+                $update_new_Position = "UPDATE thoigiannhanchuc SET thoigianbatdau ='" . $current_time . "' and thoigianketthuc = '0000-00-00' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $chucvu . "'";
+    
+                $update_old_Position = "UPDATE thoigiannhanchuc SET thoigianketthuc = '" . $current_time . "' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $row_result_info["machucvu"] . "'";
+    
+                $level = str_replace("C", "", $chucvu);
+    
+                $update_level = "UPDATE taikhoan SET `level` = '" . $level . "' where manv = '" . $_SESSION["staff-fix"] . "'";
+    
+                $result_update_new_Position = mysqli_query($ketnoi, $update_new_Position);
+    
+                $result_update_old_Position = mysqli_query($ketnoi, $update_old_Position);
+    
+                $result_update_level = mysqli_query($ketnoi, $update_level);
+            } else {
+                $add_Position = "INSERT INTO thoigiannhanchuc (manhanvien, machucvu, thoigianbatdau, thoigianketthuc)
+                VALUES ( '" . $_SESSION["staff-fix"] . "', '" . $chucvu . "', '" . $current_time . "', '0000-00-00')";
+    
+                $update_Position = "UPDATE thoigiannhanchuc SET thoigianketthuc = '" . $current_time . "' WHERE manhanvien = '" . $_SESSION["staff-fix"] . "' and machucvu = '" . $row_result_info["machucvu"] . "'";
+    
+                $level = str_replace("C", "", $chucvu);
+    
+                $update_level = "UPDATE taikhoan SET `level` = '" . $level . "' where manv = '" . $_SESSION["staff-fix"] . "'";
+    
+                $result_add_Position = mysqli_query($ketnoi, $add_Position);
+    
+                $result_update_Position = mysqli_query($ketnoi, $update_Position);
+    
+                $result_update_level = mysqli_query($ketnoi, $update_level);
+            }
+        }
+    
+    
+        $result_update = mysqli_query($ketnoi, $sql_update);
+    
+    
+    
+        echo '<script> alert("Cập nhật thông tin nhân viên thành công!"); </script>';
+        header("Refresh:0");
     }
-
-
-    $result_update = mysqli_query($ketnoi, $sql_update);
-
-
-
-    echo '<script> alert("Cập nhật thông tin nhân viên thành công!"); </script>';
-    header("Refresh:0");
 }
+
 
 
 
@@ -178,14 +187,14 @@ if (isset($_POST['button_save'])) {
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Mã nhân viên:</label>
-                                            <input type="text" class="form-control fs-5" readonly disabled value="<?= $row_result_info["manhanvien"] ?>">
+                                            <input type="text" class="form-control fs-5" readonly disabled value="<?= $row_result_info["manhanvien"] ?> ">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Họ tên:</label>
-                                            <input type="text" class="form-control fs-5" name="staffName" value="<?= $row_result_info["hoten"] ?>">
+                                            <input type="text" class="form-control fs-5" name="staffName" value="<?= $row_result_info["hoten"] ?>" <?= $disable ?>>
 
                                         </div>
                                     </div>
@@ -194,7 +203,7 @@ if (isset($_POST['button_save'])) {
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Khu vực:</label>
-                                            <select class="form-select fs-5" name="staffArea" id="staffArea">
+                                            <select class="form-select fs-5" name="staffArea" id="staffArea" <?= $disable ?>>
                                                 <option selected value="<?= $row_result_info["makhuvuc"] ?>"><?= $row_result_info["makhuvuc"] ?> - <?= $row_result_info["tenkhuvuc"] ?></option>
                                                 <?php
                                                 while ($row_select_area = mysqli_fetch_array($result_select_area)) {
@@ -207,7 +216,7 @@ if (isset($_POST['button_save'])) {
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Chức vụ:</label>
-                                            <select class="form-select fs-5" name="staffPosition">
+                                            <select class="form-select fs-5" name="staffPosition" <?= $disable ?>>
                                                 <option selected value="<?= $row_result_info["machucvu"] ?>"><?= $row_result_info["machucvu"] ?> - <?= $row_result_info["tenchucvu"] ?></option>
                                                 <?php
                                                 while ($row_select_position = mysqli_fetch_array($result_select_position)) {
@@ -222,7 +231,7 @@ if (isset($_POST['button_save'])) {
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Phòng ban:</label>
-                                            <select class="form-select fs-5" name="staffDepartment" id="staffDepartment">
+                                            <select class="form-select fs-5" name="staffDepartment" id="staffDepartment" <?= $disable ?>>
 
                                             </select>
                                         </div>
@@ -231,14 +240,14 @@ if (isset($_POST['button_save'])) {
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Ngày sinh:</label>
-                                            <input type="date" class="form-control fs-5" name="staffDateofBirth" value="<?= $row_result_info["ngaysinh"] ?>">
+                                            <input type="date" class="form-control fs-5" name="staffDateofBirth" value="<?= $row_result_info["ngaysinh"] ?>" <?= $disable ?>>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Giới tính:</label>
-                                            <select class="form-select fs-5" name="staffSexual">
+                                            <select class="form-select fs-5" name="staffSexual" <?= $disable ?>>
                                                 <option selected><?= $row_result_info["gioitinh"] ?></option>
                                                 <option value="Nam">Nam</option>
                                                 <option value="Nữ">Nữ</option>
@@ -251,7 +260,7 @@ if (isset($_POST['button_save'])) {
                                             <label class="form-label fs-5 fw-bold">
                                                 Số điện thoại:
                                             </label>
-                                            <input type="text" class="form-control fs-5" name="staffPhone" value="<?= $row_result_info["sodienthoai"] ?>">
+                                            <input type="text" class="form-control fs-5" name="staffPhone" value="<?= $row_result_info["sodienthoai"] ?>" <?= $disable ?>>
 
                                         </div>
                                     </div>
@@ -259,14 +268,14 @@ if (isset($_POST['button_save'])) {
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <h3 class="form-label fs-5 fw-bold">Email:</h3>
-                                            <input type="text" class="form-control fs-5" name="staffEmail" value="<?= $row_result_info["email"] ?>">
+                                            <input type="text" class="form-control fs-5" name="staffEmail" value="<?= $row_result_info["email"] ?>" <?= $disable ?>> 
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <h3 class="form-label fs-5 fw-bold">Tài khoản:</h3>
-                                            <input type="text" class="form-control fs-5" name="staffUser" value="<?= $row_result_info["tentk"] ?>">
+                                            <input type="text" class="form-control fs-5" name="staffUser" value="<?= $row_result_info["tentk"] ?>" <?= $disable ?>>
                                         </div>
                                     </div>
 
@@ -274,18 +283,19 @@ if (isset($_POST['button_save'])) {
                                         <div class="mb-3">
                                             <h3 class="form-label fs-5 fw-bold">Mật khẩu:</h3>
                                             <div class="d-inline position-relative">
-                                                <input type="password" id="password" name="staffPassword" style="background-color: white;" class="form-control fs-5" value="<?= $row_result_info["matkhau"] ?>">
+                                                <input type="password" id="password" name="staffPassword" style="background-color: white;" class="form-control fs-5" value="<?= $row_result_info["matkhau"] ?>" <?= $disable ?>>
                                                 <span class="btn-show-password fs-5" style="top: 30%"><i class="fa-regular fa-eye"></i></span>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <?php if($disable == "") { ?>
                                     <div class="col-md-12">
                                         <div class="mt-4">
                                             <button type="submit" class="btn btn-primary fs-4 me-4" name="button_save">Lưu thông tin</button>
                                             <button class="btn btn-outline-danger fs-4" name="button_delete">Xóa nhân viên</button>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +308,7 @@ if (isset($_POST['button_save'])) {
 
                                 <div class="upload-avatar">
                                     <label for="avatar"><i class="fa-solid fa-upload"></i> Upload Image</label>
-                                    <input id="avatar" type="file" name="image" />
+                                    <input id="avatar" type="file" name="image" <?= $disable ?> />
                                 </div>
                             </div>
                         </div>

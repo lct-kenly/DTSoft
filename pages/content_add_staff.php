@@ -83,10 +83,12 @@
         $tempname = $_FILES["avatar"]["tmp_name"];
         $folder = "../asset/img/" . $current_avatar;
 
-        if($_FILES['avatar']['error'] > 0) {
-            $error['avatar'] = 'Bạn chọn hình ảnh sản phẩm';
-        } else {
+        if($_FILES['avatar']['error'] == 0) {
             move_uploaded_file($tempname ,$folder);
+        }
+
+        if(empty($current_avatar)) {
+            $current_avatar = 'avatar-default.jfif';
         }
 
         while ($row_old_id = mysqli_fetch_array($result_old_staff_id)) {
@@ -150,15 +152,6 @@
             <div class="row header">
                 <h2 class="header__title">Thêm nhân viên</h2>
             </div>
-            <?php if (!empty($error)) { ?>
-                <div class="notify-msg" id="notify-msg">
-                    <?= $error ?>
-                </div>
-            <?php } elseif (!empty($success)) { ?>
-                <div class="notify-msg" id="notify-msg">
-                    <?= $success ?>
-                </div>
-            <?php } ?>
             <form action="content_add_staff.php?action=submit" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
                 <div class="row content">
                     <div class="col-md-6 content__left">

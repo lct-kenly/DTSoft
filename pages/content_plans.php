@@ -7,9 +7,27 @@
     $evaluates = array();
     $index = 1;
 
-    $sql_evaluate = "SELECT makehoach, bophan.tenbophan, khuvuc.tenkhuvuc, thoigianbatdau, thoigiandukien
+    // $title = '';
+    // switch($macv) {
+    //     case 'C1': '';
+    // }
+
+    if($macv == 'C1') {
+
+        $sql_evaluate = "SELECT kehoachgiaoviec.makehoach, bophan.tenbophan, khuvuc.tenkhuvuc, thoigianbatdau, thoigiandukien
+                         FROM kehoachgiaoviec, chitietkehoach, bophan, khuvuc
+                         WHERE chitietkehoach.makehoach = kehoachgiaoviec.makehoach AND kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc AND chitietkehoach.manhanvien = '{$profile['manhanvien']}'
+                         GROUP BY kehoachgiaoviec.makehoach";
+    } else {
+
+        $sql_evaluate = "SELECT makehoach, bophan.tenbophan, khuvuc.tenkhuvuc, thoigianbatdau, thoigiandukien
             FROM kehoachgiaoviec, bophan, khuvuc
             WHERE kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc";
+    }
+
+
+
+    
     
     $result_evaluate = $conn->query($sql_evaluate);
 

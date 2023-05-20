@@ -1,6 +1,14 @@
 <?php
 include('../admin/config.php');
 
+$disable = "";
+ 
+$malevel = $chucvu["machucvu"];
+
+if($malevel == "C1" ){
+    $disable = "disabled";
+}
+
 $sql_list_staff = "SELECT nhanvien.manhanvien, hoten, tenchucvu, email, sodienthoai, quequan, hinhanh
                                 from nhanvien, taikhoan, thoigiannhanchuc, chucvu
                                 where nhanvien.manhanvien = taikhoan.manv
@@ -47,12 +55,13 @@ $result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
             <div class="row">
                 <div class="header__staff">
                     <h2 class="header__title">Danh sách nhân viên</h2>
-
+                    <?php if($disable == "") { ?>
                     <div class="header__staff_btn">
-                        <a href="content_add_staff.php" class="btn__add-staff">
+                        <a href="content_add_staff.php" class="btn__add-staff" >
                             Thêm nhân viên
                         </a>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
 
