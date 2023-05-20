@@ -4,6 +4,17 @@ if (!isset($_SESSION['username'])) {
     header("location: ./login.php");
 }
 
+
+    // //echo $chucvu['machucvu'];
+    // if($chucvu['machucvu'] == 'C2' || $chucvu['machucvu'] == 'C3') {
+    //     // echo "<script>window.location:\"/pages/index.php\";</script>";
+    //     // header("location: ../");
+    // }
+
+
+    if($chucvu["machucvu"] == "C3" || $chucvu["machucvu"] == "C2"){
+        header("location: ..//pages/content_index.php");
+    }
 $query = $conn->query(
     "SELECT DISTINCT `kehoachgiaoviec`.`motakehoach`, `nhanvien`.`manhanvien`, `nhanvien`.`hoten`, `kehoachgiaoviec`.`makehoach`, `kehoachgiaoviec`.`thoigianbatdau`, `kehoachgiaoviec`.`thoigiandukien`, bophan.tenbophan
         FROM `chitietkehoach`, `nhanvien`, `kehoachgiaoviec`, bophan
@@ -15,10 +26,15 @@ $query = $conn->query(
 //================================================================
 //================================================================
 
-// check exist
+
+//================================================================
+//================================================================
 
 
 if (isset($_POST['submit-add']) && $_POST['submit-add']) {
+
+
+
     $plan_code = $_POST['makehoach'];
     $month = date('n');
     $err = '';
@@ -48,7 +64,6 @@ if (isset($_POST['submit-add']) && $_POST['submit-add']) {
         }
 
         if ($is_update == true) {
-           
             echo "<script>alert('Cập nhật thành công')</script>";
             header("Refresh:0");
         } else {
@@ -146,9 +161,7 @@ if (isset($_POST['submit-add']) && $_POST['submit-add']) {
             </div>
 
             <div class="row form-report">
-                
             </div>
-
             <div class="row">
                 <button type="submit" class="btn btn-primary btn_report" name="submit-add" value="submit" form="form-baocaothang">
                     Xác nhận
@@ -210,6 +223,10 @@ if (isset($_POST['submit-add']) && $_POST['submit-add']) {
 
                 })
         })
+    </script>
+
+    <script>
+
     </script>
 </body>
 

@@ -9,7 +9,13 @@ if (isset($_SESSION['username'])) {
     header("location: ./login.php");
 }
 
+$disable = "";
+ 
+$check = $chucvu["machucvu"];
 
+if($check == "C2" || $check == "C3"){
+    $disable = "disabled";
+}
 
 
 
@@ -313,12 +319,13 @@ if (isset($_SESSION['username'])) {
                                     <li class="sidebar__menu-sub-item">
                                         <a href="" class="sidebar__menu-sub-link btn-change-content" data_content="../pages/content_list_staff.php">Danh sách nhân viên</a>
                                     </li>
-
+                                    <?php if($disable == "") { ?>
                                     <li class="sidebar__menu-sub-item">
                                         <a href="" class="sidebar__menu-sub-link btn-change-content" data_content="../pages/content_report.php">
                                             Báo cáo nhiệm vụ
                                         </a>
                                     </li>
+                                    <?php }?>
                                 </ul>
                             </li>
                             <li class="sidebar__item">

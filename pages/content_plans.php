@@ -144,11 +144,13 @@
                 </div>
 
                 <!-- Button -->
-                <div class="row add__btn btn btn-primary">
-                    <a href="content_plan-add.php" class="add__plans"
-                        >Thêm Kế Hoạch</a
-                    >
-                </div>
+                <?php if($macv != 'C1' && substr($bophan['tenbophan'], 0, 2) == 'NS' && strpos($bophan['tenbophan'], 'Nhân sự')){ ?>
+                    <div class="row add__btn btn btn-primary">
+                        <a href="content_plan-add.php" class="add__plans"
+                            >Thêm Kế Hoạch</a
+                        >
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </body>
