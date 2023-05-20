@@ -222,6 +222,9 @@ while ($row = $result->fetch_assoc()) {
 
         let html = data.map((item, index) => {
             const evaluate = '';
+
+            const classText = item.trangthai === 'Đã đánh giá' ? 'text-success' : 'text-danger';
+
             return `<tr>
                         <th scope="row">${item.makehoach}</th>
                         <td>${item.tenkhuvuc}</td>
@@ -230,7 +233,7 @@ while ($row = $result->fetch_assoc()) {
                         <td>
                             ${item.tiendo}
                         </td>
-                        <td class="text-danger">
+                        <td class="${classText}">
                             ${item.trangthai}
                         </td>
                         <td>

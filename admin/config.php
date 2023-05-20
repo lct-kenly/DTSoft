@@ -23,8 +23,6 @@ if (!empty($_SERVER['WWW_HTTP_CLIENT_IP'])) {
 $browser = $_SERVER['HTTP_USER_AGENT'];
 
 
-
-
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $user = $ketnoi->query("SELECT * FROM `taikhoan` WHERE `tentk` = '".$_SESSION['username']."'")->fetch_array();

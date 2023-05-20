@@ -14,7 +14,7 @@ if (isset($_GET['makv'])) {
     $result_bophan = mysqli_query($ketnoi, $sql_bophan);
 
 
-    echo '<option selected>Chọn bộ phận</option>';
+    echo '<option value="" selected>Tất cả</option>';
     // Lấy dữ liệu
     while ($row = mysqli_fetch_array($result_bophan)) {
         $mabophan = $row[0];
@@ -78,77 +78,57 @@ if (isset($_GET['makv'])) {
 if (isset($_GET['makhuvuc_thongke']) and isset($_GET['mabophan_thongke'])) {
 
 
-    $sql_kehoach = "SELECT * FROM `kehoachgiaoviec`";
+    $makhuvuc = $_GET['makhuvuc_thongke'];
+    $mabophan = $_GET['mabophan_thongke'];
 
-    $result_kehoach = $ketnoi->query($sql_kehoach);
-
-    while ($row_kehoach = $result_kehoach->fetch_assoc()) {
-        $makehoach = $row_kehoach['makehoach'];
-
-        //echo $makehoach."<br/>";
-
-        $makhuvuc = $_GET['makhuvuc_thongke'];
-        $mabophan = $_GET['mabophan_thongke'];
-        $sql__nhanvien = "SELECT * FROM `nhanvien` WHERE `mabophan` = '" . $mabophan . "'";
-
-        //echo $sql__nhanvien;
-
-        $result__nhanvien = $ketnoi->query($sql__nhanvien);
-
-        $arr_ds = [];
-
-        if ($result__nhanvien->num_rows > 0) {
-            // Lặp qua từng dòng kết quả
-            while ($row__nhanvien = $result__nhanvien->fetch_assoc()) {
-
-                $manv = $row__nhanvien['manhanvien'];
-
-                //echo $manv."<br/>";
-
-                $tongchitieucandat = 0;
-                $tongchitieudatduoc = 0;
-
-                $sql_chitietkehoach = "SELECT * FROM `chitietkehoach` WHERE `makehoach` = '".$makehoach."' AND `manhanvien` = '".$manv."'";
-                $result_chitietkehoach = $ketnoi->query($sql_chitietkehoach);
-                while ($row_chitietkehoach = $result_chitietkehoach->fetch_assoc()) {
-                    $chitieucandat = $row_chitietkehoach['chitieucandat'];
-                    $chitieudatduoc = $row_chitietkehoach['chitieudatduoc'];
-                    $tongchitieucandat = $tongchitieucandat + $chitieucandat;
-                    $tongchitieudatduoc = $tongchitieudatduoc + $chitieudatduoc;
-                }
-
-                $phantram_tongchitieudatduoc = ($tongchitieudatduoc / $tongchitieucandat) * 100;
-
-                if($phantram_tongchitieudatduoc > 99){
-                    $trangthai = "Đạt";
-                }else if($phantram_tongchitieudatduoc > 74){
-                    $trangthai = "Đạt";
-                }else{
-                    $trangthai = "Không đạt";
-                }
-
-
-                $user = $ketnoi->query("SELECT * FROM `taikhoan` WHERE `manv` = '" . $manv . "'")->fetch_array();
-
-                $profile =  $ketnoi->query("SELECT * FROM `nhanvien`,`taikhoan` WHERE nhanvien.manhanvien = '" . $user['manv'] . "' and taikhoan.manv = '" . $user['manv'] . "'")->fetch_array();
-
-
-                $macv = "C" . $profile['level'];
-
-                $chucvu =  $ketnoi->query("SELECT * FROM  `chucvu` WHERE chucvu.machucvu = '" . $macv . "'")->fetch_array();
-
-                $bophan = $ketnoi->query("SELECT * FROM `bophan` WHERE `mabophan` = '" . $profile['mabophan'] . "'")->fetch_array();
-
-
-                $hoten = $profile['hoten'];
-                $tenchucvu = $chucvu['tenchucvu'];
-                $mabophan = $bophan['mabophan'];
-
-                $arr = array("MANV" => $manv, "HOTEN_NV" => $hoten, "TEN_CV" => $tenchucvu, "MAKEHOACH" => $makehoach,"TRANG_THAI"=>$trangthai);
-                array_push($arr_ds, $arr);
-            }
-        }
+    $loc_KV_BP = '';
+    if ($makhuvuc != "" and $mabophan == "") {
+        $loc_KV_BP = " and khuvuc.makhuvuc = '" . $makhuvuc . "'";
+    } elseif($makhuvuc == "" and $mabophan == ""){
+        $loc_KV_BP = "";
+    }else
+     {
+        $loc_KV_BP = " and khuvuc.makhuvuc = '" . $makhuvuc . "' AND bophan.mabophan = '" . $mabophan . "'";
     }
 
+
+
+    $sql_kehoach = "SELECT nhanvien.manhanvien, nhanvien.hoten, khuvuc.makhuvuc, khuvuc.tenkhuvuc, bophan.mabophan, bophan.tenbophan, chucvu.tenchucvu, chitietkehoach.makehoach, chitieu.machitieu, chitieu.tenchitieu, chitietkehoach.chitieucandat FROM khuvuc, bophan, nhanvien, chucvu, thoigiannhanchuc, chitieu, chitietkehoach WHERE khuvuc.makhuvuc = bophan.makhuvuc AND bophan.mabophan = nhanvien.mabophan AND nhanvien.manhanvien = thoigiannhanchuc.manhanvien AND thoigiannhanchuc.machucvu = chucvu.machucvu AND nhanvien.manhanvien = chitietkehoach.manhanvien AND chitietkehoach.machitieu = chitieu.machitieu" . $loc_KV_BP;
+    
+    //echo $sql_kehoach;
+    
+    $result_kehoach = $ketnoi->query($sql_kehoach);
+
+    //print_r($result_kehoach);
+    //die();
+    $arr_ds = [];
+    while ($row_kehoach = $result_kehoach->fetch_assoc()) {
+        $manv = $row_kehoach['manhanvien'];
+        $hoten = $row_kehoach['hoten'];
+        $tenkhuvuc = $row_kehoach['tenkhuvuc'];
+        $tenchucvu = $row_kehoach['tenchucvu'];
+        $tenbophan = $row_kehoach['tenbophan'];
+        $tenchitieu = $row_kehoach['tenchitieu'];
+        $machitieu = $row_kehoach['machitieu'];
+        $chitieucandat = $row_kehoach['chitieucandat'];
+        $makehoach = $row_kehoach['makehoach'];
+        $sql_kehoach2 = "SELECT SUM(theodoikehoach.chitieuthangdatduoc) AS TONGDATDUOC FROM theodoikehoach WHERE theodoikehoach.manhanvien = '" . $manv . "' AND theodoikehoach.makehoach = '" . $makehoach . "' AND theodoikehoach.machitieu = '" . $machitieu . "';";
+        $result_chitieu = $ketnoi->query($sql_kehoach2)->fetch_array();
+        $chitieudadat = $result_chitieu['TONGDATDUOC'];
+        if($chitieudadat == "" or $chitieudadat == null){
+            $chitieudadat = 0;
+        }
+        $phantram_tongchitieudatduoc = ($chitieudadat / $chitieucandat) * 100;
+        if ($phantram_tongchitieudatduoc > 99) {
+            $trangthai = "Đạt";
+        } else if ($phantram_tongchitieudatduoc > 74) {
+            $trangthai = "Chưa đạt";
+        } else {
+            $trangthai = "Không đạt";
+        }
+        $arr = array("MANV" => $manv, "HOTEN_NV" => $hoten, "TEN_CV" => $tenchucvu, "TEN_KV" => $tenkhuvuc, "TEN_BP" => $tenbophan, "TEN_CT" => $tenchitieu, "CT_CANDAT" => $chitieucandat, "CT_DADAT" => $chitieudadat, "MAKEHOACH" => $makehoach, "TRANG_THAI" => $trangthai);
+        array_push($arr_ds, $arr);
+        
+    }
     echo json_encode($arr_ds);
 }

@@ -50,8 +50,8 @@ if (!isset($_SESSION['username'])) {
                             <div>
                                 <label for="khuvuc" class="fs-4 fw-bold mb-4">Khu vực</label>
                                 <select class="statistical-manager-content__filter form-select" aria-label="Default select example" id="makhuvuc">
-                                    <option selected value="ALL">
-                                        ------ Khu vực -----
+                                    <option selected value="">
+                                        Tất cả
                                     </option>
                                     <?php
                                     $res = $conn->query("SELECT * FROM khuvuc WHERE 1");
@@ -84,15 +84,23 @@ if (!isset($_SESSION['username'])) {
                         </div>
 
                         <div class="statistical-manager-content__body">
-                            <table id="manager-table" class="table table-bordered display statistical-manager-content__table-staff">
+                            <table id="manager-table" class="table table-bordered align-middle display statistical-manager-content__table-staff">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th scope="col">STT</th>
-                                        <th scope="col">Mã nhân viên</th>
-                                        <th scope="col">Họ tên</th>
-                                        <th scope="col">Chức vụ</th>
-                                        <th scope="col">Mã kế hoạch</th>
-                                        <th scope="col">Trạng thái</th>
+                                        <th class="align-middle" scope="col" rowspan="2">STT</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Mã nhân viên</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Họ tên</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Chức vụ</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Khu vực</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Bộ phận</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Mã kế hoạch</th>
+                                        <th class="align-middle" scope="col" colspan="3">Chỉ tiêu</th>
+                                        <th class="align-middle" scope="col" rowspan="2">Trạng thái</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">TÊN</th>
+                                        <th scope="col">CẦN ĐẠT</th>
+                                        <th scope="col">ĐÃ ĐẠT</th>
                                     </tr>
                                 </thead>
                                 <tbody class="align-middle"></tbody>
@@ -123,21 +131,28 @@ if (!isset($_SESSION['username'])) {
     </div>
 </body>
 
-<!-- Jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Bootstrap bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-<!-- Chart js library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- DataTables plugins jquery -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
-<!-- Main JS -->
-<script src="../asset/js/main.js"></script>
 <script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Nhận kết quả từ tập tin PHP xử lý
+            listStaff = JSON.parse(this.responseText);
+            //document.getElementById("mabophan").innerHTML = result;
+            // In kết quả ra console
+
+            //alert(result);
+            bodyTable.innerHTML = render(listStaff);
+            //console.log(result);
+        }
+    };
+    var linkget = "content_additional.php?makhuvuc_thongke=&mabophan_thongke=";
+    xhttp.open("GET", linkget, true);
+    xhttp.send();
+
+
+
+
     // Lắng nghe sự kiện khi chọn option
     document.getElementById('makhuvuc').addEventListener('change', function() {
         //Lấy giá trị của option đã chọn
@@ -149,8 +164,36 @@ if (!isset($_SESSION['username'])) {
                 // Nhận kết quả từ tập tin PHP xử lý
                 var result = this.responseText;
                 document.getElementById("mabophan").innerHTML = result;
-                // In kết quả ra console
-                console.log(result);
+
+
+                //Lấy giá trị của option đã chọn
+                var selectedFruit = this.value;
+                // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Nhận kết quả từ tập tin PHP xử lý
+                        listStaff = JSON.parse(this.responseText);
+                        //document.getElementById("mabophan").innerHTML = result;
+                        // In kết quả ra console
+
+                        //alert(result);
+                        bodyTable.innerHTML = render(listStaff);
+                        //console.log(result);
+                    }
+                };
+
+                var selectmabophan = document.getElementById("mabophan");
+                var selectedValuemabophan = selectmabophan.value;
+                var selectmakhuvuc = document.getElementById("makhuvuc");
+                var selectedValuemakhuvuc = selectmakhuvuc.value;
+
+                var linkget = "content_additional.php?makhuvuc_thongke=" + selectedValuemakhuvuc + "&mabophan_thongke=" + selectedValuemabophan;
+                //alert(linkget);
+                xhttp.open("GET", linkget, true);
+                xhttp.send();
+
+
             }
         };
         // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
@@ -187,6 +230,9 @@ if (!isset($_SESSION['username'])) {
     //=====================================================================================
 
 
+
+
+
     $(document).ready(function() {
         $("#manager-table").DataTable();
     });
@@ -194,6 +240,14 @@ if (!isset($_SESSION['username'])) {
 
 <script>
     var listStaff = [];
+
+
+
+
+
+
+
+
 
     const bodyTable = document.querySelector(
         ".statistical-manager-content__table-staff tbody"
@@ -210,7 +264,12 @@ if (!isset($_SESSION['username'])) {
                         <td>${item.MANV}</td>
                         <td>${item.HOTEN_NV}</td>
                         <td>${item.TEN_CV}</td>
+                        <td>${item.TEN_KV}</td>
+                        <td>${item.TEN_BP}</td>
                         <td>${item.MAKEHOACH}</td>
+                        <td>${item.TEN_CT}</td>
+                        <td>${item.CT_CANDAT}</td>
+                        <td>${item.CT_DADAT}</td>
                         <td>${item.TRANG_THAI}</td>
                     </tr>
                 `;
@@ -220,7 +279,7 @@ if (!isset($_SESSION['username'])) {
     };
 
 
-        //=====================================================================================
+    //=====================================================================================
     // Lắng nghe sự kiện khi chọn option
     document.getElementById('mabophan').addEventListener('change', function() {
         //Lấy giá trị của option đã chọn
@@ -233,7 +292,7 @@ if (!isset($_SESSION['username'])) {
                 listStaff = JSON.parse(this.responseText);
                 //document.getElementById("mabophan").innerHTML = result;
                 // In kết quả ra console
-                
+
                 //alert(result);
                 bodyTable.innerHTML = render(listStaff);
                 //console.log(result);
@@ -249,12 +308,14 @@ if (!isset($_SESSION['username'])) {
         xhttp.open("GET", linkget, true);
         xhttp.send();
 
-
-
     });
 
 
-    
+
+
+
+
+
 
     selectBox.addEventListener("change", (e) => {
         if (e.target.value === "ALL") {
@@ -317,7 +378,20 @@ if (!isset($_SESSION['username'])) {
         },
     });
 </script>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!-- Bootstrap bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<!-- Chart js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- DataTables plugins jquery -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- Main JS -->
+<script src="../asset/js/main.js"></script>
 <script>
     $(document).ready(function() {
         $("#manager-table").DataTable();

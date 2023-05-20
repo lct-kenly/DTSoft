@@ -150,20 +150,6 @@ if (isset($_POST['button_save'])) {
 
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
-                                            <label class="form-label fs-5 fw-bold">Phòng ban:</label>
-                                            <select class="form-select fs-5" name="staffDepartment">
-                                                <option selected value="<?= $row_result_info["mabophan"] ?>"><?= $row_result_info["mabophan"] ?> - <?= $row_result_info["tenbophan"] ?></option>
-                                                <?php
-                                                while ($row_select_department = mysqli_fetch_array($result_select_department)) {
-                                                    echo "<option value=\"" . $row_select_department["mabophan"] . "\">" . $row_select_department["mabophan"] . " - " . $row_select_department["tenbophan"] . "</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mt-4">
-                                        <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Chức vụ:</label>
                                             <select class="form-select fs-5" name="staffPosition">
                                                 <option selected value="<?= $row_result_info["machucvu"] ?>"><?= $row_result_info["machucvu"] ?> - <?= $row_result_info["tenchucvu"] ?></option>
@@ -185,6 +171,20 @@ if (isset($_POST['button_save'])) {
                                                 <?php
                                                 while ($row_select_area = mysqli_fetch_array($result_select_area)) {
                                                     echo "<option value=\"" . $row_select_area["makhuvuc"] . "\">" . $row_select_area["makhuvuc"] . " - " . $row_select_area["tenkhuvuc"] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">Phòng ban:</label>
+                                            <select class="form-select fs-5" name="staffDepartment">
+                                                <option selected value="<?= $row_result_info["mabophan"] ?>"><?= $row_result_info["mabophan"] ?> - <?= $row_result_info["tenbophan"] ?></option>
+                                                <?php
+                                                while ($row_select_department = mysqli_fetch_array($result_select_department)) {
+                                                    echo "<option value=\"" . $row_select_department["mabophan"] . "\">" . $row_select_department["mabophan"] . " - " . $row_select_department["tenbophan"] . "</option>";
                                                 }
                                                 ?>
                                             </select>

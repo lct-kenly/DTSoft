@@ -254,7 +254,7 @@
                         <!-- Avatar -->
                         <div class="input__form input__avatar">
                             <div class="avatar__input">
-                                <img src="#" alt="avatar" id="avatar__img" />
+                                <img src="../asset/img/avatar-default.jfif" alt="avatar" id="avatar__img" />
                             </div>
                             <input type="file" class="form-control input__value" name="avatar" onchange="readURL(this)" value="<?= $current_avatar ?>" />
                         </div>
@@ -302,9 +302,7 @@
             var reader = new FileReader();
             reader.onload = function(e) {
                 $("#avatar__img")
-                    .attr("src", e.target.result)
-                    .width(245)
-                    .height(300);
+                    .attr("src", e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
