@@ -33,8 +33,13 @@ $info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkh
 $result_info = mysqli_query($ketnoi, $info);
 $row_result_info = mysqli_fetch_array($result_info);
 
+$danhsachchuvu = array();
 $sql_select_position = "SELECT machucvu, tenchucvu FROM chucvu";
 $result_select_position = mysqli_query($ketnoi, $sql_select_position);
+
+while($row = $result_select_position->fetch_assoc()) {
+    $danhsachchuvu[] = $row;
+}
 
 $sql_select_department = "SELECT mabophan, tenbophan FROM bophan ";
 $result_select_department = mysqli_query($ketnoi, $sql_select_department);
@@ -78,6 +83,18 @@ if($disable == ""){
         $gioitinh = $_POST['staffSexual'];
         $sdt = $_POST['staffPhone'];
         $matkhau = $_POST['staffPassword'];
+
+        $avatar = isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : '';
+        $tempname = isset($_FILES["image"]["tmp_name"]) ? $_FILES["image"]["tmp_name"] : '';
+        $folder = "../asset/img/" . $avatar;
+
+        if($_FILES['image']['error'] == 0) {
+            move_uploaded_file($tempname, $folder);
+        }
+
+        if(empty($avatar)) {
+            $avatar = $row_result_info['hinhanh'];
+        }
     
     
         // $doihoten = "";
@@ -223,12 +240,11 @@ if($disable == ""){
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Chức vụ:</label>
                                             <select class="form-select fs-5" name="staffPosition" <?= $disable ?>>
-                                               
-                                                <?php
-                                                while ($row_select_position = mysqli_fetch_array($result_select_position)) {
-                                                    echo "<option value=\"" . $row_select_position["machucvu"] . "\">" . $row_select_position["machucvu"] . " - " . $row_select_position["tenchucvu"] . "</option>";
-                                                }
-                                                ?>
+                                                <?php foreach ($danhsachchuvu as $item) { ?>
+                                                    <option value="<?=$item['machucvu']?>" <?php if($item['machucvu'] == $row_result_info['machucvu']) echo 'selected'; ?> >
+                                                        <?=$item['machucvu'] . ' - ' . $item['tenchucvu']?>
+                                                    </option>
+                                                <?php } ?>
                                             </select>
 
                                         </div>

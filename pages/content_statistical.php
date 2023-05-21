@@ -79,6 +79,9 @@ if (!isset($_SESSION['username'])) {
                                     <option value="Chưa đạt">
                                         Chưa đạt kết quả
                                     </option>
+                                    <option value="Không đạt">
+                                        Không đạt kết quả
+                                    </option>
                                 </select>
                             </div>
                         </div>

@@ -278,15 +278,15 @@
                         <!-- Email -->
                         <div class="input__form">
                             <label for="staffEmail" class="form-label input__label">Email</label>
-                            <input type="email" class="form-control input__value" id="staffEmail" placeholder="Email" value="<?= $current_staffEmail ?>" disabled/>
-                            <input type="hidden" name="staffEmail" value="<?= $current_staffEmail ?>"/>
+                            <input type="email" class="form-control input__value" id="staffEmail" name="staffEmail" placeholder="Email" value="<?= $current_staffEmail ?>"/>
+                            <input type="hidden"  value="<?= $current_staffEmail ?>"/>
                         </div>
 
                         <!-- Staff Account -->
                         <div class="input__form">
                             <label for="staffUser" class="form-label input__label">Tài khoản</label>
-                            <input type="text" class="form-control input__value" id="staffUser" placeholder="Tài khoản" value="<?= $current_staffUser ?>" disabled/>
-                            <input type="hidden" name="staffUser" value="<?= $current_staffEmail ?>"/>
+                            <input type="text" class="form-control input__value" id="staffUser" name="staffUser" placeholder="Tài khoản" value="<?= $current_staffUser ?>"/>
+                            <input type="hidden" value="<?= $current_staffEmail ?>"/>
                         </div>
 
                         <div class="input__form">
