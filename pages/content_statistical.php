@@ -129,136 +129,144 @@ if (!isset($_SESSION['username'])) {
                 </div> -->
         </div>
     </div>
-</body>
 
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script>
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Nhận kết quả từ tập tin PHP xử lý
-            listStaff = JSON.parse(this.responseText);
-            //document.getElementById("mabophan").innerHTML = result;
-            // In kết quả ra console
+    <!-- Bootstrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-            //alert(result);
-            bodyTable.innerHTML = render(listStaff);
-            //console.log(result);
-        }
-    };
-    var linkget = "content_additional.php?makhuvuc_thongke=&mabophan_thongke=";
-    xhttp.open("GET", linkget, true);
-    xhttp.send();
+    <!-- Chart js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- DataTables plugins jquery -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
+    <!-- Main JS -->
+    <script src="../asset/js/main.js"></script>
 
-
-    // Lắng nghe sự kiện khi chọn option
-    document.getElementById('makhuvuc').addEventListener('change', function() {
-        //Lấy giá trị của option đã chọn
-        var selectedFruit = this.value;
-        // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+    <script>
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 // Nhận kết quả từ tập tin PHP xử lý
-                var result = this.responseText;
-                document.getElementById("mabophan").innerHTML = result;
-
-
-                //Lấy giá trị của option đã chọn
-                var selectedFruit = this.value;
-                // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        // Nhận kết quả từ tập tin PHP xử lý
-                        listStaff = JSON.parse(this.responseText);
-                        //document.getElementById("mabophan").innerHTML = result;
-                        // In kết quả ra console
-
-                        //alert(result);
-                        bodyTable.innerHTML = render(listStaff);
-                        //console.log(result);
-                    }
-                };
-
-                var selectmabophan = document.getElementById("mabophan");
-                var selectedValuemabophan = selectmabophan.value;
-                var selectmakhuvuc = document.getElementById("makhuvuc");
-                var selectedValuemakhuvuc = selectmakhuvuc.value;
-
-                var linkget = "content_additional.php?makhuvuc_thongke=" + selectedValuemakhuvuc + "&mabophan_thongke=" + selectedValuemabophan;
-                //alert(linkget);
-                xhttp.open("GET", linkget, true);
-                xhttp.send();
-
-
-            }
-        };
-        // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
-        xhttp.open("GET", "content_additional.php?makv=" + selectedFruit + "&chon=bophan", true);
-        xhttp.send();
-    });
-
-
-
-
-
-    var selectnhanvien_thamgia_kh = document.getElementById("nhanvien_thamgia_kh");
-    var selectedValuenhanvien_thamgia_kh = selectnhanvien_thamgia_kh.value;
-    var select_mabophan = document.getElementById("mabophan");
-    var selectedValue_mabophan = select_mabophan.value;
-
-    if (selectedValuenhanvien_thamgia_kh == "") {
-
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // Nhận kết quả từ tập tin PHP xử lý
-                var result = this.responseText;
-                document.getElementById("nhanvien_thamgia_kh").innerHTML = result;
+                listStaff = JSON.parse(this.responseText);
+                //document.getElementById("mabophan").innerHTML = result;
                 // In kết quả ra console
-                console.log(result);
+
+                //alert(result);
+                bodyTable.innerHTML = render(listStaff);
+                //console.log(result);
+
+                
             }
         };
-        // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
-        xhttp.open("GET", "content_additional.php?mabophan=" + selectedFruit + "&chon=manv_bophan", true);
+        var linkget = "content_additional.php?makhuvuc_thongke=&mabophan_thongke=";
+        xhttp.open("GET", linkget, true);
         xhttp.send();
-    }
-
-    //=====================================================================================
 
 
 
 
-
-    $(document).ready(function() {
-        $("#manager-table").DataTable();
-    });
-</script>
-
-<script>
-    var listStaff = [];
-
-
-
-
-
+        // Lắng nghe sự kiện khi chọn option
+        document.getElementById('makhuvuc').addEventListener('change', function() {
+            //Lấy giá trị của option đã chọn
+            var selectedFruit = this.value;
+            // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Nhận kết quả từ tập tin PHP xử lý
+                    var result = this.responseText;
+                    document.getElementById("mabophan").innerHTML = result;
 
 
+                    //Lấy giá trị của option đã chọn
+                    var selectedFruit = this.value;
+                    // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            // Nhận kết quả từ tập tin PHP xử lý
+                            listStaff = JSON.parse(this.responseText);
+                            //document.getElementById("mabophan").innerHTML = result;
+                            // In kết quả ra console
+
+                            //alert(result);
+                            bodyTable.innerHTML = render(listStaff);
+                            //console.log(result);
+                            
+                        }
+                    };
+
+                    var selectmabophan = document.getElementById("mabophan");
+                    var selectedValuemabophan = selectmabophan.value;
+                    var selectmakhuvuc = document.getElementById("makhuvuc");
+                    var selectedValuemakhuvuc = selectmakhuvuc.value;
+
+                    var linkget = "content_additional.php?makhuvuc_thongke=" + selectedValuemakhuvuc + "&mabophan_thongke=" + selectedValuemabophan;
+                    //alert(linkget);
+                    xhttp.open("GET", linkget, true);
+                    xhttp.send();
 
 
-    const bodyTable = document.querySelector(
-        ".statistical-manager-content__table-staff tbody"
-    );
-    const selectBox = document.querySelector(
-        "#select-statistical"
-    );
+                }
+            };
+            // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
+            xhttp.open("GET", "content_additional.php?makv=" + selectedFruit + "&chon=bophan", true);
+            xhttp.send();
+        });
 
-    const render = (arrData) => {
-        const html = arrData.map((item, index) => {
-            return `
+
+
+
+
+        var selectnhanvien_thamgia_kh = document.getElementById("nhanvien_thamgia_kh");
+        var selectedValuenhanvien_thamgia_kh = selectnhanvien_thamgia_kh.value;
+        var select_mabophan = document.getElementById("mabophan");
+        var selectedValue_mabophan = select_mabophan.value;
+
+        if (selectedValuenhanvien_thamgia_kh == "") {
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Nhận kết quả từ tập tin PHP xử lý
+                    var result = this.responseText;
+                    document.getElementById("nhanvien_thamgia_kh").innerHTML = result;
+                    // In kết quả ra console
+                    console.log(result);
+                }
+            };
+            // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
+            xhttp.open("GET", "content_additional.php?mabophan=" + selectedFruit + "&chon=manv_bophan", true);
+            xhttp.send();
+        }
+
+        //=====================================================================================
+    </script>
+
+    <script>
+        var listStaff = [];
+
+
+
+
+
+
+
+
+
+        const bodyTable = document.querySelector(
+            ".statistical-manager-content__table-staff tbody"
+        );
+        const selectBox = document.querySelector(
+            "#select-statistical"
+        );
+
+        const render = (arrData) => {
+            const html = arrData.map((item, index) => {
+                return `
                     <tr>
                         <th scope="row">${index + 1}</th>
                         <td>${item.MANV}</td>
@@ -273,129 +281,115 @@ if (!isset($_SESSION['username'])) {
                         <td>${item.TRANG_THAI}</td>
                     </tr>
                 `;
-        });
-
-        return html.join("");
-    };
-
-
-    //=====================================================================================
-    // Lắng nghe sự kiện khi chọn option
-    document.getElementById('mabophan').addEventListener('change', function() {
-        //Lấy giá trị của option đã chọn
-        var selectedFruit = this.value;
-        // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // Nhận kết quả từ tập tin PHP xử lý
-                listStaff = JSON.parse(this.responseText);
-                //document.getElementById("mabophan").innerHTML = result;
-                // In kết quả ra console
-
-                //alert(result);
-                bodyTable.innerHTML = render(listStaff);
-                //console.log(result);
-            }
-        };
-
-        var selectmabophan = document.getElementById("mabophan");
-        var selectedValuemabophan = selectmabophan.value;
-        var selectmakhuvuc = document.getElementById("makhuvuc");
-        var selectedValuemakhuvuc = selectmakhuvuc.value;
-
-        var linkget = "content_additional.php?makhuvuc_thongke=" + selectedValuemakhuvuc + "&mabophan_thongke=" + selectedValuemabophan;
-        xhttp.open("GET", linkget, true);
-        xhttp.send();
-
-    });
-
-
-
-
-
-
-
-
-    selectBox.addEventListener("change", (e) => {
-        if (e.target.value === "ALL") {
-            bodyTable.innerHTML = render(listStaff);
-        } else {
-            const newArrListStaff = listStaff.filter((item) => {
-                return item.TRANG_THAI === e.target.value;
             });
 
-            bodyTable.innerHTML = render(newArrListStaff);
-        }
-    });
+            $(document).ready(function() {
+                $("#manager-table").DataTable();
+            });
 
-    let tongNhanVienDat = 0;
-    let tongNhanVienChuaDat = 0;
+            return html.join("");
+        };
 
-    listStaff.forEach((item) => {
-        if (item.TRANG_THAI === "Đạt") {
-            tongNhanVienDat++;
-        } else {
-            tongNhanVienChuaDat++;
-        }
-    });
 
-    const ctx = document.getElementById("myChart");
+        //=====================================================================================
+        // Lắng nghe sự kiện khi chọn option
+        document.getElementById('mabophan').addEventListener('change', function() {
+            //Lấy giá trị của option đã chọn
+            var selectedFruit = this.value;
+            // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Nhận kết quả từ tập tin PHP xử lý
+                    listStaff = JSON.parse(this.responseText);
+                    //document.getElementById("mabophan").innerHTML = result;
+                    // In kết quả ra console
 
-    var mamau1 = randomNumber = Math.floor(Math.random() * 255) + 1;
-    var mamau2 = randomNumber = Math.floor(Math.random() * 255) + 1;
-    var mamau3 = randomNumber = Math.floor(Math.random() * 255) + 1;
-    var mamau4 = randomNumber = Math.floor(Math.random() * 255) + 1;
-    var mamau5 = randomNumber = Math.floor(Math.random() * 255) + 1;
-    var mamau6 = randomNumber = Math.floor(Math.random() * 255) + 1;
+                    //alert(result);
+                    bodyTable.innerHTML = render(listStaff);
+                    //console.log(result);
+                }
+            };
 
-    const data = {
-        labels: ["Chưa đạt", "Đạt"],
-        datasets: [{
-            label: "Số lượng nhân viên",
-            data: [tongNhanVienChuaDat, tongNhanVienDat],
-            backgroundColor: ["rgb(" + mamau1 + ", " + mamau2 + ", " + mamau3 + ")", "rgb(" + mamau4 + ", " + mamau5 + ", " + mamau6 + ")"],
-            hoverOffset: 4,
-        }, ],
-        datasets: [{
-            label: "Số lượng nhân viên",
-            data: [12, 12],
-            backgroundColor: ["rgb(" + mamau1 + ", " + mamau2 + ", " + mamau3 + ")", "rgb(" + mamau4 + ", " + mamau5 + ", " + mamau6 + ")"],
-            hoverOffset: 4,
-        }, ],
-    };
+            var selectmabophan = document.getElementById("mabophan");
+            var selectedValuemabophan = selectmabophan.value;
+            var selectmakhuvuc = document.getElementById("makhuvuc");
+            var selectedValuemakhuvuc = selectmakhuvuc.value;
 
-    new Chart(ctx, {
-        type: "pie",
-        data: data,
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: "Tỉ lệ nhân viên hoàn thành kế hoạch",
+            var linkget = "content_additional.php?makhuvuc_thongke=" + selectedValuemakhuvuc + "&mabophan_thongke=" + selectedValuemabophan;
+            xhttp.open("GET", linkget, true);
+            xhttp.send();
+
+        });
+
+
+
+
+
+
+
+
+        selectBox.addEventListener("change", (e) => {
+            if (e.target.value === "ALL") {
+                bodyTable.innerHTML = render(listStaff);
+            } else {
+                const newArrListStaff = listStaff.filter((item) => {
+                    return item.TRANG_THAI === e.target.value;
+                });
+
+                bodyTable.innerHTML = render(newArrListStaff);
+            }
+        });
+
+        let tongNhanVienDat = 0;
+        let tongNhanVienChuaDat = 0;
+
+        listStaff.forEach((item) => {
+            if (item.TRANG_THAI === "Đạt") {
+                tongNhanVienDat++;
+            } else {
+                tongNhanVienChuaDat++;
+            }
+        });
+
+        const ctx = document.getElementById("myChart");
+
+        var mamau1 = randomNumber = Math.floor(Math.random() * 255) + 1;
+        var mamau2 = randomNumber = Math.floor(Math.random() * 255) + 1;
+        var mamau3 = randomNumber = Math.floor(Math.random() * 255) + 1;
+        var mamau4 = randomNumber = Math.floor(Math.random() * 255) + 1;
+        var mamau5 = randomNumber = Math.floor(Math.random() * 255) + 1;
+        var mamau6 = randomNumber = Math.floor(Math.random() * 255) + 1;
+
+        const data = {
+            labels: ["Chưa đạt", "Đạt"],
+            datasets: [{
+                label: "Số lượng nhân viên",
+                data: [tongNhanVienChuaDat, tongNhanVienDat],
+                backgroundColor: ["rgb(" + mamau1 + ", " + mamau2 + ", " + mamau3 + ")", "rgb(" + mamau4 + ", " + mamau5 + ", " + mamau6 + ")"],
+                hoverOffset: 4,
+            }, ],
+            datasets: [{
+                label: "Số lượng nhân viên",
+                data: [12, 12],
+                backgroundColor: ["rgb(" + mamau1 + ", " + mamau2 + ", " + mamau3 + ")", "rgb(" + mamau4 + ", " + mamau5 + ", " + mamau6 + ")"],
+                hoverOffset: 4,
+            }, ],
+        };
+
+        new Chart(ctx, {
+            type: "pie",
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Tỉ lệ nhân viên hoàn thành kế hoạch",
+                    },
                 },
             },
-        },
-    });
-</script>
-<!-- Jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<!-- Bootstrap bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-<!-- Chart js library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- DataTables plugins jquery -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
-<!-- Main JS -->
-<script src="../asset/js/main.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#manager-table").DataTable();
-    });
-</script>
+        });
+    </script>
+</body>
 
 </html>

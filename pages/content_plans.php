@@ -18,11 +18,16 @@
                          FROM kehoachgiaoviec, chitietkehoach, bophan, khuvuc
                          WHERE chitietkehoach.makehoach = kehoachgiaoviec.makehoach AND kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc AND chitietkehoach.manhanvien = '{$profile['manhanvien']}'
                          GROUP BY kehoachgiaoviec.makehoach";
-    } else {
+
+    } else if($macv == 'C2') {
 
         $sql_evaluate = "SELECT makehoach, bophan.tenbophan, khuvuc.tenkhuvuc, thoigianbatdau, thoigiandukien
-            FROM kehoachgiaoviec, bophan, khuvuc
-            WHERE kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc";
+                         FROM kehoachgiaoviec, bophan, khuvuc
+                         WHERE kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc AND bophan.mabophan = '{$bophan['mabophan']}'";
+    } else {
+        $sql_evaluate = "SELECT makehoach, bophan.tenbophan, khuvuc.tenkhuvuc, thoigianbatdau, thoigiandukien
+                         FROM kehoachgiaoviec, bophan, khuvuc
+                         WHERE kehoachgiaoviec.mabophan = bophan.mabophan AND kehoachgiaoviec.makhuvuc = khuvuc.makhuvuc AND khuvuc.makhuvuc = '{$bophan['makhuvuc']}'";
     }
 
 
@@ -144,7 +149,7 @@
                 </div>
 
                 <!-- Button -->
-                <?php if($macv != 'C1' && substr($bophan['tenbophan'], 0, 2) == 'NS' && strpos($bophan['tenbophan'], 'Nhân sự')){ ?>
+                <?php if($macv != 'C1' || substr($bophan['mabophan'], 0, 2) == 'NS' && str_contains($bophan['tenbophan'], 'Nhân sự')) { ?>
                     <div class="row add__btn btn btn-primary">
                         <a href="content_plan-add.php" class="add__plans"
                             >Thêm Kế Hoạch</a

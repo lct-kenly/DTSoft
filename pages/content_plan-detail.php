@@ -369,17 +369,19 @@ if ($makehoach) {
                                     </p>
                                 </div>
 
-                                <div class="col-md-12 mt-4">
-                                    <button class="btn btn-info text-white fs-5" data-bs-toggle="modal" data-bs-target="#modal-plan-edit">
-                                        <i class="fa-regular fa-pen-to-square me-2"></i>
-                                        Chỉnh sửa kế hoạch
-                                    </button>
+                                <?php if ($macv != 'C1') { ?>
+                                    <div class="col-md-12 mt-4">
+                                        <button class="btn btn-info text-white fs-5" data-bs-toggle="modal" data-bs-target="#modal-plan-edit">
+                                            <i class="fa-regular fa-pen-to-square me-2"></i>
+                                            Chỉnh sửa kế hoạch
+                                        </button>
 
-                                    <button class="btn btn-primary text-white fs-5 ms-4 js-add-staff" data-bs-toggle="modal" data-bs-target="#modal-plan">
-                                        <i class="fa-solid fa-plus me-2"></i>
-                                        Thêm nhân viên
-                                    </button>
-                                </div>
+                                        <button class="btn btn-primary text-white fs-5 ms-4 js-add-staff" data-bs-toggle="modal" data-bs-target="#modal-plan">
+                                            <i class="fa-solid fa-plus me-2"></i>
+                                            Thêm nhân viên
+                                        </button>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -396,7 +398,12 @@ if ($makehoach) {
                                         <?php foreach ($danhsachchitieu as $item) { ?>
                                             <th scope="col"><?= $item['tenchitieu'] ?></th>
                                         <?php } ?>
-                                        <th scope="col">Action</th>
+
+
+                                        <?php if ($macv != 'C1') { ?>
+                                            <th scope="col">Action</th>
+                                        <?php } ?>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody class="align-middle">
@@ -412,21 +419,23 @@ if ($makehoach) {
                                                 <td><?= number_format($chitieu['chitieucandat'], 0, ',', '.') ?></td>
                                             <?php } ?>
 
-                                            <td>
-                                                <button class="btn btn-info text-white fs-5 js-edit-staff" data-bs-toggle="modal" data-bs-target="#modal-plan-edit-staff" data-manv="<?= $item['manhanvien'] ?>" data-tennv="<?= $item['hoten'] ?>">
-                                                    <i class="fa-regular fa-pen-to-square"></i>
+                                            <?php if ($macv != 'C1') { ?>
+                                                <td>
+                                                    <button class="btn btn-info text-white fs-5 js-edit-staff" data-bs-toggle="modal" data-bs-target="#modal-plan-edit-staff" data-manv="<?= $item['manhanvien'] ?>" data-tennv="<?= $item['hoten'] ?>">
+                                                        <i class="fa-regular fa-pen-to-square"></i>
 
-                                                    <?php foreach ($danhsachchitieunhanvien as $chitieu) { ?>
-                                                        <input type="hidden" name="machitieu[]" value="<?= $chitieu['machitieu'] ?>">
-                                                        <input type="hidden" name="tenchitieu[]" value="<?= $chitieu['tenchitieu'] ?>">
-                                                        <input type="hidden" name="chitieu[]" value="<?= $chitieu['chitieucandat'] ?>">
-                                                    <?php } ?>
+                                                        <?php foreach ($danhsachchitieunhanvien as $chitieu) { ?>
+                                                            <input type="hidden" name="machitieu[]" value="<?= $chitieu['machitieu'] ?>">
+                                                            <input type="hidden" name="tenchitieu[]" value="<?= $chitieu['tenchitieu'] ?>">
+                                                            <input type="hidden" name="chitieu[]" value="<?= $chitieu['chitieucandat'] ?>">
+                                                        <?php } ?>
 
-                                                </button>
-                                                <button class="btn btn-danger fs-5" data-bs-toggle="modal" data-bs-target="#modal-delete-staff" data-manv="<?=$item['manhanvien'] ?>">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </button>
-                                            </td>
+                                                    </button>
+                                                    <button class="btn btn-danger fs-5" data-bs-toggle="modal" data-bs-target="#modal-delete-staff" data-manv="<?=$item['manhanvien'] ?>">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </button>
+                                                </td>
+                                            <?php } ?>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
