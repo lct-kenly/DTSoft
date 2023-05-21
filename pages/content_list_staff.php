@@ -1,22 +1,46 @@
 <?php
 include('../admin/config.php');
 
-$disable = "";
+$show = "";
  
 $malevel = $chucvu["machucvu"];
 
-if($malevel == "C1" ){
-    $disable = "disabled";
+$currentBophan = $bophan["mabophan"];
+
+$currentKhuvuc = $bophan["makhuvuc"];
+
+$Nhansu = substr($currentBophan,0,2);
+
+if($malevel == "C3" || ($Nhansu == "NS" && $malevel == "C2") ){
+    $show = "show";
 }
 
-$sql_list_staff = "SELECT nhanvien.manhanvien, hoten, tenchucvu, email, sodienthoai, quequan, hinhanh
-                                from nhanvien, taikhoan, thoigiannhanchuc, chucvu
-                                where nhanvien.manhanvien = taikhoan.manv
-                                    and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
-                                    and thoigiannhanchuc.machucvu = chucvu.machucvu
-                                    and thoigiannhanchuc.thoigianketthuc = '0000-00-00'
-                                    ";
-$result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
+if($malevel == "C2"){
+    $sql_list_staff = "SELECT nhanvien.manhanvien, hoten, tenchucvu, email, sodienthoai, quequan, hinhanh
+    from nhanvien, taikhoan, thoigiannhanchuc, chucvu, bophan
+    where nhanvien.manhanvien = taikhoan.manv
+        and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
+        and thoigiannhanchuc.machucvu = chucvu.machucvu
+        and thoigiannhanchuc.thoigianketthuc = '0000-00-00'
+        and nhanvien.mabophan = bophan.mabophan
+        and nhanvien.mabophan = '" . $currentBophan . "'
+        and bophan.makhuvuc = '" . $currentKhuvuc . "'
+        ";
+    $result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
+}
+if($malevel == "C3"){
+    $sql_list_staff = "SELECT nhanvien.manhanvien, hoten, tenchucvu, email, sodienthoai, quequan, hinhanh
+    from nhanvien, taikhoan, thoigiannhanchuc, chucvu, bophan
+    where nhanvien.manhanvien = taikhoan.manv
+        and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
+        and thoigiannhanchuc.machucvu = chucvu.machucvu
+        and thoigiannhanchuc.thoigianketthuc = '0000-00-00'
+        and nhanvien.mabophan = bophan.mabophan
+        and bophan.makhuvuc = '" . $currentKhuvuc . "'
+        ";
+    $result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
+}
+
 ?>
 
 
@@ -55,7 +79,7 @@ $result_list_staff = mysqli_query($ketnoi, $sql_list_staff);
             <div class="row">
                 <div class="header__staff">
                     <h2 class="header__title">Danh sách nhân viên</h2>
-                    <?php if($disable == "") { ?>
+                    <?php if($show == "show") { ?>
                     <div class="header__staff_btn">
                         <a href="content_add_staff.php" class="btn__add-staff" >
                             Thêm nhân viên

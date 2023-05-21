@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2023 at 06:27 PM
+-- Generation Time: May 21, 2023 at 09:03 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -89,9 +89,6 @@ INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `
 ('KH01', 'NV2', 'CT01', '1', 700000000, 0),
 ('KH01', 'NV2', 'CT02', '1', 250, 0),
 ('KH01', 'NV2', 'CT03', '2', 700000000, 0),
-('KH03', 'NV005', 'CT01', '', 700000000, 0),
-('KH03', 'NV005', 'CT02', '', 250, 0),
-('KH03', 'NV005', 'CT03', '', 700000000, 0),
 ('KH03', 'NV1', 'CT01', '2', 700000000, 0),
 ('KH03', 'NV1', 'CT02', '2', 250, 0),
 ('KH03', 'NV1', 'CT03', '2', 700000000, 0),
@@ -104,9 +101,40 @@ INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `
 ('KH04', 'NV3', 'CT01', '1', 70000000, 0),
 ('KH04', 'NV3', 'CT02', '1', 250, 0),
 ('KH04', 'NV3', 'CT03', '1', 700000000, 0),
-('KH04', 'NV4', 'CT01', '1', 70000000, 0),
-('KH04', 'NV4', 'CT02', '1', 250, 0),
-('KH04', 'NV4', 'CT03', '1', 700000000, 0);
+('KH05', 'NV1', 'CT01', '2', 700000000, 0),
+('KH05', 'NV1', 'CT02', '2', 250, 0),
+('KH05', 'NV1', 'CT04', '2', 100, 0),
+('KH05', 'NV1', 'CT05', '2', 1200, 0),
+('KH05', 'NV2', 'CT01', '1', 700000000, 0),
+('KH05', 'NV2', 'CT02', '1', 250, 0),
+('KH05', 'NV2', 'CT04', '1', 100, 0),
+('KH05', 'NV2', 'CT05', '1', 1200, 0),
+('KH05', 'NV3', 'CT01', '1', 700000000, 0),
+('KH05', 'NV3', 'CT02', '1', 250, 0),
+('KH05', 'NV3', 'CT04', '1', 100, 0),
+('KH05', 'NV3', 'CT05', '1', 1200, 0),
+('KH05', 'NV4', 'CT01', '1', 2147483647, 0),
+('KH05', 'NV4', 'CT02', '1', 250, 0),
+('KH05', 'NV4', 'CT04', '1', 100, 0),
+('KH05', 'NV4', 'CT05', '1', 1200, 0),
+('KH06', 'NV1', 'CT01', '2', 700000000, 0),
+('KH06', 'NV1', 'CT02', '2', 250, 0),
+('KH06', 'NV1', 'CT03', '2', 1000, 0),
+('KH06', 'NV1', 'CT04', '2', 1000, 0),
+('KH06', 'NV1', 'CT05', '2', 1000, 0),
+('KH06', 'NV1', 'CT06', '2', 1000, 0),
+('KH06', 'NV2', 'CT01', '1', 700000000, 0),
+('KH06', 'NV2', 'CT02', '1', 250, 0),
+('KH06', 'NV2', 'CT03', '1', 1000, 0),
+('KH06', 'NV2', 'CT04', '1', 1000, 0),
+('KH06', 'NV2', 'CT05', '1', 1000, 0),
+('KH06', 'NV2', 'CT06', '1', 1000, 0),
+('KH06', 'NV3', 'CT01', '1', 700000000, 0),
+('KH06', 'NV3', 'CT02', '1', 250, 0),
+('KH06', 'NV3', 'CT03', '1', 1000, 0),
+('KH06', 'NV3', 'CT04', '1', 1000, 0),
+('KH06', 'NV3', 'CT05', '1', 1000, 0),
+('KH06', 'NV3', 'CT06', '1', 1000, 0);
 
 -- --------------------------------------------------------
 
@@ -222,7 +250,11 @@ CREATE TABLE `kehoachgiaoviec` (
 INSERT INTO `kehoachgiaoviec` (`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `makhuvuc`, `mabophan`) VALUES
 ('KH01', '                                                                        Kế hoạch phòng Kinh doanh 0011                                                                                                                                                       ', '2023-01-01', '2023-05-16', '2023-12-31', 'Đã hoàn thành', 'CT', 'KD001'),
 ('KH03', 'MO TA', '2023-01-01', '2023-12-31', '2023-12-31', 'Đang thực hiện', 'CT', 'KD001'),
-('KH04', 'MO TA', '2023-05-16', '2023-05-16', '2023-05-16', 'Đang thực hiện', 'CT', 'KD001');
+('KH04', 'MO TA', '2023-05-16', '2023-05-16', '2023-05-16', 'Đang thực hiện', 'CT', 'KD001'),
+('KH05', 'Kế hoạch làm việc bộ phận kế toán', '2023-05-20', '2023-05-20', '2023-05-20', 'Đang thực hiện', 'CT', 'KD001'),
+('KH06', 'TEST', '2023-05-20', '2023-05-20', '2023-05-20', 'Đang thực hiện', 'CT', 'KD001'),
+('TEST', 'SKJDSJH', '2023-05-20', '2023-05-20', '2023-05-20', 'Đang thực hiện', 'CT', 'KD001'),
+('TEST2', 'MO TA', '2023-05-20', '2023-05-20', '2023-05-20', 'Đang thực hiện', 'CT', 'KD001');
 
 -- --------------------------------------------------------
 
@@ -259,7 +291,7 @@ CREATE TABLE `nhanvien` (
   `dantoc` varchar(50) NOT NULL COMMENT 'nhân viên thuộc dân tộc',
   `quequan` varchar(255) NOT NULL COMMENT 'quê quán của nhân viên',
   `sodienthoai` varchar(15) NOT NULL COMMENT 'số điện thoại của nhân viên',
-  `hinhanh` varchar(255) NOT NULL COMMENT 'hình ảnh đại diện cho nhân viên',
+  `hinhanh` varchar(255) NOT NULL DEFAULT 'avatar-default.jfif' COMMENT 'hình ảnh đại diện cho nhân viên',
   `macongviec` varchar(10) NOT NULL COMMENT 'mã số công việc nhân việc phụ trách',
   `mabophan` varchar(10) NOT NULL COMMENT 'mã số bộ phận nhân việc tiếp nhận làm việc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -269,11 +301,14 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manhanvien`, `hoten`, `ngaysinh`, `gioitinh`, `noisinh`, `dantoc`, `quequan`, `sodienthoai`, `hinhanh`, `macongviec`, `mabophan`) VALUES
-('NV005', 'NGUYEN VAN A', '2023-05-16', 'Nam', '', 'KINH', 'CT', '0123456789', 'hp-eliteone-870-g9-aio-i7-76n72pa-3.jpg', 'CV1', 'KD001'),
-('NV1', 'Trần Văn A', '2000-02-20', 'Nam', 'Cần Thơ', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV1', 'KD001'),
-('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV4', 'KD001'),
-('NV3', 'Trần Văn C', '2000-03-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV5', 'KD001'),
-('NV4', 'Trần Văn D', '2000-03-15', 'Nam', 'Nha Trang', 'Kinh', 'Cần thơ', '0780898586', '1.jpg', 'CV6', 'KD001');
+('NV1', 'Trần Văn A', '2000-02-20', 'Nam', 'Cần Thơ', 'Kinh', 'Cần thơ', '0780898586', 'apple-macbook-air-2020-mgn63saa638168474828249381.jpg', 'CV1', 'KD001'),
+('NV10', 'NGUYEN VAN A', '2023-05-20', 'Nam', '', 'KINH', 'CAN THO', '0123456789', 'avatar-default.jfif', 'CV2', 'NS001'),
+('NV2', 'Trần Văn B', '2000-03-17', 'Nam', 'Cà Nau', 'Kinh', 'Cần thơ', '0780898586', 'vi-vn-apple-macbook-air-2020-mgn63saa-thumbvideo.jpg', 'CV4', 'KD001'),
+('NV3', 'Trần Văn T', '2000-04-16', 'Nam', 'Vũng Tàu', 'Kinh', 'Cần thơ', '0780898587', 'dell-gaming-g15-5511-i5-70266676-fix-ab-06-1020x570.jpg', 'CV5', 'KT001'),
+('NV4', 'Nguyễn Văn D', '2023-05-19', 'Nam', '', 'Kinh', 'Cần Thơ', '0123456789', 'vi-vn-dell-gaming-g15-5511-i5-70266676-7.jpg', 'CV1', 'KD001'),
+('NV7', 'Nguyễn Văn ABC', '2023-05-20', 'Nam', '', 'Kinh', 'Hậu Giang', '0123456789', 'camera-ip-360-do-3mp-tp-link-tapo-c210-6-1-org.jpg', 'CV3', 'KD001'),
+('NV8', 'NGUYEN VAN A', '2023-05-20', 'Nam', '', 'KINH', 'CAN THO', '0123456789', '', 'CV1', 'KD001'),
+('NV9', 'NGUYEN VAN A', '2023-05-20', 'Nam', '', 'KINH', 'CAN THO', '0123456789', 'avatar-default.jfif', 'CV1', 'KD001');
 
 -- --------------------------------------------------------
 
@@ -299,8 +334,11 @@ INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`, `tra
 (13, 'NV1', 'giamdoc', 'giamdoc@gmail.com', '123', 3, 'hoạt động'),
 (14, 'NV2', 'truongphong', 'truongphong@gmail.com', '123', 2, 'hoạt động'),
 (15, 'NV3', 'ketoan', 'ketoan@gmail.com', '123', 1, 'hoạt động'),
-(16, 'NV4', 'kinhdoanh', 'kinhdoanh@gmail.com', '123', 1, 'hoạt động'),
-(24, 'NV005', 'KD001-NV005', 'KD001-NV005@gmail.com', '123456', 1, '');
+(25, 'NV4', 'KD001-NV4', 'KD001-NV4@gmail.com', '123456', 1, ''),
+(27, 'NV7', 'KD001-NV7', 'KD001-NV7@gmail.com', '123456', 1, ''),
+(28, 'NV8', 'KD001-NV8', 'KD001-NV8@gmail.com', '123', 1, ''),
+(29, 'NV9', 'KD001-NV9', 'KD001-NV9@gmail.com', '123', 1, ''),
+(30, 'NV10', 'NS001-NV10', 'NS001-NV10@gmail.com', '123', 2, '');
 
 -- --------------------------------------------------------
 
@@ -349,11 +387,14 @@ CREATE TABLE `thoigiannhanchuc` (
 --
 
 INSERT INTO `thoigiannhanchuc` (`manhanvien`, `machucvu`, `thoigianbatdau`, `thoigianketthuc`) VALUES
-('NV005', 'C1', '2023-05-16', '0000-00-00'),
 ('NV1', 'C3', '2023-01-01', '0000-00-00'),
+('NV10', 'C2', '2023-05-20', '0000-00-00'),
 ('NV2', 'C2', '2023-02-01', '0000-00-00'),
 ('NV3', 'C3', '2023-06-01', '0000-00-00'),
-('NV4', 'C3', '2023-06-01', '0000-00-00');
+('NV4', 'C2', '2023-05-19', '0000-00-00'),
+('NV7', 'C1', '2023-05-20', '0000-00-00'),
+('NV8', 'C3', '2023-05-20', '0000-00-00'),
+('NV9', 'C2', '2023-05-20', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -458,7 +499,7 @@ ALTER TABLE `thoigiannhanchuc`
 -- AUTO_INCREMENT for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables

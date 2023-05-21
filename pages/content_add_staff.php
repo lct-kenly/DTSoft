@@ -3,6 +3,29 @@
     if(!isset($_SESSION['username'])) {
         header("location: ./login.php");
     }
+
+    
+
+    $disable = "";
+ 
+    $malevel = $chucvu["machucvu"];
+    
+    $currentBophan = $bophan["mabophan"];
+
+    $Nhansu = substr($currentBophan,0,2);
+
+    if(!($malevel == "C3" || ($Nhansu == "NS" && $malevel == "C2") )){       
+        header("location: ..//pages/index.php");
+    }
+    
+    $currentKhuvuc = $bophan["makhuvuc"];
+    
+    $tenkhuvuc =  $ketnoi->query("SELECT * FROM  `khuvuc` WHERE makhuvuc = '".$currentKhuvuc."'")->fetch_array();
+    
+    if($malevel == "C1" ){
+        $disable = "disabled";
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +62,7 @@
     $sql_select_position = "SELECT machucvu, tenchucvu FROM chucvu";
     $result_select_position = mysqli_query($ketnoi,$sql_select_position);
 
-    $sql_select_department = "SELECT mabophan, tenbophan, khuvuc.tenkhuvuc FROM bophan, khuvuc WHERE bophan.makhuvuc = khuvuc.makhuvuc";
+    $sql_select_department = "SELECT mabophan, tenbophan, khuvuc.tenkhuvuc FROM bophan, khuvuc WHERE bophan.makhuvuc = khuvuc.makhuvuc and bophan.makhuvuc = '".$currentKhuvuc."   '";
     $result_select_department = mysqli_query($ketnoi,$sql_select_department);
     
 

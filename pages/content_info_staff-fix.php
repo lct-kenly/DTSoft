@@ -8,7 +8,15 @@ $disable = "";
  
 $malevel = $chucvu["machucvu"];
 
-if($malevel == "C1" ){
+$currentBophan = $bophan["mabophan"];
+
+$currentKhuvuc = $bophan["makhuvuc"];
+
+$Nhansu = substr($currentBophan,0,2);
+
+$tenkhuvuc =  $ketnoi->query("SELECT * FROM  `khuvuc` WHERE makhuvuc = '".$currentKhuvuc."'")->fetch_array();
+
+if(!($malevel == "C3" || ($Nhansu == "NS" && $malevel == "C2") )){
     $disable = "disabled";
 }
 
@@ -28,8 +36,12 @@ $row_result_info = mysqli_fetch_array($result_info);
 $sql_select_position = "SELECT machucvu, tenchucvu FROM chucvu";
 $result_select_position = mysqli_query($ketnoi, $sql_select_position);
 
-$sql_select_department = "SELECT mabophan, tenbophan FROM bophan";
+$sql_select_department = "SELECT mabophan, tenbophan FROM bophan ";
 $result_select_department = mysqli_query($ketnoi, $sql_select_department);
+
+$sql_select_part_department = "SELECT mabophan, tenbophan FROM bophan where makhuvuc = '".$currentKhuvuc."'";
+$result_select_part_department = mysqli_query($ketnoi, $sql_select_part_department);
+
 
 $sql_select_area = "SELECT makhuvuc, tenkhuvuc FROM khuvuc";
 $result_select_area = mysqli_query($ketnoi, $sql_select_area);
@@ -203,21 +215,15 @@ if($disable == ""){
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Khu vực:</label>
-                                            <select class="form-select fs-5" name="staffArea" id="staffArea" <?= $disable ?>>
-                                                <option selected value="<?= $row_result_info["makhuvuc"] ?>"><?= $row_result_info["makhuvuc"] ?> - <?= $row_result_info["tenkhuvuc"] ?></option>
-                                                <?php
-                                                while ($row_select_area = mysqli_fetch_array($result_select_area)) {
-                                                    echo "<option value=\"" . $row_select_area["makhuvuc"] . "\">" . $row_select_area["makhuvuc"] . " - " . $row_select_area["tenkhuvuc"] . "</option>";
-                                                }
-                                                ?>
-                                            </select>
+                                            <input type="text" class="form-control fs-5" value="<?= $currentKhuvuc ?> - <?=$tenkhuvuc["tenkhuvuc"]?>" disabled> 
+                                            <input type="text" class="form-control fs-5" name="staffArea" hidden value="<?= $currentKhuvuc ?>" disabled>                                           
                                         </div>
                                     </div>
                                     <div class="col-md-6 mt-4">
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Chức vụ:</label>
                                             <select class="form-select fs-5" name="staffPosition" <?= $disable ?>>
-                                                <option selected value="<?= $row_result_info["machucvu"] ?>"><?= $row_result_info["machucvu"] ?> - <?= $row_result_info["tenchucvu"] ?></option>
+                                               
                                                 <?php
                                                 while ($row_select_position = mysqli_fetch_array($result_select_position)) {
                                                     echo "<option value=\"" . $row_select_position["machucvu"] . "\">" . $row_select_position["machucvu"] . " - " . $row_select_position["tenchucvu"] . "</option>";
@@ -232,6 +238,11 @@ if($disable == ""){
                                         <div class="mb-3">
                                             <label class="form-label fs-5 fw-bold">Phòng ban:</label>
                                             <select class="form-select fs-5" name="staffDepartment" id="staffDepartment" <?= $disable ?>>
+                                            <?php
+                                                while ($row_select_part_department = mysqli_fetch_array($result_select_part_department)) {
+                                                    echo "<option value=\"" . $row_select_part_department["mabophan"] . "\">" . $row_select_part_department["mabophan"] . " - " . $row_select_part_department["tenbophan"] . "</option>";
+                                                }
+                                                ?>
 
                                             </select>
                                         </div>
@@ -338,15 +349,7 @@ if($disable == ""){
         var selectedFruit = this.value;
         // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // Nhận kết quả từ tập tin PHP xử lý
-                var result = this.responseText;
-                document.getElementById("staffDepartment").innerHTML = result;
-
-
-            }
-        };
+        
 
         var manv = '<?= $row_result_info["manhanvien"] ?>';
         // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
@@ -361,15 +364,7 @@ if($disable == ""){
             var selectedFruit = this.value;
             // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến tập tin PHP xử lý
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Nhận kết quả từ tập tin PHP xử lý
-                    var result = this.responseText;
-                    document.getElementById("staffDepartment").innerHTML = result;
-
-
-                }
-            };
+            
 
             var manv = '<?= $row_result_info["manhanvien"] ?>';
             // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn

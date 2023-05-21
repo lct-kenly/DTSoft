@@ -10,6 +10,8 @@ if (isset($_SESSION['username'])) {
 }
 
 $disable = "";
+
+$disableNV = "";
  
 $check = $chucvu["machucvu"];
 
@@ -17,7 +19,9 @@ if($check == "C2" || $check == "C3"){
     $disable = "disabled";
 }
 
-
+if($check == "C1"){
+    $disableNV = "disabled";
+}
 
 
 ?>
@@ -316,9 +320,11 @@ if($check == "C2" || $check == "C3"){
                                 </a>
 
                                 <ul class="sidebar__menu-sub">
+                                <?php if($disableNV == "") { ?>
                                     <li class="sidebar__menu-sub-item">
                                         <a href="" class="sidebar__menu-sub-link btn-change-content" data_content="../pages/content_list_staff.php">Danh sách nhân viên</a>
                                     </li>
+                                    <?php }?>
                                     <?php if($disable == "") { ?>
                                     <li class="sidebar__menu-sub-item">
                                         <a href="" class="sidebar__menu-sub-link btn-change-content" data_content="../pages/content_report.php">
