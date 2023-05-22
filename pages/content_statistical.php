@@ -159,8 +159,7 @@ if (!isset($_SESSION['username'])) {
 
                 //alert(result);
                 bodyTable.innerHTML = render(listStaff);
-                //console.log(result);
-
+                //console.log(result)
                 
             }
         };
@@ -252,14 +251,6 @@ if (!isset($_SESSION['username'])) {
     <script>
         var listStaff = [];
 
-
-
-
-
-
-
-
-
         const bodyTable = document.querySelector(
             ".statistical-manager-content__table-staff tbody"
         );
@@ -272,12 +263,16 @@ if (!isset($_SESSION['username'])) {
                 return `
                     <tr>
                         <th scope="row">${index + 1}</th>
-                        <td>${item.MANV}</td>
+                        <td>
+                            <a href="content_info_staff-fix.php?manv=${item.MANV}">${item.MANV}</a>
+                        </td>
                         <td>${item.HOTEN_NV}</td>
                         <td>${item.TEN_CV}</td>
                         <td>${item.TEN_KV}</td>
                         <td>${item.TEN_BP}</td>
-                        <td>${item.MAKEHOACH}</td>
+                        <td>
+                            <a href=""content_plan-detail.php?makehoach=${item.MAKEHOACH}">${item.MAKEHOACH}</a>
+                        </td>
                         <td>${item.TEN_CT}</td>
                         <td>${item.CT_CANDAT}</td>
                         <td>${item.CT_DADAT}</td>

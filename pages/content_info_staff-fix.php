@@ -20,7 +20,7 @@ if(!($malevel == "C3" || ($Nhansu == "NS" && $malevel == "C2") )){
     $disable = "disabled";
 }
 
-$info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkhuvuc, ngaysinh, gioitinh, sodienthoai, email, tentk, matkhau, thoigiannhanchuc.machucvu, nhanvien.mabophan, bophan.makhuvuc
+$info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkhuvuc, ngaysinh, gioitinh, sodienthoai, email, tentk, matkhau, thoigiannhanchuc.machucvu, nhanvien.mabophan, bophan.makhuvuc, cccd
                     from nhanvien, bophan, chucvu, khuvuc, taikhoan, thoigiannhanchuc
                     WHERE nhanvien.mabophan = bophan.mabophan
                     and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
@@ -81,6 +81,7 @@ if($disable == ""){
         $khuvuc = $_POST['staffArea'];
         $ngaysinh = $_POST['staffDateofBirth'];
         $gioitinh = $_POST['staffSexual'];
+        $cccd = $_POST['staffIdCard'];
         $sdt = $_POST['staffPhone'];
         $matkhau = $_POST['staffPassword'];
 
@@ -108,7 +109,7 @@ if($disable == ""){
         // }
     
     
-        $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $avatar . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
+        $sql_update = "UPDATE `nhanvien` SET `hoten`='" . $hoten . "',`ngaysinh`='" . $ngaysinh . "',`gioitinh`='" . $gioitinh . "',`sodienthoai`='" . $sdt . "',`mabophan`='" . $phongban . "',`hinhanh`='" . $avatar . "' ,`cccd`='" . $cccd . "'  WHERE  manhanvien = '" . $_SESSION["staff-fix"] . "'";
         //echo $sql_update;
     
     
@@ -288,6 +289,14 @@ if($disable == ""){
                                                 Số điện thoại:
                                             </label>
                                             <input type="text" class="form-control fs-5" name="staffPhone" value="<?= $row_result_info["sodienthoai"] ?>" <?= $disable ?>>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">CCCD:</label>
+                                            <input type="text" class="form-control fs-5" name="staffIdCard" value="<?= $row_result_info["cccd"] ?>" <?= $disable ?>>
 
                                         </div>
                                     </div>

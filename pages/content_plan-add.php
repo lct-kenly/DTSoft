@@ -405,7 +405,7 @@ if (isset($_POST['addPlan'])) {
               <p class="member__name">Tên nhân viên: </p>
               <p class="member__desc" id="hienthi_manvtruongnhom">Chọn mã nhân viên sẽ tự điền tên</p>
               <p class="member__position">Chức vụ: </p>
-              <p class="member__desc" id="hienthi_cvtruongnhom">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+              <p class="member__desc" id="hienthi_cvtruongnhom"></p>
               <p class="member__location">Khu vực: </p>
               <p class="member__desc" id="hienthi_kvtruongnhom">Chọn mã nhân viên sẽ tự điền khu vực</p>
             </div>
@@ -427,11 +427,11 @@ if (isset($_POST['addPlan'])) {
                 </select>
 
                 <p class="member__name">Tên nhân viên: </p>
-                <p class="member__desc" id="hienthi_manv_thamgia_1">Chọn mã nhân viên sẽ tự điền tên</p>
+                <p class="member__desc" id="hienthi_manv_thamgia_1"></p>
                 <p class="member__position">Chức vụ: </p>
-                <p class="member__desc" id="hienthi_cv_thamgia_1">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+                <p class="member__desc" id="hienthi_cv_thamgia_1"></p>
                 <p class="member__location">Khu vực: </p>
-                <p class="member__desc" id="hienthi_kv_thamgia_1">Chọn mã nhân viên sẽ tự điền khu vực</p>
+                <p class="member__desc" id="hienthi_kv_thamgia_1"></p>
               </div>
             </div>
             <div class="member__item">
@@ -444,11 +444,11 @@ if (isset($_POST['addPlan'])) {
                 </select>
 
                 <p class="member__name">Tên nhân viên: </p>
-                <p class="member__desc" id="hienthi_manv_thamgia_2">Chọn mã nhân viên sẽ tự điền tên</p>
+                <p class="member__desc" id="hienthi_manv_thamgia_2"></p>
                 <p class="member__position">Chức vụ: </p>
                 <p class="member__desc" id="hienthi_cv_thamgia_2">Chọn mã nhân viên sẽ tự điền chức vụ</p>
                 <p class="member__location">Khu vực: </p>
-                <p class="member__desc" id="hienthi_kv_thamgia_2">Chọn mã nhân viên sẽ tự điền khu vực</p>
+                <p class="member__desc" id="hienthi_kv_thamgia_2"></p>
               </div>
             </div>
             <div class="member__item">
@@ -461,11 +461,11 @@ if (isset($_POST['addPlan'])) {
                 </select>
 
                 <p class="member__name">Tên nhân viên: </p>
-                <p class="member__desc" id="hienthi_manv_thamgia_3">Chọn mã nhân viên sẽ tự điền tên</p>
+                <p class="member__desc" id="hienthi_manv_thamgia_3"></p>
                 <p class="member__position">Chức vụ: </p>
-                <p class="member__desc" id="hienthi_cv_thamgia_3">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+                <p class="member__desc" id="hienthi_cv_thamgia_3"></p>
                 <p class="member__location">Khu vực: </p>
-                <p class="member__desc" id="hienthi_kv_thamgia_3">Chọn mã nhân viên sẽ tự điền khu vực</p>
+                <p class="member__desc" id="hienthi_kv_thamgia_3"></p>
               </div>
             </div>
             <div class="member__item">
@@ -478,11 +478,11 @@ if (isset($_POST['addPlan'])) {
                 </select>
 
                 <p class="member__name">Tên nhân viên: </p>
-                <p class="member__desc" id="hienthi_manv_thamgia_4">Chọn mã nhân viên sẽ tự điền tên</p>
+                <p class="member__desc" id="hienthi_manv_thamgia_4"></p>
                 <p class="member__position">Chức vụ: </p>
-                <p class="member__desc" id="hienthi_cv_thamgia_4">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+                <p class="member__desc" id="hienthi_cv_thamgia_4"></p>
                 <p class="member__location">Khu vực: </p>
-                <p class="member__desc" id="hienthi_kv_thamgia_4">Chọn mã nhân viên sẽ tự điền khu vực</p>
+                <p class="member__desc" id="hienthi_kv_thamgia_4"></p>
               </div>
             </div>
             <div class="member__item">
@@ -495,11 +495,11 @@ if (isset($_POST['addPlan'])) {
                 </select>
 
                 <p class="member__name">Tên nhân viên: </p>
-                <p class="member__desc" id="hienthi_manv_thamgia_5">Chọn mã nhân viên sẽ tự điền tên</p>
+                <p class="member__desc" id="hienthi_manv_thamgia_5"></p>
                 <p class="member__position">Chức vụ: </p>
-                <p class="member__desc" id="hienthi_cv_thamgia_5">Chọn mã nhân viên sẽ tự điền chức vụ</p>
+                <p class="member__desc" id="hienthi_cv_thamgia_5"></p>
                 <p class="member__location">Khu vực: </p>
-                <p class="member__desc" id="hienthi_kv_thamgia_5">Chọn mã nhân viên sẽ tự điền khu vực</p>
+                <p class="member__desc" id="hienthi_kv_thamgia_5"></p>
               </div>
             </div>
 

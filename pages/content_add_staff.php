@@ -82,6 +82,7 @@
     $current_staffEmail = "";
     $current_staffUser = "";
     $current_staffPassword = "";
+    $current_staffIdCard ="";
     $current_time = date("Y-m-d H:i:s");
 
     if (isset($_GET['action'])) {
@@ -101,6 +102,7 @@
         $current_staffUser = $_POST['staffUser'];
         $current_staffPassword = $_POST['staffPassword'];
         $current_time = date("Y-m-d H:i:s");
+        $current_staffIdCard = $_POST['staffIdCard'];
 
         $current_avatar = $_FILES["avatar"]["name"];
         $tempname = $_FILES["avatar"]["tmp_name"];
@@ -123,10 +125,10 @@
         if ($check) {
             $error = "Mã nhân viên đã bị trùng lặp!";
         } else {
-            $add_staff = "INSERT INTO nhanvien (manhanvien,hoten,ngaysinh,gioitinh,dantoc,quequan,sodienthoai,hinhanh,macongviec,mabophan)
+            $add_staff = "INSERT INTO nhanvien (manhanvien,hoten,ngaysinh,gioitinh,dantoc,quequan,sodienthoai,cccd,hinhanh,macongviec,mabophan)
                                 VALUES ('" . $current_StaffID . "', '" . $current_StaffName . "', '" . $current_staffDateofBirth . "', 
                                 '" . $current_staffSexual . "', '" . $current_staffNation . "', '" . $current_staffHome . "', 
-                                '" . $current_staffPhone . "', '" . $current_avatar . "', '" . $current_staffWork . "', 
+                                '" . $current_staffPhone . "','" . $current_staffIdCard . "', '" . $current_avatar . "', '" . $current_staffWork . "', 
                                 '" . $current_staffDepartment . "' ) ";
             $add_Position = "INSERT INTO thoigiannhanchuc (manhanvien, machucvu, thoigianbatdau, thoigianketthuc)
                                 VALUES ( '" . $current_StaffID . "', '" . $current_staffPosition . "', '" . $current_time . "', '0000-00-00')";
@@ -163,6 +165,7 @@
             $current_staffEmail = "";
             $current_staffUser = "";
             $current_staffPassword = "";
+            $current_staffIdCard ="";
             unset($_SESSION['add_staff']);
         }
     }
@@ -211,6 +214,11 @@
                         <div class="input__form">
                             <label for="staffPhone" class="form-label input__label">Số điện thoại</label>
                             <input type="text" class="form-control input__value" id="staffPhone" name="staffPhone" value="<?= $current_staffPhone ?>" />
+                        </div>
+
+                        <div class="input__form">
+                            <label for="staffIdCard" class="form-label input__label">CCCD</label>
+                            <input type="text" class="form-control input__value" id="staffIdCard" name="staffIdCard" value="<?= $current_staffIdCard ?>" />
                         </div>
 
                         <!-- Home -->

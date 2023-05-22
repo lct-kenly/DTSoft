@@ -1,9 +1,29 @@
 <?php
-    require_once('../admin/config.php');
-    if(!isset($_SESSION['username'])) {
-        header("location: ./login.php");
+require_once('../admin/config.php');
+if (!isset($_SESSION['username'])) {
+    header("location: ./login.php");
+}
+
+
+
+
+function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
+{
+    $sql = "SELECT SUM(theodoikehoach.chitieuthangdatduoc) AS TONGDATDUOC
+                FROM kehoachgiaoviec, theodoikehoach
+                WHERE kehoachgiaoviec.makehoach = theodoikehoach.makehoach AND kehoachgiaoviec.makehoach = '{$makehoach}' AND theodoikehoach.manhanvien = '{$manhanvien}' AND theodoikehoach.machitieu = '{$machitieu}' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+
+    $result = $conn->query($sql)->fetch_assoc();
+
+    if (empty($result['TONGDATDUOC'])) {
+        $result['TONGDATDUOC'] = 0;
     }
+
+    return $result['TONGDATDUOC'];
+}
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -42,10 +62,33 @@
                                 <span class="card-statistical__icon">
                                     <i class="fa-solid fa-users-line"></i>
                                 </span>
-                                <p class="card-statistical__name">Nhân viên</p>
+                                <p class="card-statistical__name">TỔNG KẾ HOẠCH</p>
                             </div>
                             <div class="card-statistical__right">
-                                <p class="card-statistical__total">80</p>
+                                <p class="card-statistical__total">
+                                    <?php
+                                    if ($profile['level'] == "3") {
+                                        $sql_tongkehoach = "SELECT COUNT(kehoachgiaoviec.makehoach) TONGKEHOACH
+                                        FROM kehoachgiaoviec
+                                        WHERE kehoachgiaoviec.makhuvuc = '" . $bophan['makhuvuc'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    } elseif ($profile['level'] == "2") {
+                                        $sql_tongkehoach = "SELECT COUNT(kehoachgiaoviec.makehoach) TONGKEHOACH
+                                        FROM kehoachgiaoviec
+                                        WHERE kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    } else {
+                                        $sql_tongkehoach = "SELECT COUNT(chitietkehoach.makehoach) TONGKEHOACH
+                                        FROM kehoachgiaoviec, chitietkehoach
+                                        WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '" . $profile['manhanvien'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    }
+
+                                    //echo $sql_tongkehoach;
+                                    $TONGKEHOACH =  $ketnoi->query($sql_tongkehoach)->fetch_array();
+                                    echo $TONGKEHOACH['TONGKEHOACH'];
+
+
+                                    ?>
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -57,10 +100,35 @@
                                 <span class="card-statistical__icon">
                                     <i class="fa-solid fa-money-bill-trend-up"></i>
                                 </span>
-                                <p class="card-statistical__name">Doanh thu</p>
+                                <p class="card-statistical__name">Chỉ tiêu cần đạt</p>
                             </div>
                             <div class="card-statistical__right">
-                                <p class="card-statistical__total">$1M</p>
+                                <p class="card-statistical__total">
+
+
+                                    <?php
+                                    if ($profile['level'] == "3") {
+                                        $sql_chitieucandat = "SELECT COUNT(chitietkehoach.machitieu) TONGCHITIEU, kehoachgiaoviec.thoigianbatdau
+                                        FROM kehoachgiaoviec, chitietkehoach
+                                        WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.makhuvuc = '" . $bophan['makhuvuc'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    } elseif ($profile['level'] == "2") {
+                                        $sql_chitieucandat = "SELECT COUNT(chitietkehoach.machitieu) TONGCHITIEU, kehoachgiaoviec.thoigianbatdau
+                                        FROM kehoachgiaoviec, chitietkehoach
+                                        WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    } else {
+                                        $sql_chitieucandat = "SELECT COUNT(chitietkehoach.machitieu) TONGCHITIEU, kehoachgiaoviec.thoigianbatdau
+                                        FROM kehoachgiaoviec, chitietkehoach
+                                        WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '" . $profile['manhanvien'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    }
+
+                                    //echo $sql_chitieucandat;
+                                    $chitieucandat =  $ketnoi->query($sql_chitieucandat)->fetch_array();
+                                    echo $chitieucandat['TONGCHITIEU'];
+
+
+                                    ?>
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -72,10 +140,54 @@
                                 <span class="card-statistical__icon">
                                     <i class="fa-solid fa-users-line"></i>
                                 </span>
-                                <p class="card-statistical__name">Nhân viên</p>
+                                <p class="card-statistical__name">Tổng chỉ tiêu đã đạt</p>
                             </div>
                             <div class="card-statistical__right">
-                                <p class="card-statistical__total">80</p>
+                                <p class="card-statistical__total">
+
+
+
+                                    <?php
+                                    if ($profile['level'] == "3") {
+                                        $sql_chitieudadat = "SELECT kehoachgiaoviec.makehoach, chitietkehoach.manhanvien, chitietkehoach.machitieu, chitietkehoach.chitieucandat
+                                            FROM kehoachgiaoviec, chitietkehoach
+                                            WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.makhuvuc = '" . $bophan['makhuvuc'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    } elseif ($profile['level'] == "2") {
+                                        $sql_chitieudadat = "SELECT kehoachgiaoviec.makehoach, chitietkehoach.manhanvien, chitietkehoach.machitieu, chitietkehoach.chitieucandat
+                                            FROM kehoachgiaoviec, chitietkehoach
+                                            WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    } else {
+                                        $sql_chitieudadat = "SELECT kehoachgiaoviec.makehoach, chitietkehoach.manhanvien, chitietkehoach.machitieu, chitietkehoach.chitieucandat
+                                            FROM kehoachgiaoviec, chitietkehoach
+                                            WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '" . $profile['manhanvien'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                    }
+
+
+                                    $tongchitieudadat = [];
+
+                                    //echo $sql_chitieudadat;
+                                    $result =  $ketnoi->query($sql_chitieudadat);
+
+                                    while($row = $result->fetch_assoc()) {
+                                        $tongchitieudadat[] = $row;
+                                    }
+                                    //echo $tongchitieudadat['TONGCHITIEU'];
+                                    //print_r($tongchitieudadat);
+
+                                    
+                                    $cc = 0;
+                                    foreach ($tongchitieudadat as $item){
+                                        if($item['chitieucandat'] <= ham_get_chitieudadat($conn, $item['makehoach'], $item['manhanvien'], $item['machitieu'])){
+                                            $cc++;
+                                        }
+
+                                    }
+                                    echo $cc;
+                                    ?>
+
+
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -171,28 +283,38 @@
                         <?php
 
                         // Thực hiện truy vấn bảng theo dõi kế hoạch
-                        $sql = "SELECT * FROM theodoikehoach ORDER BY makehoach DESC LIMIT 5";
+                        if ($profile['level'] == "3") {
+                            $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
+                            FROM kehoachgiaoviec, chitietkehoach, bophan
+                            WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.makhuvuc = '" . $bophan['makhuvuc'] . "'
+                            GROUP BY kehoachgiaoviec.makehoach
+                            ORDER BY kehoachgiaoviec.thoigiandukien DESC
+                            LIMIT 0, 5";
+                        }elseif ($profile['level'] == "2") {
+                            $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
+                            FROM kehoachgiaoviec, chitietkehoach, bophan
+                            WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "'
+                            GROUP BY kehoachgiaoviec.makehoach
+                            ORDER BY kehoachgiaoviec.thoigiandukien DESC
+                            LIMIT 0, 5";
+                        }else{
+
+                        $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
+                            FROM kehoachgiaoviec, chitietkehoach, bophan
+                            WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '".$profile["manhanvien"]."'
+                            GROUP BY kehoachgiaoviec.makehoach
+                            ORDER BY kehoachgiaoviec.thoigiandukien DESC
+                            LIMIT 0, 5";
+                        }
                         $result = mysqli_query($ketnoi, $sql);
 
+                        //$arr_theodoikehoach;
                         // Lấy dữ liệu
                         while ($row = mysqli_fetch_array($result)) {
-                            $makehoach = $row[0];
-                            $manhanvien = $row[1];
-                            $machitieu = $row[2];
-                            $thang = $row[3];
-                            $chitieuthangcandat = $row[4];
+                            
+                            //$arr_theodoikehoach[] = $row;
 
-                            $sql_kehoach = "SELECT `thoigianbatdau`,`motakehoach`,`mabophan` FROM `kehoachgiaoviec` WHERE `makehoach` = '" . $makehoach . "'";
-                            $result_kehoach = mysqli_query($ketnoi, $sql_kehoach);
-                            $row_kehoach = mysqli_fetch_array($result_kehoach);
-                            $thoigianbatdau = $row_kehoach["thoigianbatdau"];
-                            $motakehoach = $row_kehoach["motakehoach"];
-                            $mabophan = $row_kehoach["mabophan"];
 
-                            $sql_bophan = "SELECT `tenbophan` FROM `bophan` WHERE `mabophan` = '" . $mabophan . "'";
-                            $result_bophan = mysqli_query($ketnoi, $sql_bophan);
-                            $row_bophan = mysqli_fetch_array($result_bophan);
-                            $tenbophan = $row_bophan["tenbophan"];
 
 
                         ?>
@@ -202,7 +324,7 @@
                                     <div class="col-md-3 d-flex justify-content-between">
                                         <div class="plan-item__timedate">
                                             <p class="lh-sm">
-                                                <?=$thoigianbatdau?>
+                                                <?= $row['thoigiandukien'] ?>
                                             </p>
                                         </div>
                                         <div class="plan-item__timeline-bar">
@@ -212,11 +334,11 @@
                                     </div>
                                     <div class="col-md-9 ps-4">
                                         <p class="plan-item__title">
-                                            <?=$tenbophan?>
+                                            <?= $row['tenbophan'] ?>
                                         </p>
                                         <p class="plan-item__des">
-                                        <?=$motakehoach?>
-                                    </p>
+                                            <?= $row['motakehoach'] ?>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

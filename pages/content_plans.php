@@ -88,7 +88,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="container-flud">
+            <div class="container-flud pb-5">
                 <div class="row header">
                     <h2 class="header__title">Danh sách kế hoạch</h2>
                 </div>
@@ -146,16 +146,15 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- Button -->
+                    <?php if($macv != 'C1' || substr($bophan['mabophan'], 0, 2) == 'NS' && str_contains($bophan['tenbophan'], 'Nhân sự')) { ?>
+                        <div class="text-end mt-5">
+                            <a href="content_plan-add.php" class="btn btn-lg btn-primary p-4">
+                                Thêm Kế Hoạch
+                            </a>
+                        </div>
+                    <?php } ?>
                 </div>
-
-                <!-- Button -->
-                <?php if($macv != 'C1' || substr($bophan['mabophan'], 0, 2) == 'NS' && str_contains($bophan['tenbophan'], 'Nhân sự')) { ?>
-                    <div class="row add__btn btn btn-primary">
-                        <a href="content_plan-add.php" class="add__plans"
-                            >Thêm Kế Hoạch</a
-                        >
-                    </div>
-                <?php } ?>
             </div>
         </div>
     </body>

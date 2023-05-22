@@ -12,7 +12,7 @@ if (isset($_GET['manv'])) {
     $_SESSION["staff-fix"] = $_GET['manv'];
 }
 
-$info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkhuvuc, ngaysinh, gioitinh, sodienthoai, email, tentk, matkhau 
+$info = "SELECT nhanvien.manhanvien, hoten, hinhanh, tenbophan, tenchucvu, tenkhuvuc, ngaysinh, gioitinh, sodienthoai, email, tentk, matkhau, cccd 
             from nhanvien, bophan, chucvu, khuvuc, taikhoan, thoigiannhanchuc
             WHERE nhanvien.mabophan = bophan.mabophan
             and nhanvien.manhanvien = thoigiannhanchuc.manhanvien
@@ -148,6 +148,13 @@ if (isset($_POST['button_save'])) {
                                                 Số điện thoại:
                                             </label>
                                             <input type="text" class="form-control fs-5" name="staffPhone" value="<?= $row_result_info["sodienthoai"] ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mt-4">
+                                        <div class="mb-3">
+                                            <label class="form-label fs-5 fw-bold">CCCD:</label>
+                                            <input class="form-control fs-5" value="<?= $row_result_info["cccd"] ?>" readonly disabled>
                                         </div>
                                     </div>
 

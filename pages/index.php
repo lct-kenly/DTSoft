@@ -84,147 +84,7 @@ if($check == "C1"){
                         </a>
 
                         <ul class="header__menu">
-                            <li class="header__menu-item header__notify">
-                                <i class="fa-regular fa-bell header__menu-icon"></i>
-
-                                <!-- Start Notify -->
-                                <div class="header__notify-container">
-                                    <ul class="header__notify-list">
-                                        <li class="header__notify-item active">
-                                            <a href="" class="header__notify-link">
-                                                <span class="header__notify-icon"><i class="fa-solid fa-envelope"></i></span>
-                                                <div class="header__notify-content">
-                                                    <h6 class="header__notify-title">
-                                                        Thông báo
-                                                    </h6>
-                                                    <p class="header__notify-des">
-                                                        Lorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and
-                                                        typesetting
-                                                        industry. Lorem
-                                                        Ipsum has been the
-                                                        industry's standard
-                                                        dummy text ever
-                                                        since the 1500s,
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="header__notify-item">
-                                            <a href="" class="header__notify-link">
-                                                <span class="header__notify-icon"><i class="fa-solid fa-envelope"></i></span>
-                                                <div class="header__notify-content">
-                                                    <h6 class="header__notify-title">
-                                                        Thông báo
-                                                    </h6>
-                                                    <p class="header__notify-des">
-                                                        Lorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and
-                                                        typesetting
-                                                        industry. Lorem
-                                                        Ipsum has been the
-                                                        industry's standard
-                                                        dummy text ever
-                                                        since the 1500s,
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="header__notify-item active">
-                                            <a href="" class="header__notify-link">
-                                                <span class="header__notify-icon"><i class="fa-solid fa-envelope"></i></span>
-                                                <div class="header__notify-content">
-                                                    <h6 class="header__notify-title">
-                                                        Thông báo
-                                                    </h6>
-                                                    <p class="header__notify-des">
-                                                        Lorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and
-                                                        typesetting
-                                                        industry. Lorem
-                                                        Ipsum has been the
-                                                        industry's standard
-                                                        dummy text ever
-                                                        since the 1500s,
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="header__notify-item active">
-                                            <a href="" class="header__notify-link">
-                                                <span class="header__notify-icon"><i class="fa-solid fa-envelope"></i></span>
-                                                <div class="header__notify-content">
-                                                    <h6 class="header__notify-title">
-                                                        Thông báo
-                                                    </h6>
-                                                    <p class="header__notify-des">
-                                                        Lorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and
-                                                        typesetting
-                                                        industry. Lorem
-                                                        Ipsum has been the
-                                                        industry's standard
-                                                        dummy text ever
-                                                        since the 1500s,
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="header__notify-item active">
-                                            <a href="" class="header__notify-link">
-                                                <span class="header__notify-icon"><i class="fa-solid fa-envelope"></i></span>
-                                                <div class="header__notify-content">
-                                                    <h6 class="header__notify-title">
-                                                        Thông báo
-                                                    </h6>
-                                                    <p class="header__notify-des">
-                                                        Lorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and
-                                                        typesetting
-                                                        industry. Lorem
-                                                        Ipsum has been the
-                                                        industry's standard
-                                                        dummy text ever
-                                                        since the 1500s,
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li class="header__notify-item active">
-                                            <a href="" class="header__notify-link">
-                                                <span class="header__notify-icon"><i class="fa-solid fa-envelope"></i></span>
-                                                <div class="header__notify-content">
-                                                    <h6 class="header__notify-title">
-                                                        Thông báo
-                                                    </h6>
-                                                    <p class="header__notify-des">
-                                                        Lorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and
-                                                        typesetting
-                                                        industry. Lorem
-                                                        Ipsum has been the
-                                                        industry's standard
-                                                        dummy text ever
-                                                        since the 1500s,
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- End Notify -->
-                            </li>
+                            
                             <li class="header__menu-item header__profile">
                                 <!-- Start Profile -->
                                 <?php if ($acc != '') {
@@ -357,12 +217,22 @@ if($check == "C1"){
                                 </a>
                             </li>
                             <li class="sidebar__item">
-                                <a href="#" class="sidebar__link btn-change-content" data_content="../pages/content_statistical.php">
+                                <a href="#" class="sidebar__link">
                                     <span class="sidebar__icon">
                                         <i class="fa-solid fa-chart-pie"></i>
                                     </span>
                                     Thống kê
                                 </a>
+
+                                <ul class="sidebar__menu-sub">
+                                    <li class="sidebar__menu-sub-item">
+                                        <a href="" class="sidebar__menu-sub-link btn-change-content" data_content="../pages/content_statistical-2.php">Kết quả giao việc</a>
+                                    </li>
+
+                                    <li class="sidebar__menu-sub-item">
+                                        <a href="" class="sidebar__menu-sub-link btn-change-content" data_content="../pages/content_statistical.php">Kết quả đánh giá</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
