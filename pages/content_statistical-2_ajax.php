@@ -8,6 +8,9 @@
     if (!isset($_SESSION['username'])) {
         header("location: ../dang-nhap");
     }
+    if(!isset($_SESSION['makhuvuc'])) {
+        $_SESSION['makhuvuc'] = 'ALL';
+    }
 
     $makhuvuc = isset($_POST['makhuvuc']) ? $_POST['makhuvuc'] : '';
     $mabophan = isset($_POST['mabophan']) ? $_POST['mabophan'] : '';
@@ -15,7 +18,10 @@
 
     $danh_sach_bo_phan = array();
 
-    if(!empty($makhuvuc) && $makhuvuc != 'ALL') {
+    if($_SESSION['makhuvuc'] != $makhuvuc && $makhuvuc != 'ALL' ) {
+
+        $_SESSION['makhuvuc'] = $makhuvuc;
+
         $sql_bophan = "SELECT * FROM bophan WHERE makhuvuc = '{$makhuvuc}'";
 
         $result_bophan = $conn->query($sql_bophan);
@@ -26,7 +32,6 @@
         }
         
     }
-
 
     if(!empty($makhuvuc) && !empty($mabophan) && !empty($macongviec)) {
 
@@ -51,8 +56,8 @@
         $danh_sach_nhan_vien[] = $row;
     }
 
+    echo json_encode(array("nhanvien" => $danh_sach_nhan_vien, "danhsachbophan" => $danh_sach_bo_phan, "mabophan" => $_POST['mabophan']));
 
-    echo json_encode(array("nhanvien" => $danh_sach_nhan_vien, "bophan" => $danh_sach_bo_phan));
 
 
 ?>

@@ -58,7 +58,7 @@
                                 <label for="makhuvuc" class="fs-4 fw-bold mb-4">Khu vực</label>
                                 <select class="statistical-manager-content__filter form-select" aria-label="Default select example" id="makhuvuc">
                                     <option selected value="ALL">
-                                        ------ Tất cả -----
+                                            ------ Tất cả -----
                                     </option>
                                     <?php foreach ($khu_vuc as $item) { ?>
 
@@ -76,13 +76,6 @@
                                     <option selected value="ALL">
                                             ------ Tất cả -----
                                     </option>
-                                    <?php foreach ($bo_phan as $item) { ?>
-
-                                    <option value="<?= $item['mabophan'] ?>">
-                                        <?= $item['tenbophan']; ?>
-                                    </option>
-
-                                    <?php  } ?>
                                 </select>
                             </div>
 
@@ -169,7 +162,8 @@
 
         const selectKhuvuc = $('#makhuvuc');
         const selectBophan = $('#mabophan');
-        const textSelectBophan = selectBophan.text();
+        const selectVal = $('#mabophan').val();
+        const textSelectBophan = selectBophan.find('option:selected').val();
         const selectCongviec = $('#macongviec');
 
         const tableBody = $('#manager-table tbody');
@@ -210,20 +204,9 @@
                     },
                 }).done(function (response) {
 
-                    console.log(response);
-
-                    if(response.bophan.length > 0) {
-
-                        if(mabophan.value === 'ALL') {
-                            mabophan.length = 1;
-                        } else {
-                            mabophan.length = 2;
-                            mabophan.options[1] = new Option(mabophan.value, textSelectBophan);
-
-                            mabophan.selectedIndex = 2;
-                        }
-
-                        response.bophan.forEach((item, index) => {
+                    if(response.danhsachbophan.length > 0) {
+                        mabophan.length = 1;
+                        response.danhsachbophan.forEach((item, index) => {
                             mabophan.options[mabophan.options.length] = new Option(item.tenbophan, item.mabophan);
                         })
                     }

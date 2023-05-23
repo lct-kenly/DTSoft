@@ -405,7 +405,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputPassword1" class="form-label">Đánh giá chi tiết</label>
-                                            <textarea name="evaluate-detail" id="" cols="30" rows="10" class="form-control mt-3"></textarea>
+                                            <textarea name="evaluate-detail" id="" cols="30" rows="10" class="form-control mt-3 fs-4"></textarea>
                                             <span class="form-text"></span>
                                         </div>
                                         <button type="submit" name="evaluate-submit" value="submit" class="btn btn-lg btn-primary">Xác nhận</button>

@@ -168,19 +168,18 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                                     //echo $sql_chitieudadat;
                                     $result =  $ketnoi->query($sql_chitieudadat);
 
-                                    while($row = $result->fetch_assoc()) {
+                                    while ($row = $result->fetch_assoc()) {
                                         $tongchitieudadat[] = $row;
                                     }
                                     //echo $tongchitieudadat['TONGCHITIEU'];
                                     //print_r($tongchitieudadat);
 
-                                    
+
                                     $cc = 0;
-                                    foreach ($tongchitieudadat as $item){
-                                        if($item['chitieucandat'] <= ham_get_chitieudadat($conn, $item['makehoach'], $item['manhanvien'], $item['machitieu'])){
+                                    foreach ($tongchitieudadat as $item) {
+                                        if ($item['chitieucandat'] <= ham_get_chitieudadat($conn, $item['makehoach'], $item['manhanvien'], $item['machitieu'])) {
                                             $cc++;
                                         }
-
                                     }
                                     echo $cc;
                                     ?>
@@ -194,86 +193,11 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="news">
-                        <marquee direction="up" style="max-height: 80%" onmouseover="this.stop()" onmouseout="this.start()">
-                            <div class="news__item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img src="../asset/img/news/ky-niem-28-nam-thanh-lap-dtsoft-27-03-1995-27-03-20231679905549.jpg" alt="" class="news__img">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="news__content">
-                                            <p class="news__des">
-                                                Kỷ niệm 28 năm thành lập DTSoft (27/03/1995 - 27/03/2023)
-                                            </p>
-                                            <a href="" class="news__link">
-                                                <i class="fa-solid fa-angles-right"></i>
-                                                Xem thêm
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="news__item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img src="../asset/img/news/ky-niem-28-nam-thanh-lap-dtsoft-27-03-1995-27-03-20231679905549.jpg" alt="" class="news__img">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="news__content">
-                                            <p class="news__des">
-                                                Kỷ niệm 28 năm thành lập DTSoft (27/03/1995 - 27/03/2023)
-                                            </p>
-                                            <a href="" class="news__link">
-                                                <i class="fa-solid fa-angles-right"></i>
-                                                Xem thêm
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="news__item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img src="../asset/img/news/ky-niem-28-nam-thanh-lap-dtsoft-27-03-1995-27-03-20231679905549.jpg" alt="" class="news__img">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="news__content">
-                                            <p class="news__des">
-                                                Kỷ niệm 28 năm thành lập DTSoft (27/03/1995 - 27/03/2023)
-                                            </p>
-                                            <a href="" class="news__link">
-                                                <i class="fa-solid fa-angles-right"></i>
-                                                Xem thêm
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="news__item">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img src="../asset/img/news/ky-niem-28-nam-thanh-lap-dtsoft-27-03-1995-27-03-20231679905549.jpg" alt="" class="news__img">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="news__content">
-                                            <p class="news__des">
-                                                Kỷ niệm 28 năm thành lập DTSoft (27/03/1995 - 27/03/2023)
-                                            </p>
-                                            <a href="" class="news__link">
-                                                <i class="fa-solid fa-angles-right"></i>
-                                                Xem thêm
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </marquee>
-                    </div>
+                <div class="col-md-6 mt-4">
+                    
+                    <canvas id="canvas"></canvas>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                
                 </div>
                 <div class="col-md-6">
                     <div class="plan">
@@ -290,18 +214,18 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                             GROUP BY kehoachgiaoviec.makehoach
                             ORDER BY kehoachgiaoviec.thoigiandukien DESC
                             LIMIT 0, 5";
-                        }elseif ($profile['level'] == "2") {
+                        } elseif ($profile['level'] == "2") {
                             $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
                             FROM kehoachgiaoviec, chitietkehoach, bophan
                             WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "'
                             GROUP BY kehoachgiaoviec.makehoach
                             ORDER BY kehoachgiaoviec.thoigiandukien DESC
                             LIMIT 0, 5";
-                        }else{
+                        } else {
 
-                        $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
+                            $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
                             FROM kehoachgiaoviec, chitietkehoach, bophan
-                            WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '".$profile["manhanvien"]."'
+                            WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '" . $profile["manhanvien"] . "'
                             GROUP BY kehoachgiaoviec.makehoach
                             ORDER BY kehoachgiaoviec.thoigiandukien DESC
                             LIMIT 0, 5";
@@ -311,7 +235,7 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                         //$arr_theodoikehoach;
                         // Lấy dữ liệu
                         while ($row = mysqli_fetch_array($result)) {
-                            
+
                             //$arr_theodoikehoach[] = $row;
 
 
@@ -350,34 +274,6 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
 
                         ?>
 
-                        <!--
-                        <div class="plan-item">
-                            <div class="row">
-                                <div class="col-md-3 d-flex justify-content-between">
-                                    <div class="plan-item__timedate">
-                                        <p class="lh-sm">
-                                            15 DEC, 2023 </br>
-                                            10:30 AM
-                                        </p>
-                                    </div>
-                                    <div class="plan-item__timeline-bar">
-                                        <span class="plan-item__icon"><i class="fa-regular fa-calendar-plus"></i></span>
-                                        <span class="plan-item__line"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 ps-4">
-                                    <p class="plan-item__title">
-                                        Assigned as a director for Project The Chewing Gum Attack
-                                        by <a href="" class="text-decoration-none">Shantinon Mekalan</a>
-                                    </p>
-                                    <p class="plan-item__des">
-                                        Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-
                     </div>
                 </div>
             </div>
@@ -393,5 +289,74 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
 
 <!-- Main JS -->
 <script src="../asset/js/main.js"></script>
+
+<script>
+    const data = {
+        labels: [
+            <?php
+            $sql_tongnv =  "SELECT tenbophan,count(*) FROM  `nhanvien`, bophan where nhanvien.mabophan = bophan.mabophan and bophan.makhuvuc = '" . $bophan['makhuvuc'] . "' GROUP BY nhanvien.mabophan ";
+            $result_tongnv = mysqli_query($ketnoi, $sql_tongnv);
+
+            $string = "";
+            while ($row = mysqli_fetch_array($result_tongnv)) {
+                $string = $string . "'" . $row['tenbophan'] . "'";
+                $string = $string . ",";
+            }
+
+            echo trim($string, ",");
+            ?>
+        ],
+        datasets: [{
+            label: 'Tổng nhân viên',
+            data: [
+                <?php
+                $count_bophan = $ketnoi->query("SELECT tenbophan,count(*) FROM  `nhanvien`, bophan where nhanvien.mabophan = bophan.mabophan and bophan.makhuvuc = '" . $bophan['makhuvuc'] . "' GROUP BY nhanvien.mabophan ");
+                $num_rows = $count_bophan->num_rows;
+                $count = 0;
+
+                while ($row = $count_bophan->fetch_array()) {
+                    echo $row['count(*)'];
+
+                    $count++;
+                    if ($count < $num_rows) {
+                        echo ",";
+                    }
+                }
+                ?>
+            ],
+            backgroundColor: [
+                '#F56F2F',
+                '#F75E54',
+                '#E058B5',
+                '#C554F7',
+                '#7151ED',
+                '#AAF54D',
+                '#F7B454',
+                '#E058B5',
+                '#5483F7',
+                '#51ED76',
+                '#0000FF',
+                '#A52A2A',
+                '#DEB887',
+                '#5F9EA0',
+                '#D2691E',
+                '#FF7F50',
+                '#6495ED',
+                '#FFF8DC',
+                '#00008B',
+                '#F0F8FF'
+            ],
+            hoverOffset: 4,
+
+        }]
+    }
+    const config = {
+        type: 'pie',
+        data: data,
+    }
+
+    const canvas = document.getElementById('canvas')
+    const chart = new Chart(canvas, config)
+</script>
 
 </html>
