@@ -90,7 +90,7 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
 
                                     //echo $sql_tongkehoach;
                                     $TONGKEHOACH =  $ketnoi->query($sql_tongkehoach)->fetch_array();
-                                    echo $TONGKEHOACH['TONGKEHOACH'];
+                                    echo !empty($TONGKEHOACH['TONGKEHOACH']) ? $TONGKEHOACH['TONGKEHOACH'] : 0;
 
 
                                     ?>
