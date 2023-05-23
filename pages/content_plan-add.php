@@ -109,12 +109,12 @@ if (isset($_POST['addPlan'])) {
     array_push($arr_chitieu, $_POST['thuhoicongno']);
     array_push($arr_mact, "CT03");
   }
-  if (isset($_POST['checkphattrienkhachhang'])) {
-    array_push($arr_chitieu, $_POST['phattrienkhachhang']);
-    array_push($arr_mact, "CT04");
-  }
   if (isset($_POST['checkhotrokhachhang'])) {
     array_push($arr_chitieu, $_POST['hotrokhachhang']);
+    array_push($arr_mact, "CT04");
+  }
+  if (isset($_POST['checkphattrienkhachhang'])) {
+    array_push($arr_chitieu, $_POST['phattrienkhachhang']);
     array_push($arr_mact, "CT05");
   }
   if (isset($_POST['checkhieubietsanpham'])) {
@@ -256,7 +256,7 @@ if (isset($_POST['addPlan'])) {
     <div class="container-fuild">
       <form method="POST" action="">
         <div class="row header">
-          <h2 class="header__title">
+          <h2 class="header__title ps-0">
             Thêm kế hoạch
           </h2>
 
@@ -311,7 +311,7 @@ if (isset($_POST['addPlan'])) {
           <div class="row plan__desc">
             <form class="plan__desc-form">
               <div class="mb-3 plan__desc-input">
-                <label for="motakehoach" class="form-label">Mô tả kế hoạch</label>
+                <label for="motakehoach" class="select__title">Mô tả kế hoạch</label>
                 <textarea name="motakehoach" class="form-control" id="motakehoach" placeholder="Mô tả kế hoạch" required></textarea>
               </div>
             </form>

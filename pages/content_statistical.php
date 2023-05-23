@@ -111,8 +111,12 @@ if (!isset($_SESSION['username'])) {
 
                             <div class="statistical-manager-content__chart">
                                 <div class="row">
-                                    <div class="offset-md-4 col-md-4">
-                                        <canvas id="myChart"></canvas>
+                                    <div class="col-md-4">
+                                        <canvas id="CanTho"></canvas>
+                                    </div>
+
+                                    <div class=" offset-md-4 col-md-4">
+                                        <canvas id="NhaTrang"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +151,6 @@ if (!isset($_SESSION['username'])) {
 
     <!-- Main JS -->
     <script src="../asset/js/main.js"></script>
-
     <script>
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -223,27 +226,27 @@ if (!isset($_SESSION['username'])) {
 
 
 
-        var selectnhanvien_thamgia_kh = document.getElementById("nhanvien_thamgia_kh");
-        var selectedValuenhanvien_thamgia_kh = selectnhanvien_thamgia_kh.value;
-        var select_mabophan = document.getElementById("mabophan");
-        var selectedValue_mabophan = select_mabophan.value;
+        // var selectnhanvien_thamgia_kh = document.getElementById("nhanvien_thamgia_kh");
+        // var selectedValuenhanvien_thamgia_kh = selectnhanvien_thamgia_kh.value;
+        // var select_mabophan = document.getElementById("mabophan");
+        // var selectedValue_mabophan = select_mabophan.value;
 
-        if (selectedValuenhanvien_thamgia_kh == "") {
+        // if (selectedValuenhanvien_thamgia_kh == "") {
 
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Nhận kết quả từ tập tin PHP xử lý
-                    var result = this.responseText;
-                    document.getElementById("nhanvien_thamgia_kh").innerHTML = result;
-                    // In kết quả ra console
-                    console.log(result);
-                }
-            };
-            // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
-            xhttp.open("GET", "content_additional.php?mabophan=" + selectedFruit + "&chon=manv_bophan", true);
-            xhttp.send();
-        }
+        //     var xhttp = new XMLHttpRequest();
+        //     xhttp.onreadystatechange = function() {
+        //         if (this.readyState == 4 && this.status == 200) {
+        //             // Nhận kết quả từ tập tin PHP xử lý
+        //             var result = this.responseText;
+        //             document.getElementById("nhanvien_thamgia_kh").innerHTML = result;
+        //             // In kết quả ra console
+        //             console.log(result);
+        //         }
+        //     };
+        //     // Gửi yêu cầu đến tập tin PHP xử lý và truyền giá trị của option đã chọn
+        //     xhttp.open("GET", "content_additional.php?mabophan=" + selectedFruit + "&chon=manv_bophan", true);
+        //     xhttp.send();
+        // }
 
         //=====================================================================================
     </script>
@@ -349,45 +352,89 @@ if (!isset($_SESSION['username'])) {
                 tongNhanVienChuaDat++;
             }
         });
-
-        const ctx = document.getElementById("myChart");
-
-        var mamau1 = randomNumber = Math.floor(Math.random() * 255) + 1;
-        var mamau2 = randomNumber = Math.floor(Math.random() * 255) + 1;
-        var mamau3 = randomNumber = Math.floor(Math.random() * 255) + 1;
-        var mamau4 = randomNumber = Math.floor(Math.random() * 255) + 1;
-        var mamau5 = randomNumber = Math.floor(Math.random() * 255) + 1;
-        var mamau6 = randomNumber = Math.floor(Math.random() * 255) + 1;
-
-        const data = {
-            labels: ["Chưa đạt", "Đạt"],
-            datasets: [{
-                label: "Số lượng nhân viên",
-                data: [tongNhanVienChuaDat, tongNhanVienDat],
-                backgroundColor: ["rgb(" + mamau1 + ", " + mamau2 + ", " + mamau3 + ")", "rgb(" + mamau4 + ", " + mamau5 + ", " + mamau6 + ")"],
-                hoverOffset: 4,
-            }, ],
-            datasets: [{
-                label: "Số lượng nhân viên",
-                data: [12, 12],
-                backgroundColor: ["rgb(" + mamau1 + ", " + mamau2 + ", " + mamau3 + ")", "rgb(" + mamau4 + ", " + mamau5 + ", " + mamau6 + ")"],
-                hoverOffset: 4,
-            }, ],
-        };
-
-        new Chart(ctx, {
-            type: "pie",
-            data: data,
-            options: {
-                plugins: {
-                    title: {
-                        display: true,
-                        text: "Tỉ lệ nhân viên hoàn thành kế hoạch",
-                    },
-                },
-            },
-        });
     </script>
+
+    <script>
+        const randomColor = () => {
+            return Math.floor(Math.random() * 16777215).toString(16);
+        }
+
+        let dataCT = [];
+        let dataNT = [];
+
+        $(document).ready(function() {
+            $.ajax({
+                    url: 'content_statistical_char_ajax.php',
+                    method: 'POST',
+                    dataType: 'JSON',
+                }).done(function (response) {
+
+                    for(let key in response.cantho) {
+                        dataCT.push(response.cantho[key]);
+                    }
+
+                    for(let key in response.nhatrang) {
+                        dataNT.push(response.nhatrang[key]);
+                    }
+
+                    const ctx = document.getElementById("CanTho");
+
+                    const data = {
+                        labels: ["Đạt", "Chưa đạt", "Không đạt"],
+                        datasets: [{
+                            label: "Số lượng nhân viên",
+                            data: [...dataCT],
+                            backgroundColor: ['rgb(54, 162, 235)','rgb(255, 205, 86)',  'rgb(255, 99, 132)'],
+                            hoverOffset: 4,
+                        }, ],
+                    };
+
+                    new Chart(ctx, {
+                        type: "pie",
+                        data: data,
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: "Tỉ lệ nhân viên hoàn thành kế hoạch ở khu vực Cần Thơ",
+                                },
+                            },
+                        },
+                    });
+
+
+                    const ctxNT = document.getElementById("NhaTrang");
+
+                    const data2 = {
+                        labels: ["Đạt", "Chưa đạt", "Không đạt"],
+                        datasets: [{
+                            label: "Số lượng nhân viên",
+                            data: [...dataNT],
+                            backgroundColor: ['rgb(54, 162, 235)','rgb(255, 205, 86)',  'rgb(255, 99, 132)'],
+                            hoverOffset: 4,
+                        }, ],
+                    };
+
+                    new Chart(ctxNT, {
+                        type: "pie",
+                        data: data2,
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: "Tỉ lệ nhân viên hoàn thành kế hoạch ở khu vực Nha Trang",
+                                },
+                            },
+                        },
+                    });
+
+                })
+        });
+
+        
+
+    </script>
+
 </body>
 
 </html>

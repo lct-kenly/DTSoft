@@ -1,7 +1,4 @@
 <?php
-
-
-
     require_once('../admin/config.php');
     require_once('../lib/helper.php');
 

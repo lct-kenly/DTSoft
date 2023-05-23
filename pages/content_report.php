@@ -11,6 +11,16 @@ if (!isset($_SESSION['username'])) {
     //     // header("location: ../");
     // }
 
+    function them_chi_tieu_tung_thang($conn, $makehoach, $manhanvien, $machitieu) {
+        $sql_get = "SELECT chitieu.machitieu, SUM(theodoikehoach.chitieuthangdatduoc) as TONGDATDUOC
+                FROM chitieu, theodoikehoach
+                WHERE theodoikehoach.machitieu = chitieu.machitieu AND theodoikehoach.makehoach = '{$makehoach}' AND theodoikehoach.manhanvien = '{$manhanvien}' AND chitieu.machitieu = '{$machitieu}'";
+
+        $result_get = $conn->query($sql_get)->fetch_assoc();
+
+        return $result_get['TONGDATDUOC'];
+    }
+
 
     if($chucvu["machucvu"] == "C3" || $chucvu["machucvu"] == "C2"){
         header("location: ..//pages/content_index.php");
@@ -58,6 +68,12 @@ if (isset($_POST['submit-add']) && $_POST['submit-add']) {
             $res2 = mysqli_query($conn, $sql_update);
             if ($res2) {
                 $is_update = true;
+
+                $tongchitieu = them_chi_tieu_tung_thang($conn, $plan_code, $profile['manhanvien'], $machitieu[$i]);
+
+                $sql_update = "UPDATE `chitietkehoach` SET `chitieudatduoc`='{$tongchitieu}' WHERE makehoach = '{$plan_code}' AND manhanvien = '{$profile['manhanvien']}' AND machitieu = '{$machitieu[$i]}'";
+
+                $conn->query($sql_update);
             } else {
                 $is_update = false;
             }
@@ -79,6 +95,11 @@ if (isset($_POST['submit-add']) && $_POST['submit-add']) {
             $res = mysqli_query($conn, $sql);
             if ($res) {
                 $is_insert = true;
+                $tongchitieu = them_chi_tieu_tung_thang($conn, $plan_code, $profile['manhanvien'], $machitieu[$j]);
+
+                $sql_update = "UPDATE `chitietkehoach` SET `chitieudatduoc`='{$tongchitieu}' WHERE makehoach = '{$plan_code}' AND manhanvien = '{$profile['manhanvien']}' AND machitieu = '{$machitieu[$j]}'";
+
+                $conn->query($sql_update);
             } else {
                 $is_insert = false;
             }

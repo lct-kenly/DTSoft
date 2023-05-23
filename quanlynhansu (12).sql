@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 06:04 PM
+-- Generation Time: May 24, 2023 at 12:09 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -94,6 +94,33 @@ CREATE TABLE `chitietkehoach` (
   `chitieucandat` int(11) NOT NULL COMMENT 'chỉ tiều cần đạt được trong kế hoạch',
   `chitieudatduoc` int(11) NOT NULL COMMENT 'chỉ tiêu đạt được sau khi kết thúc kế hoạch'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chitietkehoach`
+--
+
+INSERT INTO `chitietkehoach` (`makehoach`, `manhanvien`, `machitieu`, `level`, `chitieucandat`, `chitieudatduoc`) VALUES
+('KH001', 'NV002', 'CT01', '2', 700000000, 800000000),
+('KH001', 'NV002', 'CT02', '2', 250, 300),
+('KH001', 'NV002', 'CT03', '2', 700000000, 800000000),
+('KH001', 'NV0032', 'CT01', '1', 700000000, 650000000),
+('KH001', 'NV0032', 'CT02', '1', 250, 230),
+('KH001', 'NV0032', 'CT03', '1', 700000000, 650000000),
+('KH001', 'NV0039', 'CT01', '1', 700000000, 500000000),
+('KH001', 'NV0039', 'CT02', '1', 250, 150),
+('KH001', 'NV0039', 'CT03', '1', 700000000, 500000000),
+('KH001', 'NV0046', 'CT01', '1', 700000000, 800000000),
+('KH001', 'NV0046', 'CT02', '1', 250, 300),
+('KH001', 'NV0046', 'CT03', '1', 700000000, 800000000),
+('KH002', 'NV0012', 'CT01', '2', 700000000, 800000000),
+('KH002', 'NV0012', 'CT03', '2', 700000000, 800000000),
+('KH002', 'NV0012', 'CT05', '2', 100, 120),
+('KH002', 'NV0021', 'CT01', '1', 700000000, 650000000),
+('KH002', 'NV0021', 'CT03', '1', 700000000, 650000000),
+('KH002', 'NV0021', 'CT05', '1', 100, 80),
+('KH002', 'NV0025', 'CT01', '', 700000000, 500000000),
+('KH002', 'NV0025', 'CT03', '', 700000000, 500000000),
+('KH002', 'NV0025', 'CT05', '', 100, 70);
 
 -- --------------------------------------------------------
 
@@ -198,6 +225,14 @@ CREATE TABLE `kehoachgiaoviec` (
   `mabophan` varchar(10) NOT NULL COMMENT 'kế hoạch được phân công cho một bộ phận đảm nhận'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `kehoachgiaoviec`
+--
+
+INSERT INTO `kehoachgiaoviec` (`makehoach`, `motakehoach`, `thoigianbatdau`, `thoigiandukien`, `thoigianketthuc`, `tiendo`, `makhuvuc`, `mabophan`) VALUES
+('KH001', 'Kế hoạch phòng kinh doanh 2 khu vực Cần Thơ năm 2023', '2023-01-01', '2023-12-31', '2023-12-31', 'Đang thực hiện', 'CT', 'CTKD02'),
+('KH002', 'Kế hoạch bộ phận kế toán 1 khu vực Nha Trang năm 2023', '2023-01-01', '2023-12-31', '2023-12-31', 'Đang thực hiện', 'NT', 'NTKT01');
+
 -- --------------------------------------------------------
 
 --
@@ -243,8 +278,8 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manhanvien`, `hoten`, `ngaysinh`, `gioitinh`, `dantoc`, `quequan`, `sodienthoai`, `cccd`, `hinhanh`, `macongviec`, `mabophan`) VALUES
-('NV001', 'Vũ Kim Nga', '1998-11-15', 'Nữ', 'Kinh', 'Bạc Liêu', '0448328447', '05611676091', '1.jpg', 'HDKD', 'CTQL01'),
-('NV0010', 'Đặng Hoàng My', '1997-04-28', 'Nam', 'Ô Đu', 'Hòa Bình', '0297898421', '07753583608', '1.jpg', 'HDKD', 'NTKD01'),
+('NV001', 'Vũ Kim Nga', '1998-11-15', 'Nữ', 'Kinh', 'Bạc Liêu', '0448328447', '05611676091', '1.jpg', 'QL', 'CTQL01'),
+('NV0010', 'Đặng Hoàng My', '1997-04-28', 'Nam', 'Ô Đu', 'Hòa Bình', '0297898421', '07753583608', '1.jpg', 'QL', 'NTKD01'),
 ('NV0011', 'Đỗ Khánh Mai', '1999-10-07', 'Nam', 'Ba Na', 'Yên Bái', '0955288573', '08465953904', '1.jpg', 'TVV', 'CTLT01'),
 ('NV0012', 'Võ Khánh Kim', '1995-08-25', 'Nữ', 'Gia Rai', 'Quảng Ngãi', '0600996106', '01357584775', '1.jpg', 'KT', 'NTKT01'),
 ('NV0013', 'Đặng Hoàng Yến', '1996-11-21', 'Nữ', 'Mường', 'Bà Rịa-Vũng Tàu', '0213926330', '01986186679', '1.jpg', 'TVV', 'NTLT01'),
@@ -334,7 +369,7 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`) VALUES
-(725, 'NV001', 'NV001', 'VuNga952gmailcom', '123456', 1),
+(725, 'NV001', 'NV001', 'VuNga952gmailcom', '123456', 3),
 (726, 'NV002', 'NV002', 'PhamNga855gmailcom', '123456', 1),
 (727, 'NV003', 'NV003', 'DNga553gmailcom', '123456', 1),
 (728, 'NV004', 'NV004', 'DHa146gmailcom', '123456', 1),
@@ -343,7 +378,7 @@ INSERT INTO `taikhoan` (`id`, `manv`, `tentk`, `email`, `matkhau`, `level`) VALU
 (731, 'NV007', 'NV007', 'NgoChi949gmailcom', '123456', 1),
 (732, 'NV008', 'NV008', 'HoangLy287gmailcom', '123456', 1),
 (733, 'NV009', 'NV009', 'BuiKim838gmailcom', '123456', 1),
-(734, 'NV0010', 'NV0010', 'DngMy975gmailcom', '123456', 1),
+(734, 'NV0010', 'NV0010', 'DngMy975gmailcom', '123456', 3),
 (735, 'NV0011', 'NV0011', 'DMai542gmailcom', '123456', 1),
 (736, 'NV0012', 'NV0012', 'VoKim122gmailcom', '123456', 1),
 (737, 'NV0013', 'NV0013', 'DngYn695gmailcom', '123456', 1),
@@ -419,6 +454,33 @@ CREATE TABLE `theodoikehoach` (
   `chitieuthangdatduoc` int(11) NOT NULL DEFAULT 0 COMMENT 'chỉ tiêu trong tháng'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `theodoikehoach`
+--
+
+INSERT INTO `theodoikehoach` (`makehoach`, `manhanvien`, `machitieu`, `thang`, `chitieuthangdatduoc`) VALUES
+('KH001', 'NV002', 'CT01', '5', 800000000),
+('KH001', 'NV002', 'CT02', '5', 300),
+('KH001', 'NV002', 'CT03', '5', 800000000),
+('KH001', 'NV0032', 'CT01', '5', 650000000),
+('KH001', 'NV0032', 'CT02', '5', 230),
+('KH001', 'NV0032', 'CT03', '5', 650000000),
+('KH001', 'NV0039', 'CT01', '5', 500000000),
+('KH001', 'NV0039', 'CT02', '5', 150),
+('KH001', 'NV0039', 'CT03', '5', 500000000),
+('KH001', 'NV0046', 'CT01', '5', 800000000),
+('KH001', 'NV0046', 'CT02', '5', 300),
+('KH001', 'NV0046', 'CT03', '5', 800000000),
+('KH002', 'NV0012', 'CT01', '5', 800000000),
+('KH002', 'NV0012', 'CT03', '5', 800000000),
+('KH002', 'NV0012', 'CT05', '5', 120),
+('KH002', 'NV0021', 'CT01', '5', 650000000),
+('KH002', 'NV0021', 'CT03', '5', 650000000),
+('KH002', 'NV0021', 'CT05', '5', 80),
+('KH002', 'NV0025', 'CT01', '5', 500000000),
+('KH002', 'NV0025', 'CT03', '5', 500000000),
+('KH002', 'NV0025', 'CT05', '5', 70);
+
 -- --------------------------------------------------------
 
 --
@@ -437,8 +499,8 @@ CREATE TABLE `thoigiannhanchuc` (
 --
 
 INSERT INTO `thoigiannhanchuc` (`manhanvien`, `machucvu`, `thoigianbatdau`, `thoigianketthuc`) VALUES
-('NV001', 'C1', '2023-05-23', '0000-00-00'),
-('NV0010', 'C1', '2023-05-23', '0000-00-00'),
+('NV001', 'C3', '2023-05-23', '0000-00-00'),
+('NV0010', 'C3', '2023-05-23', '0000-00-00'),
 ('NV0011', 'C1', '2023-05-23', '0000-00-00'),
 ('NV0012', 'C1', '2023-05-23', '0000-00-00'),
 ('NV0013', 'C1', '2023-05-23', '0000-00-00'),
