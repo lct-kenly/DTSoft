@@ -72,16 +72,20 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                                     <?php
                                     if ($profile['level'] == "3") {
                                         $sql_tongkehoach = "SELECT COUNT(kehoachgiaoviec.makehoach) TONGKEHOACH
-                                        FROM kehoachgiaoviec
-                                        WHERE kehoachgiaoviec.makhuvuc = '" . $bophan['makhuvuc'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                                            FROM kehoachgiaoviec
+                                                            WHERE kehoachgiaoviec.makhuvuc = '{$bophan['makhuvuc']}' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))
+                                                            ";
+                                        
                                     } elseif ($profile['level'] == "2") {
                                         $sql_tongkehoach = "SELECT COUNT(kehoachgiaoviec.makehoach) TONGKEHOACH
-                                        FROM kehoachgiaoviec
-                                        WHERE kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                                            FROM kehoachgiaoviec
+                                                            WHERE kehoachgiaoviec.mabophan = '{$bophan['mabophan']}' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))
+                                                            ";
                                     } else {
                                         $sql_tongkehoach = "SELECT COUNT(chitietkehoach.makehoach) TONGKEHOACH
-                                        FROM kehoachgiaoviec, chitietkehoach
-                                        WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '" . $profile['manhanvien'] . "' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))";
+                                                            FROM kehoachgiaoviec, chitietkehoach
+                                                            WHERE kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '{$profile['manhanvien']}' AND (YEAR(kehoachgiaoviec.thoigianbatdau) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigianketthuc) = YEAR(NOW()) OR YEAR(kehoachgiaoviec.thoigiandukien) = YEAR(NOW()))
+                                                            GROUP BY chitietkehoach.machitieu";
                                     }
 
                                     //echo $sql_tongkehoach;
@@ -317,7 +321,7 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
         $('.slide-container').slick({
             infinite: true,
             autoplay: true,
-            autoplaySpeed: 3000,
+            autoplaySpeed: 2000,
             speed: 1000,
             slidesToShow: 1,
             slidesToScroll: 1,

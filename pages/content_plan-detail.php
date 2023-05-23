@@ -125,6 +125,17 @@ if ($makehoach) {
     }
 
 
+    //
+    $danhsachthang = array();
+    $sql = "SELECT thang FROM `theodoikehoach` WHERE makehoach = '{$makehoach}'
+            GROUP BY thang";
+    $result = $conn->query($sql);
+
+    while($row = $result->fetch_assoc()) {
+        $danhsachthang[] = $row['thang'];
+    }
+
+
     // Update thông tin kế hoạch
     if (isset($_POST["submit-update-plan"]) && $_POST["submit-update-plan"] == "submit") {
         $thoigianbatdau = isset($_POST["thoigianbatdau"]) ? $_POST["thoigianbatdau"] : '';
@@ -778,6 +789,12 @@ if ($makehoach) {
         }
 
         //
+        const danhSachThang = <?php echo json_encode($danhsachthang); ?>;
+        let thang = danhSachThang.map((item) => {
+                return `Tháng ${item}`;
+        })
+
+
         <?php foreach ($danhsachchitieu as $item) { ?>
             const <?= $item['machitieu'] ?> = document.getElementById("<?= $item['machitieu'] ?>");
 
@@ -792,20 +809,7 @@ if ($makehoach) {
             new Chart(<?= $item['machitieu'] ?>, {
                 type: "line",
                 data: {
-                    labels: [
-                        "Tháng 1",
-                        "Tháng 2",
-                        "Tháng 3",
-                        "Tháng 4",
-                        "Tháng 5",
-                        "Tháng 6",
-                        "Tháng 7",
-                        "Tháng 8",
-                        "Tháng 9",
-                        "Thánh 10",
-                        "Tháng 11",
-                        "Tháng 12",
-                    ],
+                    labels: [...thang],
                     datasets: [{
                         label: "<?= $item['tenchitieu'] ?>",
                         data: <?= $item['machitieu'] ?>NewData,
