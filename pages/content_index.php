@@ -44,6 +44,9 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
+    <!-- Slick slide -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
     <!-- Styles Css -->
     <link rel="stylesheet" href="../asset/styles/reset.css" />
     <link rel="stylesheet" href="../asset/styles/base.css" />
@@ -54,13 +57,13 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
 <body>
     <div class="wrapper">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row pt-3">
                 <div class="col-md-4">
-                    <div class="card card-statistical bg-success">
+                    <div class="card card-statistical bg-info">
                         <div class="card-body card-statistical__body">
                             <div class="card-statistical__left">
                                 <span class="card-statistical__icon">
-                                    <i class="fa-solid fa-users-line"></i>
+                                    <i class="fa-sharp fa-solid fa-list-check"></i>
                                 </span>
                                 <p class="card-statistical__name">TỔNG KẾ HOẠCH</p>
                             </div>
@@ -94,11 +97,11 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card card-statistical bg-info">
+                    <div class="card card-statistical bg-danger">
                         <div class="card-body card-statistical__body">
                             <div class="card-statistical__left">
                                 <span class="card-statistical__icon">
-                                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                                    <i class="fa-solid fa-arrow-up-right-dots"></i>
                                 </span>
                                 <p class="card-statistical__name">Chỉ tiêu cần đạt</p>
                             </div>
@@ -134,11 +137,11 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card card-statistical bg-info">
+                    <div class="card card-statistical bg-success">
                         <div class="card-body card-statistical__body">
                             <div class="card-statistical__left">
                                 <span class="card-statistical__icon">
-                                    <i class="fa-solid fa-users-line"></i>
+                                    <i class="fa-solid fa-clipboard-check"></i>
                                 </span>
                                 <p class="card-statistical__name">Tổng chỉ tiêu đã đạt</p>
                             </div>
@@ -193,13 +196,29 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 mt-4">
+                <!-- <div class="col-md-6 mt-4">
                     
                     <canvas id="canvas"></canvas>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                 
+                </div> -->
+                <div class="col-md-7">
+                    <div class="slide-container">
+                        <div class="slide-item">
+                            <img src="../asset/img/slide/dich-vu-bao-tri-dtsoft1618533857.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="slide-item">
+                            <img src="../asset/img/slide/dtsoft-phan-mem-hieu-qua1637805824.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="slide-item">
+                            <img src="../asset/img/slide/he-thong-bao-cao-chi-tieu-kinh-te-xa-hoi-dia-phuong1656730477.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="slide-item">
+                            <img src="../asset/img/slide/phan-mem-quan-ly-thu-chi-hoc-sinh1655713771.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="plan">
                         <h4 class="plan__title">Theo dõi kế hoạch</h4>
                         <p class="plan__des">Các hoạt động gần đây trên tất cả các dự án</p>
@@ -213,14 +232,14 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                             WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.makhuvuc = '" . $bophan['makhuvuc'] . "'
                             GROUP BY kehoachgiaoviec.makehoach
                             ORDER BY kehoachgiaoviec.thoigiandukien DESC
-                            LIMIT 0, 5";
+                            LIMIT 0, 4";
                         } elseif ($profile['level'] == "2") {
                             $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
                             FROM kehoachgiaoviec, chitietkehoach, bophan
                             WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND kehoachgiaoviec.mabophan = '" . $bophan['mabophan'] . "'
                             GROUP BY kehoachgiaoviec.makehoach
                             ORDER BY kehoachgiaoviec.thoigiandukien DESC
-                            LIMIT 0, 5";
+                            LIMIT 0, 4";
                         } else {
 
                             $sql = "SELECT kehoachgiaoviec.makehoach, thoigiandukien, bophan.tenbophan, motakehoach
@@ -228,7 +247,7 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
                             WHERE bophan.mabophan = kehoachgiaoviec.mabophan AND kehoachgiaoviec.makehoach = chitietkehoach.makehoach AND chitietkehoach.manhanvien = '" . $profile["manhanvien"] . "'
                             GROUP BY kehoachgiaoviec.makehoach
                             ORDER BY kehoachgiaoviec.thoigiandukien DESC
-                            LIMIT 0, 5";
+                            LIMIT 0, 4";
                         }
                         $result = mysqli_query($ketnoi, $sql);
 
@@ -279,16 +298,35 @@ function ham_get_chitieudadat($conn, $makehoach, $manhanvien, $machitieu)
             </div>
         </div>
     </div>
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Bootstrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <!-- Chart js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Slick slide -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.js"></script>
+
+    <!-- Main JS -->
+    <script src="../asset/js/main.js"></script>
+
+    <script>
+        $('.slide-container').slick({
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            speed: 1000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: '<button type="button" class="slick-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="fa-solid fa-chevron-right"></i></button>'
+        });
+
+    </script>
 </body>
-
-<!-- Bootstrap bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-<!-- Chart js library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Main JS -->
-<script src="../asset/js/main.js"></script>
 
 <script>
     const data = {

@@ -223,6 +223,40 @@ if (isset($_POST['submit-add']) && $_POST['submit-add']) {
 
                 })
         })
+
+        $(document).ready(function(e) {
+            const makehoach = $('#select-makehoach').val();
+
+            $.ajax({
+                    url: 'content_report_ajax.php',
+                    method: 'POST',
+                    dataType: 'JSON',
+                    data: {
+                        makehoach: makehoach
+                    },
+                }).done(function(response) {
+
+                    const danhSachChiTieu = response.danhsachchitieu;
+
+                    let html = danhSachChiTieu.map((item, index) => {
+                    let value = item.chitieuthangdatduoc === undefined ? '' : item.chitieuthangdatduoc;
+
+                        return `<div class="col-md-6">
+                                    <div class="report__input">
+                                        <div class="form-floating report__form">
+                                            <input type="hidden" name="machitieu[]" value="${item.machitieu}" form="form-baocaothang">
+                                            <input class="form-control report__form-control" placeholder="Nhập vào doanh số" id="floatingTextarea" name="chitieu[]" value="${value}" form="form-baocaothang">
+                                            </input>
+                                            <label for="floatingTextarea">${item.tenchitieu}</label>
+                                        </div>
+                                    </div>
+                                </div>`;
+                    });
+
+                    listChiTieu.innerHTML = html.join('');
+
+                })
+        })
     </script>
 
     <script>
